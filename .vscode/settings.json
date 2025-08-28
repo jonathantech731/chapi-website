@@ -1,0 +1,31 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "files.associations": {
+    "*.md": "markdown",
+    "CNAME": "plaintext"
+  },
+  "html.format.indentInnerHtml": true,
+  "html.format.preserveNewLines": true,
+  "css.validate": true,
+  "css.lint.important": "warning",
+  "markdown.preview.theme": "github",
+  "liveServer.settings.port": 3000,
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#2f7afe",
+    "activityBar.foreground": "#ffffff"
+  },
+  "emmet.includeLanguages": {
+    "html": "html"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true,
+    "**/tmp": true
+  }
+}
