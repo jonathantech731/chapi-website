@@ -75,7 +75,7 @@ class ChapiAssistant {
                 </svg>
                 <div class="chapi-notification-dot" id="chapiNotification"></div>
             </button>
-            
+
             <!-- Chat Window -->
             <div class="chapi-chat-window" id="chapiChatWindow">
                 <!-- Header -->
@@ -95,18 +95,18 @@ class ChapiAssistant {
                         </svg>
                     </button>
                 </div>
-                
+
                 <!-- Chat Body -->
                 <div class="chapi-chat-body" id="chapiChatBody">
                     <!-- Messages aparecerán aquí -->
                 </div>
-                
+
                 <!-- Input Area -->
                 <div class="chapi-input-area">
                     <div class="chapi-input-container">
-                        <textarea 
-                            class="chapi-input" 
-                            id="chapiInput" 
+                        <textarea
+                            class="chapi-input"
+                            id="chapiInput"
                             placeholder="Escribe tu mensaje..."
                             rows="1"
                         ></textarea>
@@ -465,7 +465,7 @@ class ChapiAssistant {
                     messages: [
                         {
                             role: 'system',
-                            content: `Eres CHAPI, un asistente virtual especializado en chatbots inteligentes para empresas. Tu empresa ofrece soluciones de automatización de ventas y soporte al cliente con IA. 
+                            content: `Eres CHAPI, un asistente virtual especializado en chatbots inteligentes para empresas. Tu empresa ofrece soluciones de automatización de ventas y soporte al cliente con IA.
 
                             Características de CHAPI:
                             - Chatbots con GPT-4 y Llama 3
@@ -474,7 +474,7 @@ class ChapiAssistant {
                             - Integración con CRMs, pagos, calendarios
                             - ROI promedio 400-800%
                             - Soporte 24/7 en español
-                            
+
                             Responde de manera amigable, profesional y enfocada en ayudar al cliente a entender cómo CHAPI puede resolver sus necesidades específicas. Mantén las respuestas concisas (máximo 2-3 oraciones).`
                         },
                         ...this.messages.slice(-5).map(msg => ({
@@ -513,16 +513,16 @@ class ChapiAssistant {
     handleFAQ() {
         const faqMessage = `
         <strong>Preguntas Frecuentes:</strong><br><br>
-        
+
         <strong>🤖 ¿Qué hace CHAPI?</strong><br>
         Automatiza ventas y soporte con chatbots inteligentes que trabajan 24/7.<br><br>
-        
+
         <strong>💰 ¿Cuánto cuesta?</strong><br>
         Planes desde $49 USD/mes con 30 días de prueba gratuita.<br><br>
-        
+
         <strong>📱 ¿En qué canales funciona?</strong><br>
         WhatsApp, Telegram, web chat, Facebook, Instagram y email.<br><br>
-        
+
         <strong>⚡ ¿Qué tan rápido se implementa?</strong><br>
         En 24 horas tienes tu chatbot funcionando completamente.
         `;
@@ -533,16 +533,16 @@ class ChapiAssistant {
     showPricing() {
         const pricingMessage = `
         <strong>💰 Planes CHAPI 2025:</strong><br><br>
-        
-        <strong>🥉 BÁSICO - $49 USD/mes</strong><br>
+
+        <strong>🥉 BÁSICO - $990 MXN/mes</strong><br>
         • 1 canal • 50 leads/mes • Plantillas básicas<br><br>
-        
-        <strong>🥈 PROFESIONAL - $99 USD/mes</strong><br>
+
+        <strong>🥈 PROFESIONAL - $1,990 MXN/mes</strong><br>
         • 2 canales • 500 leads/mes • IA avanzada • CRM<br><br>
-        
-        <strong>🥇 EMPRESARIAL - $199 USD/mes</strong><br>
+
+        <strong>🥇 EMPRESARIAL - $3,990 MXN/mes</strong><br>
         • Todo ilimitado • Machine Learning • API custom<br><br>
-        
+
         <strong>🎁 30 días gratis + ROI garantizado</strong>
         `;
 
@@ -552,11 +552,11 @@ class ChapiAssistant {
     showContactOptions() {
         const contactMessage = `
         <strong>📞 Contacta con nuestro equipo:</strong><br><br>
-        
+
         <strong>WhatsApp:</strong> +52 55 0000 0000<br>
         <strong>Email:</strong> soporte@chapibot.pro<br>
         <strong>Horario:</strong> Lun-Vie 9:00-18:00 (México)<br><br>
-        
+
         <strong>🚀 O agenda una demo personalizada:</strong><br>
         <a href="https://chapibot.pro/demo" target="_blank" style="color: #2f7afe;">chapibot.pro/demo</a>
         `;
@@ -621,13 +621,13 @@ class ChapiAssistant {
         const message = `
         <strong>🎯 Flujo: ${templateData.name}</strong><br>
         ${templateData.description}<br><br>
-        
+
         <strong>📋 Pasos incluidos:</strong><br>
         ${templateData.steps.map((step, i) => `${i + 1}. ${step}`).join('<br>')}<br><br>
-        
+
         <strong>⏱️ Tiempo de implementación:</strong> 24-48 horas<br>
         <strong>🎁 Incluye:</strong> Configuración + capacitación + soporte<br><br>
-        
+
         ¿Te gustaría que empecemos con este flujo?
         `;
 
