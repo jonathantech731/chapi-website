@@ -17,7 +17,7 @@ const CHAPI_CONFIG = {
         <br><br>
         Estoy aquí para ayudarte a:
         <br>• Crear flujos de ventas automáticos
-        <br>• Resolver dudas sobre nuestros productos  
+        <br>• Resolver dudas sobre nuestros productos
         <br>• Mostrarte planes y precios
         <br>• Conectarte con nuestro equipo
         <br><br>
@@ -40,13 +40,13 @@ const CHAPI_CONFIG = {
         'precio|costo|plan|cuanto': `
             💰 <strong>Nuestros planes 2025:</strong>
             <br><br>
-            🥉 <strong>BÁSICO - $49 USD/mes</strong>
+            🥉 <strong>BÁSICO - $990 MXN/mes</strong>
             <br>• 1 canal • 50 leads/mes • Plantillas básicas
             <br><br>
-            🥈 <strong>PROFESIONAL - $99 USD/mes</strong> ⭐ Más popular
+            🥈 <strong>PROFESIONAL - $1,990 MXN/mes</strong> ⭐ Más popular
             <br>• 2 canales • 500 leads/mes • IA avanzada • CRM
             <br><br>
-            🥇 <strong>EMPRESARIAL - $199 USD/mes</strong>
+            🥇 <strong>EMPRESARIAL - $3,990 MXN/mes</strong>
             <br>• Todo ilimitado • Machine Learning • API custom
             <br><br>
             🎁 <strong>30 días gratis + ROI garantizado</strong>
@@ -69,7 +69,7 @@ const CHAPI_CONFIG = {
             📱 <strong>CHAPI funciona en múltiples canales:</strong>
             <br><br>
             ✅ <strong>WhatsApp Business API</strong> - Canal principal de ventas
-            <br>✅ <strong>Telegram Bot</strong> - Soporte técnico instantáneo  
+            <br>✅ <strong>Telegram Bot</strong> - Soporte técnico instantáneo
             <br>✅ <strong>Web Chat Widget</strong> - Integrado en tu sitio
             <br>✅ <strong>Facebook Messenger</strong> - Redes sociales
             <br>✅ <strong>Instagram DM</strong> - Generación Z
@@ -82,7 +82,7 @@ const CHAPI_CONFIG = {
             🧠 <strong>Nuestra IA es de última generación:</strong>
             <br><br>
             🚀 <strong>GPT-4 Turbo</strong> - Conversaciones naturales
-            <br>⚡ <strong>Groq Llama 3</strong> - Respuestas ultra-rápidas  
+            <br>⚡ <strong>Groq Llama 3</strong> - Respuestas ultra-rápidas
             <br>🎯 <strong>Análisis de sentimiento</strong> - Detecta emociones
             <br>🧩 <strong>Detección de intención</strong> - Entiende necesidades
             <br>📚 <strong>Memoria contextual</strong> - Recuerda conversaciones
@@ -111,7 +111,7 @@ const CHAPI_CONFIG = {
             <br><br>
             <strong>📈 Resultados comprobados:</strong>
             <br>• +300% leads capturados
-            <br>• +45% conversión de ventas  
+            <br>• +45% conversión de ventas
             <br>• -80% costos de atención
             <br>• ROI promedio: 400-800%
             <br><br>
@@ -146,7 +146,7 @@ const CHAPI_CONFIG = {
             <br><br>
             Recuerda que estoy aquí 24/7 para resolver tus dudas sobre:
             <br>• Chatbots inteligentes
-            <br>• Automatización de ventas  
+            <br>• Automatización de ventas
             <br>• Integración con sistemas
             <br>• Planes y precios
             <br><br>
@@ -222,7 +222,7 @@ const CHAPI_CONFIG = {
     },
 
     // ========================================
-    // 🔗 ENLACES IMPORTANTES  
+    // 🔗 ENLACES IMPORTANTES
     // ========================================
 
     links: {
@@ -272,7 +272,7 @@ const CHAPI_CONFIG = {
                 <br>Lun-Vie: 9:00-18:00
                 <br>Sáb: 10:00-14:00
                 <br><br>
-                Pero yo estoy aquí 24/7 para ayudarte. 
+                Pero yo estoy aquí 24/7 para ayudarte.
                 <br>¿En qué puedo asistirte? 😊
             `
         }
@@ -293,7 +293,7 @@ const CHAPI_CONFIG = {
    - Usa HTML básico para formato: <strong>, <br>, <a>
 
 2. 🎨 CAMBIAR COLORES:
-   - Edita valores en 'styling' 
+   - Edita valores en 'styling'
    - Usa los mismos colores de tu sitio web
 
 3. ⚡ AGREGAR ACCIONES RÁPIDAS:

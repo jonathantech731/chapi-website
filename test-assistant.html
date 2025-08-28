@@ -40,6 +40,290 @@
                 background: #ffb020;
             }
 
+            /* Estilos para el contenido principal */
+            .main-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .hero-section {
+                text-align: center;
+                padding: 40px 20px;
+                background: linear-gradient(135deg, rgba(47, 122, 254, 0.1), rgba(0, 212, 166, 0.1));
+                border-radius: 16px;
+                margin-bottom: 40px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 16px;
+                background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+                color: #a9b3c4;
+                margin-bottom: 32px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-buttons {
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 12px 24px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: none;
+                cursor: pointer;
+                display: inline-block;
+            }
+
+            .btn-primary {
+                background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                color: white;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(47, 122, 254, 0.4);
+            }
+
+            .btn-secondary {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+
+            /* Secciones */
+            .features-section,
+            .pricing-section,
+            .contact-section {
+                margin-bottom: 60px;
+            }
+
+            .features-section h3,
+            .pricing-section h3,
+            .contact-section h3 {
+                text-align: center;
+                font-size: 2rem;
+                margin-bottom: 40px;
+                color: #e8eef8;
+            }
+
+            /* Grid de características */
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+            }
+
+            .feature-card {
+                background: #161c27;
+                padding: 32px 24px;
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(47, 122, 254, 0.3);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .feature-icon {
+                font-size: 3rem;
+                margin-bottom: 16px;
+            }
+
+            .feature-card h4 {
+                font-size: 1.25rem;
+                margin-bottom: 12px;
+                color: #e8eef8;
+            }
+
+            .feature-card p {
+                color: #a9b3c4;
+                line-height: 1.6;
+            }
+
+            /* Grid de precios */
+            .pricing-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 24px;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .pricing-card {
+                background: #161c27;
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                overflow: hidden;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .pricing-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .pricing-card.featured {
+                border-color: rgba(47, 122, 254, 0.5);
+                transform: scale(1.05);
+            }
+
+            .pricing-card.featured::before {
+                content: "⭐ POPULAR";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                color: white;
+                text-align: center;
+                padding: 8px;
+                font-size: 0.875rem;
+                font-weight: 600;
+            }
+
+            .plan-header {
+                padding: 24px 24px 16px;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .pricing-card.featured .plan-header {
+                padding-top: 48px;
+            }
+
+            .plan-header h4 {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+                color: #e8eef8;
+            }
+
+            .price {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #2f7afe;
+                margin-bottom: 8px;
+            }
+
+            .price span {
+                font-size: 1rem;
+                color: #a9b3c4;
+                font-weight: 400;
+            }
+
+            .plan-features {
+                padding: 24px;
+                list-style: none;
+                margin: 0;
+            }
+
+            .plan-features li {
+                padding: 8px 0;
+                color: #a9b3c4;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .plan-features li:last-child {
+                border-bottom: none;
+            }
+
+            /* Grid de contacto */
+            .contact-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 24px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .contact-card {
+                background: #161c27;
+                padding: 32px 24px;
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .contact-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(47, 122, 254, 0.3);
+            }
+
+            .contact-icon {
+                font-size: 3rem;
+                margin-bottom: 16px;
+            }
+
+            .contact-card h4 {
+                font-size: 1.25rem;
+                margin-bottom: 12px;
+                color: #e8eef8;
+            }
+
+            .contact-card a {
+                color: #2f7afe;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .contact-card a:hover {
+                color: #00d4a6;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .hero-section h2 {
+                    font-size: 2rem;
+                }
+
+                .hero-subtitle {
+                    font-size: 1rem;
+                }
+
+                .cta-buttons {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .pricing-card.featured {
+                    transform: none;
+                }
+
+                .features-grid,
+                .pricing-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
         </style>
 
         <!-- CHAPI Assistant Styles -->
@@ -72,6 +356,109 @@
                     style="background: #00d4a6; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; margin-left: 10px;">
                     👁️ Forzar Mostrar Widget
                 </button>
+            </div>
+        </div>
+
+        <!-- Sección de Información Principal -->
+        <div class="main-content">
+            <div class="hero-section">
+                <h2>🤖 CHAPI - Chatbots Inteligentes</h2>
+                <p class="hero-subtitle">Implementación profesional en WhatsApp, Telegram y Web. Integramos tu negocio
+                    con automatizaciones reales (n8n, CRMs, pago), sin depender de la nube si lo necesitas.</p>
+
+                <div class="cta-buttons">
+                    <a href="#pricing" class="btn-primary">Ver planes</a>
+                    <a href="#demo" class="btn-secondary">🚀 Probar demo</a>
+                </div>
+            </div>
+
+            <!-- Sección de Características -->
+            <div class="features-section" id="features">
+                <h3>✨ Características Principales</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h4>Crear flujos de ventas automáticos</h4>
+                        <p>Automatiza todo el proceso de ventas desde el primer contacto hasta el cierre.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h4>Conocer nuestros planes y precios</h4>
+                        <p>Planes flexibles adaptados a las necesidades de tu negocio.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h4>Probar demos en vivo</h4>
+                        <p>Experimenta nuestros chatbots en acción antes de decidir.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h4>Conectarte con nuestro equipo</h4>
+                        <p>Soporte técnico especializado y atención personalizada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Precios -->
+            <div class="pricing-section" id="pricing">
+                <h3>💰 Planes y Precios</h3>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <h4>🥉 BÁSICO</h4>
+                            <div class="price">$990 <span>MXN/mes</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✅ Chatbot básico para WhatsApp</li>
+                            <li>✅ Respuestas automáticas</li>
+                            <li>✅ Soporte por email</li>
+                            <li>✅ Configuración inicial</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card featured">
+                        <div class="plan-header">
+                            <h4>🥈 PRO</h4>
+                            <div class="price">$1,990 <span>MXN/mes</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✅ Todo lo del plan Básico</li>
+                            <li>✅ Integración con CRM</li>
+                            <li>✅ Múltiples plataformas</li>
+                            <li>✅ Análisis avanzados</li>
+                            <li>✅ Soporte prioritario</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <h4>🥇 EMPRESARIAL</h4>
+                            <div class="price">$3,990 <span>MXN/mes</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✅ Todo lo del plan Pro</li>
+                            <li>✅ IA personalizada</li>
+                            <li>✅ Integraciones ilimitadas</li>
+                            <li>✅ Soporte 24/7</li>
+                            <li>✅ Consultoría especializada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Contacto -->
+            <div class="contact-section" id="contact">
+                <h3>📞 Contacto</h3>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📱</div>
+                        <h4>WhatsApp</h4>
+                        <p><a href="https://wa.me/522228588674" target="_blank">+52 222 858 8674</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">✉️</div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a></p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -312,12 +699,12 @@
                         const botMessage = document.createElement('div');
                         botMessage.className = 'chapi-message bot-message';
 
-                        let response = '¡Gracias por contactarnos! Para una atención personalizada, puedes escribirnos a:<br><br>📱 WhatsApp: +52 55 0000 0000<br>✉️ Email: hola@chapi.mx';
+                        let response = '¡Gracias por contactarnos! Para una atención personalizada, puedes escribirnos a:<br><br>📱 WhatsApp: +52 222 858 8674<br>✉️ Email: jovany2224@gmail.com';
 
                         if (message.toLowerCase().includes('precio') || message.toLowerCase().includes('plan')) {
-                            response = '💰 <strong>Nuestros planes:</strong><br><br>🥉 <strong>BÁSICO - $49/mes</strong><br>🥈 <strong>PRO - $99/mes</strong><br>🥇 <strong>EMPRESARIAL - $199/mes</strong><br><br>¡Contacta para más detalles!';
+                            response = '💰 <strong>Nuestros planes:</strong><br><br>🥉 <strong>BÁSICO - $990 MXN/mes</strong><br>🥈 <strong>PRO - $1,990 MXN/mes</strong><br>🥇 <strong>EMPRESARIAL - $3,990 MXN/mes</strong><br><br>¡Contacta para más detalles!';
                         } else if (message.toLowerCase().includes('demo')) {
-                            response = '🚀 ¡Perfecto! Podemos agendar una demo personalizada. Escríbenos por WhatsApp: +52 55 0000 0000';
+                            response = '🚀 ¡Perfecto! Podemos agendar una demo personalizada. Escríbenos por WhatsApp: +52 222 858 8674';
                         } else if (message.toLowerCase().includes('hola') || message.toLowerCase().includes('hello')) {
                             response = '¡Hola! 👋 Soy CHAPI, tu asistente especializado en chatbots inteligentes. ¿Te interesa conocer nuestros planes o agendar una demo?';
                         }
@@ -543,6 +930,24 @@
 
             // Ejecutar tests automáticamente después de cargar
             setTimeout(runTests, 2000);
+
+            // Navegación suave
+            document.addEventListener('DOMContentLoaded', function () {
+                const links = document.querySelectorAll('a[href^="#"]');
+                links.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            });
         </script>
     </body>
 
