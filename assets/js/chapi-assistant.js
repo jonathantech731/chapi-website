@@ -24,9 +24,44 @@ class ChapiAssistant {
     }
 
     init() {
-        this.createWidget();
-        this.bindEvents();
-        this.loadWelcomeMessage();
+        // Esperar a que el DOM esté completamente cargado
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.createWidget();
+                this.bindEvents();
+                this.loadWelcomeMessage();
+                this.ensureVisibility();
+            });
+        } else {
+            // DOM ya está listo
+            this.createWidget();
+            this.bindEvents();
+            this.loadWelcomeMessage();
+            this.ensureVisibility();
+        }
+    }
+
+    ensureVisibility() {
+        // Forzar visibilidad en caso de problemas de renderizado
+        setTimeout(() => {
+            const widget = document.querySelector('.chapi-assistant');
+            if (widget) {
+                widget.style.display = 'block';
+                widget.style.visibility = 'visible';
+                widget.style.opacity = '1';
+                widget.style.position = 'fixed';
+                widget.style.zIndex = '999999';
+                
+                const button = widget.querySelector('.chapi-chat-button');
+                if (button) {
+                    button.style.display = 'flex';
+                    button.style.visibility = 'visible';
+                    button.style.opacity = '1';
+                }
+                
+                console.log('CHAPI Assistant: Widget visibility ensured');
+            }
+        }, 100);
     }
 
     createWidget() {
@@ -95,9 +130,45 @@ class ChapiAssistant {
         const sendBtn = document.getElementById('chapiSendBtn');
         const input = document.getElementById('chapiInput');
 
-        chatButton.addEventListener('click', () => this.toggle());
-        closeBtn.addEventListener('click', () => this.close());
-        sendBtn.addEventListener('click', () => this.sendMessage());
+        // Eventos para el botón principal - optimizado para móviles
+        if (chatButton) {
+            // Usar tanto click como touchend para mejor compatibilidad móvil
+            chatButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggle();
+            });
+            
+            chatButton.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggle();
+            }, { passive: false });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.close();
+            });
+            
+            closeBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.close();
+            }, { passive: false });
+        }
+
+        if (sendBtn) {
+            sendBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.sendMessage();
+            });
+            
+            sendBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.sendMessage();
+            }, { passive: false });
+        }
 
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -637,6 +708,53 @@ function initChapiAssistant() {
         welcomeMessage: '¡Hola! 👋 Soy CHAPI, tu asistente virtual especializado en chatbots inteligentes. ¿En qué puedo ayudarte hoy?'
     });
 }
+
+// Inicialización robusta que funciona en todos los dispositivos
+(function() {
+    'use strict';
+    
+    let initialized = false;
+    
+    function tryInit() {
+        if (initialized) return;
+        
+        try {
+            console.log('CHAPI: Attempting initialization...');
+            
+            // Verificar que tenemos la configuración
+            if (typeof CHAPI_CONFIG !== 'undefined') {
+                window.chapiAssistant = new ChapiAssistant(CHAPI_CONFIG);
+                initialized = true;
+                console.log('CHAPI: Successfully initialized with config');
+            } else {
+                // Usar configuración por defecto
+                initChapiAssistant();
+                initialized = true;
+                console.log('CHAPI: Successfully initialized with default config');
+            }
+        } catch (error) {
+            console.error('CHAPI: Initialization error:', error);
+            // Intentar de nuevo en 1 segundo
+            setTimeout(tryInit, 1000);
+        }
+    }
+    
+    // Múltiples puntos de inicialización para máxima compatibilidad
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tryInit);
+    } else {
+        tryInit();
+    }
+    
+    // Backup para navegadores problemáticos
+    window.addEventListener('load', function() {
+        setTimeout(tryInit, 100);
+    });
+    
+    // Para dispositivos móviles con carga diferida
+    setTimeout(tryInit, 500);
+    
+})();
 
 // Export for module environments
 if (typeof module !== 'undefined' && module.exports) {
