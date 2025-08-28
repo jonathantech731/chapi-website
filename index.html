@@ -1263,18 +1263,18 @@
         <!-- CHAPI Assistant Scripts -->
         <script src="assets/js/chapi-config.js"></script>
         <script src="assets/js/chapi-assistant.js"></script>
-        
+
         <!-- Script de inicialización y debugging -->
         <script>
             // Debugging y inicialización robusta para móviles
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 console.log('CHAPI: DOM loaded, initializing assistant...');
-                
+
                 // Verificar si el asistente se cargó correctamente
                 setTimeout(() => {
                     const chapiWidget = document.querySelector('.chapi-assistant');
                     const chapiButton = document.querySelector('.chapi-chat-button');
-                    
+
                     if (!chapiWidget) {
                         console.error('CHAPI: Widget not found! Creating fallback...');
                         createFallbackWidget();
@@ -1282,7 +1282,7 @@
                         console.error('CHAPI: Button not found in widget!');
                     } else {
                         console.log('CHAPI: Assistant loaded successfully');
-                        
+
                         // Forzar estilos para asegurar visibilidad
                         chapiWidget.style.display = 'block';
                         chapiWidget.style.visibility = 'visible';
@@ -1291,14 +1291,14 @@
                         chapiWidget.style.bottom = '20px';
                         chapiWidget.style.right = '20px';
                         chapiWidget.style.zIndex = '999999';
-                        
+
                         chapiButton.style.display = 'flex';
                         chapiButton.style.visibility = 'visible';
                         chapiButton.style.opacity = '1';
                     }
                 }, 500);
             });
-            
+
             // Widget de fallback en caso de problemas
             function createFallbackWidget() {
                 const fallback = document.createElement('div');
@@ -1322,20 +1322,20 @@
                 `;
                 fallback.innerHTML = '💬';
                 fallback.title = 'Chat con CHAPI';
-                
-                fallback.addEventListener('click', function() {
+
+                fallback.addEventListener('click', function () {
                     alert('¡Hola! Soy CHAPI, tu asistente virtual.\n\nPara contactarnos:\n📱 WhatsApp: +52 55 0000 0000\n✉️ Email: hola@chapi.mx');
                 });
-                
+
                 document.body.appendChild(fallback);
                 console.log('CHAPI: Fallback widget created');
             }
-            
+
             // Detectar dispositivo para debugging
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
             const isAndroid = /Android/.test(navigator.userAgent);
-            
+
             console.log('CHAPI Device Info:', {
                 isMobile,
                 isIOS,
