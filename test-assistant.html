@@ -1,125 +1,140 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test CHAPI Assistant</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #0a0d14;
-            color: white;
-            min-height: 100vh;
-        }
-        .test-info {
-            background: #161c27;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .status {
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-        .success { background: #10b981; }
-        .error { background: #ff4757; }
-        .warning { background: #ffb020; }
-    </style>
-    
-    <!-- CHAPI Assistant Styles -->
-    <link rel="stylesheet" href="assets/css/chapi-assistant.css">
-</head>
-<body>
-    <div class="test-info">
-        <h1>🧪 Test CHAPI Assistant</h1>
-        <p>Esta página es para probar que el asistente CHAPI funciona correctamente en tu dispositivo.</p>
-        
-        <div id="deviceInfo">
-            <h3>📱 Información del Dispositivo:</h3>
-            <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
-            <p><strong>Pantalla:</strong> <span id="screenSize"></span></p>
-            <p><strong>Viewport:</strong> <span id="viewport"></span></p>
-            <p><strong>Es Móvil:</strong> <span id="isMobile"></span></p>
-        </div>
-        
-        <div id="testResults">
-            <h3>🔍 Resultados del Test:</h3>
-        </div>
-        
-        <div style="margin-top: 20px;">
-            <button onclick="runTests()" style="background: #2f7afe; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer;">
-                🔄 Ejecutar Tests
-            </button>
-            <button onclick="forceShow()" style="background: #00d4a6; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; margin-left: 10px;">
-                👁️ Forzar Mostrar Widget
-            </button>
-        </div>
-    </div>
 
-    <!-- CHAPI Assistant Scripts -->
-    <script src="assets/js/chapi-config.js"></script>
-    <script src="assets/js/chapi-assistant.js"></script>
-    
-    <script>
-        // Mostrar información del dispositivo
-        document.getElementById('userAgent').textContent = navigator.userAgent;
-        document.getElementById('screenSize').textContent = `${screen.width}x${screen.height}`;
-        document.getElementById('viewport').textContent = `${window.innerWidth}x${window.innerHeight}`;
-        
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        document.getElementById('isMobile').textContent = isMobile ? 'Sí' : 'No';
-        
-        function addTestResult(message, type = 'info') {
-            const div = document.createElement('div');
-            div.className = `status ${type}`;
-            div.textContent = message;
-            document.getElementById('testResults').appendChild(div);
-        }
-        
-        function runTests() {
-            document.getElementById('testResults').innerHTML = '<h3>🔍 Resultados del Test:</h3>';
-            
-            // Test 1: Verificar que el CSS se cargó
-            const cssLoaded = document.querySelector('link[href="assets/css/chapi-assistant.css"]');
-            addTestResult(`CSS cargado: ${cssLoaded ? 'Sí' : 'No'}`, cssLoaded ? 'success' : 'error');
-            
-            // Test 2: Verificar que el JS se cargó
-            const jsLoaded = typeof ChapiAssistant !== 'undefined';
-            addTestResult(`JavaScript cargado: ${jsLoaded ? 'Sí' : 'No'}`, jsLoaded ? 'success' : 'error');
-            
-            // Test 3: Verificar que el widget existe
-            setTimeout(() => {
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test CHAPI Assistant</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: #0a0d14;
+                color: white;
+                min-height: 100vh;
+            }
+
+            .test-info {
+                background: #161c27;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+
+            .status {
+                padding: 10px;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .success {
+                background: #10b981;
+            }
+
+            .error {
+                background: #ff4757;
+            }
+
+            .warning {
+                background: #ffb020;
+            }
+        </style>
+
+        <!-- CHAPI Assistant Styles -->
+        <link rel="stylesheet" href="assets/css/chapi-assistant.css">
+    </head>
+
+    <body>
+        <div class="test-info">
+            <h1>🧪 Test CHAPI Assistant</h1>
+            <p>Esta página es para probar que el asistente CHAPI funciona correctamente en tu dispositivo.</p>
+
+            <div id="deviceInfo">
+                <h3>📱 Información del Dispositivo:</h3>
+                <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+                <p><strong>Pantalla:</strong> <span id="screenSize"></span></p>
+                <p><strong>Viewport:</strong> <span id="viewport"></span></p>
+                <p><strong>Es Móvil:</strong> <span id="isMobile"></span></p>
+            </div>
+
+            <div id="testResults">
+                <h3>🔍 Resultados del Test:</h3>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button onclick="runTests()"
+                    style="background: #2f7afe; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer;">
+                    🔄 Ejecutar Tests
+                </button>
+                <button onclick="forceShow()"
+                    style="background: #00d4a6; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; margin-left: 10px;">
+                    👁️ Forzar Mostrar Widget
+                </button>
+            </div>
+        </div>
+
+        <!-- CHAPI Assistant Scripts -->
+        <script src="assets/js/chapi-config.js"></script>
+        <script src="assets/js/chapi-assistant.js"></script>
+
+        <script>
+            // Mostrar información del dispositivo
+            document.getElementById('userAgent').textContent = navigator.userAgent;
+            document.getElementById('screenSize').textContent = `${screen.width}x${screen.height}`;
+            document.getElementById('viewport').textContent = `${window.innerWidth}x${window.innerHeight}`;
+
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            document.getElementById('isMobile').textContent = isMobile ? 'Sí' : 'No';
+
+            function addTestResult(message, type = 'info') {
+                const div = document.createElement('div');
+                div.className = `status ${type}`;
+                div.textContent = message;
+                document.getElementById('testResults').appendChild(div);
+            }
+
+            function runTests() {
+                document.getElementById('testResults').innerHTML = '<h3>🔍 Resultados del Test:</h3>';
+
+                // Test 1: Verificar que el CSS se cargó
+                const cssLoaded = document.querySelector('link[href="assets/css/chapi-assistant.css"]');
+                addTestResult(`CSS cargado: ${cssLoaded ? 'Sí' : 'No'}`, cssLoaded ? 'success' : 'error');
+
+                // Test 2: Verificar que el JS se cargó
+                const jsLoaded = typeof ChapiAssistant !== 'undefined';
+                addTestResult(`JavaScript cargado: ${jsLoaded ? 'Sí' : 'No'}`, jsLoaded ? 'success' : 'error');
+
+                // Test 3: Verificar que el widget existe
+                setTimeout(() => {
+                    const widget = document.querySelector('.chapi-assistant');
+                    addTestResult(`Widget creado: ${widget ? 'Sí' : 'No'}`, widget ? 'success' : 'error');
+
+                    if (widget) {
+                        const styles = window.getComputedStyle(widget);
+                        addTestResult(`Widget visible: ${styles.visibility === 'visible' ? 'Sí' : 'No'}`, styles.visibility === 'visible' ? 'success' : 'error');
+                        addTestResult(`Widget opacidad: ${styles.opacity}`, parseFloat(styles.opacity) > 0.5 ? 'success' : 'warning');
+                        addTestResult(`Widget posición: ${styles.position}`, styles.position === 'fixed' ? 'success' : 'warning');
+                        addTestResult(`Widget z-index: ${styles.zIndex}`, parseInt(styles.zIndex) > 1000 ? 'success' : 'warning');
+                    }
+
+                    // Test 4: Verificar que el botón existe
+                    const button = document.querySelector('.chapi-chat-button');
+                    addTestResult(`Botón creado: ${button ? 'Sí' : 'No'}`, button ? 'success' : 'error');
+
+                    if (button) {
+                        const buttonStyles = window.getComputedStyle(button);
+                        addTestResult(`Botón visible: ${buttonStyles.visibility === 'visible' ? 'Sí' : 'No'}`, buttonStyles.visibility === 'visible' ? 'success' : 'error');
+                    }
+                }, 1000);
+            }
+
+            function forceShow() {
                 const widget = document.querySelector('.chapi-assistant');
-                addTestResult(`Widget creado: ${widget ? 'Sí' : 'No'}`, widget ? 'success' : 'error');
-                
-                if (widget) {
-                    const styles = window.getComputedStyle(widget);
-                    addTestResult(`Widget visible: ${styles.visibility === 'visible' ? 'Sí' : 'No'}`, styles.visibility === 'visible' ? 'success' : 'error');
-                    addTestResult(`Widget opacidad: ${styles.opacity}`, parseFloat(styles.opacity) > 0.5 ? 'success' : 'warning');
-                    addTestResult(`Widget posición: ${styles.position}`, styles.position === 'fixed' ? 'success' : 'warning');
-                    addTestResult(`Widget z-index: ${styles.zIndex}`, parseInt(styles.zIndex) > 1000 ? 'success' : 'warning');
-                }
-                
-                // Test 4: Verificar que el botón existe
                 const button = document.querySelector('.chapi-chat-button');
-                addTestResult(`Botón creado: ${button ? 'Sí' : 'No'}`, button ? 'success' : 'error');
-                
-                if (button) {
-                    const buttonStyles = window.getComputedStyle(button);
-                    addTestResult(`Botón visible: ${buttonStyles.visibility === 'visible' ? 'Sí' : 'No'}`, buttonStyles.visibility === 'visible' ? 'success' : 'error');
-                }
-            }, 1000);
-        }
-        
-        function forceShow() {
-            const widget = document.querySelector('.chapi-assistant');
-            const button = document.querySelector('.chapi-chat-button');
-            
-            if (widget) {
-                widget.style.cssText = `
+
+                if (widget) {
+                    widget.style.cssText = `
                     position: fixed !important;
                     bottom: 20px !important;
                     right: 20px !important;
@@ -128,11 +143,11 @@
                     visibility: visible !important;
                     opacity: 1 !important;
                 `;
-                addTestResult('Widget forzado a mostrar', 'success');
-            }
-            
-            if (button) {
-                button.style.cssText = `
+                    addTestResult('Widget forzado a mostrar', 'success');
+                }
+
+                if (button) {
+                    button.style.cssText = `
                     width: 64px !important;
                     height: 64px !important;
                     background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
@@ -144,12 +159,13 @@
                     visibility: visible !important;
                     opacity: 1 !important;
                 `;
-                addTestResult('Botón forzado a mostrar', 'success');
+                    addTestResult('Botón forzado a mostrar', 'success');
+                }
             }
-        }
-        
-        // Ejecutar tests automáticamente después de cargar
-        setTimeout(runTests, 2000);
-    </script>
-</body>
+
+            // Ejecutar tests automáticamente después de cargar
+            setTimeout(runTests, 2000);
+        </script>
+    </body>
+
 </html>

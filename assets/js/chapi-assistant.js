@@ -51,14 +51,14 @@ class ChapiAssistant {
                 widget.style.opacity = '1';
                 widget.style.position = 'fixed';
                 widget.style.zIndex = '999999';
-                
+
                 const button = widget.querySelector('.chapi-chat-button');
                 if (button) {
                     button.style.display = 'flex';
                     button.style.visibility = 'visible';
                     button.style.opacity = '1';
                 }
-                
+
                 console.log('CHAPI Assistant: Widget visibility ensured');
             }
         }, 100);
@@ -138,7 +138,7 @@ class ChapiAssistant {
                 e.stopPropagation();
                 this.toggle();
             });
-            
+
             chatButton.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -151,7 +151,7 @@ class ChapiAssistant {
                 e.preventDefault();
                 this.close();
             });
-            
+
             closeBtn.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.close();
@@ -163,7 +163,7 @@ class ChapiAssistant {
                 e.preventDefault();
                 this.sendMessage();
             });
-            
+
             sendBtn.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.sendMessage();
@@ -710,17 +710,17 @@ function initChapiAssistant() {
 }
 
 // Inicialización robusta que funciona en todos los dispositivos
-(function() {
+(function () {
     'use strict';
-    
+
     let initialized = false;
-    
+
     function tryInit() {
         if (initialized) return;
-        
+
         try {
             console.log('CHAPI: Attempting initialization...');
-            
+
             // Verificar que tenemos la configuración
             if (typeof CHAPI_CONFIG !== 'undefined') {
                 window.chapiAssistant = new ChapiAssistant(CHAPI_CONFIG);
@@ -738,22 +738,22 @@ function initChapiAssistant() {
             setTimeout(tryInit, 1000);
         }
     }
-    
+
     // Múltiples puntos de inicialización para máxima compatibilidad
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', tryInit);
     } else {
         tryInit();
     }
-    
+
     // Backup para navegadores problemáticos
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         setTimeout(tryInit, 100);
     });
-    
+
     // Para dispositivos móviles con carga diferida
     setTimeout(tryInit, 500);
-    
+
 })();
 
 // Export for module environments
