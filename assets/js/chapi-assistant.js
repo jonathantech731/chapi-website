@@ -1,7 +1,7 @@
 /**
  * 🤖 CHAPI Assistant Widget
  * Asistente inteligente para sitio web CHAPI
- * @version 3.0
+ * @version 2.0
  * @author CHAPI Team
  */
 
@@ -11,103 +11,14 @@ class ChapiAssistant {
             apiKey: config.apiKey || '', // Para OpenAI (opcional)
             botName: config.botName || 'CHAPI',
             enableAI: config.enableAI || false,
-            welcomeMessage: config.welcomeMessage || '¡Hola! 👋 Soy CHAPI, tu asistente virtual especializado en chatbots inteligentes. ¿En qué puedo ayudarte hoy?',
+            welcomeMessage: config.welcomeMessage || '¡Hola! Soy CHAPI, tu asistente virtual. ¿En qué puedo ayudarte hoy?',
             companyName: config.companyName || 'CHAPI',
-            whatsappNumber: config.whatsappNumber || '+52 222 858 8674',
-            email: config.email || 'jovany2224@gmail.com',
-            enableAnalytics: config.enableAnalytics !== false,
-            enableLeadCapture: config.enableLeadCapture !== false,
             ...config
         };
 
         this.isOpen = false;
         this.messages = [];
         this.currentFlow = null;
-        this.sessionId = this.generateSessionId();
-        this.startTime = Date.now();
-        this.userProfile = {
-            name: null,
-            email: null,
-            phone: null,
-            interests: [],
-            urgencyLevel: 0
-        };
-
-        // Analytics
-        this.analytics = {
-            messagesCount: 0,
-            timeSpent: 0,
-            interactions: [],
-            conversion: false,
-            leadCaptured: false
-        };
-
-        // Intents y respuestas inteligentes
-        this.intents = {
-            saludo: {
-                keywords: ['hola', 'buenos', 'buenas', 'hi', 'hello', 'hey', 'saludos'],
-                responses: [
-                    '¡Hola! 👋 ¡Qué gusto tenerte aquí! Soy CHAPI y estoy aquí para ayudarte con cualquier duda sobre nuestros chatbots inteligentes.',
-                    '¡Buenos días/tardes! 😊 Soy tu asistente virtual CHAPI. ¿Te interesa conocer cómo podemos automatizar tu atención al cliente?',
-                    '¡Saludos! 🤖 Soy CHAPI, experto en soluciones de chatbots. ¿En qué puedo asistirte hoy?'
-                ]
-            },
-            precios: {
-                keywords: ['precio', 'costo', 'cuanto', 'cuánto', 'tarifa', 'plan', 'paquete', 'oferta'],
-                responses: [
-                    '💰 **Nuestros planes están diseñados para cada necesidad:**\n\n🟢 **Básico**: $990 MXN/mes\n- Hasta 1,000 conversaciones\n- Integración WhatsApp\n- Soporte por email\n\n🔵 **Pro**: $1,990 MXN/mes\n- Hasta 5,000 conversaciones\n- IA avanzada\n- Soporte prioritario\n\n🟣 **Empresarial**: $3,990 MXN/mes\n- Conversaciones ilimitadas\n- Personalización completa\n- Soporte 24/7\n\n¿Te interesa algún plan en particular?'
-                ]
-            },
-            demo: {
-                keywords: ['demo', 'prueba', 'demostración', 'ejemplo', 'ver', 'mostrar', 'probar'],
-                responses: [
-                    '🎯 ¡Perfecto! Tenemos varias opciones para que conozcas CHAPI:\n\n1️⃣ **Demo en vivo**: Te muestro el sistema funcionando ahora mismo\n2️⃣ **Prueba gratuita**: 14 días sin compromiso\n3️⃣ **Sesión personalizada**: Adaptamos la demo a tu negocio\n\n¿Qué prefieres? También puedes escribirme a ' + this.config.whatsappNumber + ' para agendar una llamada.'
-                ]
-            },
-            contacto: {
-                keywords: ['contacto', 'llamar', 'teléfono', 'whatsapp', 'email', 'correo'],
-                responses: [
-                    '📞 **¡Excelente! Te dejo mis datos de contacto:**\n\n📱 **WhatsApp**: ' + this.config.whatsappNumber + '\n📧 **Email**: ' + this.config.email + '\n\n¿Prefieres que te envíe la información por WhatsApp o tienes alguna pregunta específica que pueda resolver ahora?'
-                ]
-            },
-            caracteristicas: {
-                keywords: ['características', 'funciones', 'qué hace', 'como funciona', 'capacidades'],
-                responses: [
-                    '🚀 **CHAPI tiene increíbles características:**\n\n🤖 **IA Conversacional**: Entiende lenguaje natural\n📱 **Multi-plataforma**: WhatsApp, web, Facebook\n📊 **Analytics**: Métricas en tiempo real\n🔗 **Integraciones**: CRM, APIs, webhooks\n🎨 **Personalizable**: Tu marca, tu estilo\n🌍 **Multi-idioma**: Soporte global\n⚡ **24/7**: Atención sin pausas\n\n¿Te interesa alguna característica en particular?'
-                ]
-            },
-            urgente: {
-                keywords: ['urgente', 'rápido', 'ya', 'ahora', 'inmediato', 'pronto'],
-                urgencyOffer: true,
-                responses: [
-                    '🚨 **¡Entiendo que es urgente!** No te preocupes, estoy aquí para ayudarte.\n\n⚡ **Oferta especial por urgencia**: 20% de descuento si decides hoy\n🎯 **Setup express**: Configuración en 24 horas\n📞 **Línea directa**: ' + this.config.whatsappNumber + '\n\n¿Cuál es tu situación específica? ¡Vamos a resolverlo juntos!'
-                ]
-            },
-            tiempo: {
-                keywords: ['cuando', 'cuándo', 'tiempo', 'duración', 'implementación'],
-                responses: [
-                    '⏱️ **Tiempos de implementación CHAPI:**\n\n🟢 **Setup básico**: 2-3 días\n🔵 **Configuración Pro**: 5-7 días\n🟣 **Proyecto empresarial**: 1-2 semanas\n\n✅ **Incluye**: Configuración, pruebas, capacitación\n🎯 **Plus**: Soporte durante la implementación\n\n¿Tienes alguna fecha límite en mente?'
-                ]
-            },
-            integracion: {
-                keywords: ['integración', 'api', 'crm', 'sistema', 'conectar'],
-                responses: [
-                    '🔗 **CHAPI se integra con todo:**\n\n💼 **CRM**: Salesforce, HubSpot, Zoho\n🛒 **E-commerce**: Shopify, WooCommerce\n📊 **Analytics**: Google Analytics, Mixpanel\n📧 **Email**: Mailchimp, SendGrid\n⚙️ **APIs personalizadas**: Webhooks, REST\n\n¿Con qué sistema necesitas integrar? ¡Te ayudo con los detalles técnicos!'
-                ]
-            },
-            soporte: {
-                keywords: ['soporte', 'ayuda', 'support', 'problema', 'error'],
-                responses: [
-                    '🛠️ **Nuestro soporte está siempre disponible:**\n\n📱 **WhatsApp**: ' + this.config.whatsappNumber + ' (Respuesta inmediata)\n📧 **Email**: ' + this.config.email + '\n💬 **Chat**: Aquí mismo\n📞 **Llamada**: Agenda tu cita\n\n**Planes incluyen:**\n🟢 Básico: Email support\n🔵 Pro: Soporte prioritario\n🟣 Empresarial: 24/7 + Account Manager\n\n¿En qué puedo ayudarte específicamente?'
-                ]
-            },
-            horarios: {
-                keywords: ['horario', 'hora', 'disponible', 'abierto'],
-                responses: [
-                    '🕐 **Horarios de atención:**\n\n🤖 **CHAPI (yo)**: 24/7 siempre disponible\n👨‍💻 **Soporte humano**: Lun-Vie 9:00-18:00 (GMT-6)\n📱 **WhatsApp**: Respuesta en menos de 1 hora\n📧 **Email**: Respuesta en menos de 4 horas\n\n¡Pero yo estoy aquí ahora para resolver tus dudas! ¿En qué puedo ayudarte?'
-                ]
-            }
-        };
 
         this.init();
     }
@@ -120,7 +31,6 @@ class ChapiAssistant {
                 this.bindEvents();
                 this.loadWelcomeMessage();
                 this.ensureVisibility();
-                this.initAnalytics();
             });
         } else {
             // DOM ya está listo
@@ -128,49 +38,7 @@ class ChapiAssistant {
             this.bindEvents();
             this.loadWelcomeMessage();
             this.ensureVisibility();
-            this.initAnalytics();
         }
-    }
-
-    initAnalytics() {
-        if (!this.config.enableAnalytics) return;
-
-        // Cargar analytics previos si existen
-        const saved = localStorage.getItem('chapi_analytics');
-        if (saved) {
-            try {
-                this.analytics = { ...this.analytics, ...JSON.parse(saved) };
-            } catch (e) {
-                console.warn('Error loading saved analytics:', e);
-            }
-        }
-
-        // Tracking de tiempo
-        this.analyticsTimer = setInterval(() => {
-            this.analytics.timeSpent += 1;
-            this.saveAnalytics();
-        }, 1000);
-
-        // Track page visibility
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                this.saveAnalytics();
-            }
-        });
-    }
-
-    saveAnalytics() {
-        if (!this.config.enableAnalytics) return;
-
-        try {
-            localStorage.setItem('chapi_analytics', JSON.stringify(this.analytics));
-        } catch (e) {
-            console.warn('Error saving analytics:', e);
-        }
-    }
-
-    generateSessionId() {
-        return 'chapi_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     }
 
     ensureVisibility() {
@@ -203,7 +71,7 @@ class ChapiAssistant {
             <!-- Chat Button -->
             <button class="chapi-chat-button" id="chapiChatButton">
                 <svg class="chapi-chat-icon" viewBox="0 0 24 24">
-                    <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 2.98.97 4.29L1 23l6.71-1.97C9.02 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-1 17h-2v-2h2v2zm2.07-7.75l-.9.92C11.45 12.9 11 13.5 11 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
                 </svg>
                 <div class="chapi-notification-dot" id="chapiNotification"></div>
             </button>
@@ -233,28 +101,6 @@ class ChapiAssistant {
                     <!-- Messages aparecerán aquí -->
                 </div>
 
-                <!-- Quick Actions -->
-                <div class="chapi-quick-actions" id="chapiQuickActions" style="display: none;">
-                    <button class="chapi-quick-btn" data-action="precios">💰 Ver Precios</button>
-                    <button class="chapi-quick-btn" data-action="demo">🎯 Solicitar Demo</button>
-                    <button class="chapi-quick-btn" data-action="contacto">📞 Contactar</button>
-                </div>
-
-                <!-- Typing Indicator -->
-                <div class="chapi-typing-indicator" id="chapiTyping" style="display: none;">
-                    <div class="chapi-typing-content">
-                        <div class="chapi-typing-avatar">🤖</div>
-                        <div class="chapi-typing-text">
-                            <span class="chapi-typing-name">${this.config.botName}</span> está escribiendo
-                            <div class="chapi-typing-dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Input Area -->
                 <div class="chapi-input-area">
                     <div class="chapi-input-container">
@@ -272,48 +118,6 @@ class ChapiAssistant {
                     </div>
                 </div>
             </div>
-
-            <!-- Lead Capture Modal -->
-            <div class="chapi-lead-modal" id="chapiLeadModal" style="display: none;">
-                <div class="chapi-lead-content">
-                    <div class="chapi-lead-header">
-                        <h3>🎯 Cotización Personalizada</h3>
-                        <button class="chapi-lead-close" id="chapiLeadClose">×</button>
-                    </div>
-                    <form class="chapi-lead-form" id="chapiLeadForm">
-                        <div class="chapi-form-group">
-                            <label>Nombre *</label>
-                            <input type="text" id="leadName" required>
-                        </div>
-                        <div class="chapi-form-group">
-                            <label>Email *</label>
-                            <input type="email" id="leadEmail" required>
-                        </div>
-                        <div class="chapi-form-group">
-                            <label>Teléfono</label>
-                            <input type="tel" id="leadPhone">
-                        </div>
-                        <div class="chapi-form-group">
-                            <label>Empresa</label>
-                            <input type="text" id="leadCompany">
-                        </div>
-                        <div class="chapi-form-group">
-                            <label>¿Qué necesitas?</label>
-                            <select id="leadNeeds">
-                                <option value="">Selecciona una opción</option>
-                                <option value="chatbot-web">Chatbot para sitio web</option>
-                                <option value="chatbot-whatsapp">Chatbot WhatsApp</option>
-                                <option value="chatbot-completo">Solución completa</option>
-                                <option value="integracion">Integración con sistema existente</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="chapi-lead-submit">
-                            📩 Enviar Solicitud
-                        </button>
-                    </form>
-                </div>
-            </div>
         `;
 
         document.body.appendChild(widget);
@@ -325,23 +129,20 @@ class ChapiAssistant {
         const closeBtn = document.getElementById('chapiCloseBtn');
         const sendBtn = document.getElementById('chapiSendBtn');
         const input = document.getElementById('chapiInput');
-        const leadClose = document.getElementById('chapiLeadClose');
-        const leadForm = document.getElementById('chapiLeadForm');
 
         // Eventos para el botón principal - optimizado para móviles
         if (chatButton) {
+            // Usar tanto click como touchend para mejor compatibilidad móvil
             chatButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 this.toggle();
-                this.trackInteraction('chat_opened');
             });
 
             chatButton.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 this.toggle();
-                this.trackInteraction('chat_opened');
             }, { passive: false });
         }
 
@@ -349,8 +150,12 @@ class ChapiAssistant {
             closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.close();
-                this.trackInteraction('chat_closed');
             });
+
+            closeBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.close();
+            }, { passive: false });
         }
 
         if (sendBtn) {
@@ -358,89 +163,29 @@ class ChapiAssistant {
                 e.preventDefault();
                 this.sendMessage();
             });
+
+            sendBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.sendMessage();
+            }, { passive: false });
         }
 
-        // Quick actions
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('chapi-quick-btn')) {
-                const action = e.target.dataset.action;
-                this.handleQuickAction(action);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
             }
         });
 
-        // Lead modal events
-        if (leadClose) {
-            leadClose.addEventListener('click', () => {
-                this.closeLeadModal();
-            });
-        }
-
-        if (leadForm) {
-            leadForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.submitLead();
-            });
-        }
-
-        // Input events
-        if (input) {
-            input.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    this.sendMessage();
-                }
-            });
-
-            input.addEventListener('input', () => {
-                this.autoResize(input);
-            });
-        }
-
-        // Hide notification dot after first interaction
-        if (chatButton) {
-            chatButton.addEventListener('click', () => {
-                const notification = document.getElementById('chapiNotification');
-                if (notification) notification.style.display = 'none';
-            }, { once: true });
-        }
-    }
-
-    trackInteraction(type, data = {}) {
-        if (!this.config.enableAnalytics) return;
-
-        this.analytics.interactions.push({
-            type,
-            timestamp: Date.now(),
-            sessionId: this.sessionId,
-            ...data
+        input.addEventListener('input', () => {
+            this.autoResize(input);
         });
 
-        this.analytics.messagesCount++;
-        this.saveAnalytics();
-    }
-
-    handleQuickAction(action) {
-        this.trackInteraction('quick_action', { action });
-
-        // Simular que el usuario escribió el comando
-        const input = document.getElementById('chapiInput');
-        input.value = action;
-        this.sendMessage();
-    }
-
-    showTypingIndicator() {
-        const typing = document.getElementById('chapiTyping');
-        if (typing) {
-            typing.style.display = 'block';
-            this.scrollToBottom();
-        }
-    }
-
-    hideTypingIndicator() {
-        const typing = document.getElementById('chapiTyping');
-        if (typing) {
-            typing.style.display = 'none';
-        }
+        // Hide notification dot after first interaction
+        chatButton.addEventListener('click', () => {
+            const notification = document.getElementById('chapiNotification');
+            notification.style.display = 'none';
+        }, { once: true });
     }
 
     autoResize(textarea) {
@@ -461,71 +206,22 @@ class ChapiAssistant {
         window.classList.add('active');
         this.isOpen = true;
 
-        // Show quick actions if no messages yet
-        if (this.messages.length <= 1) {
-            this.showQuickActions();
-        }
-
         setTimeout(() => {
-            const input = document.getElementById('chapiInput');
-            if (input) input.focus();
+            document.getElementById('chapiInput').focus();
         }, 300);
-
-        this.trackInteraction('chat_opened');
     }
+
     close() {
         const window = document.getElementById('chapiChatWindow');
         window.classList.remove('active');
         this.isOpen = false;
-        this.hideQuickActions();
-        this.trackInteraction('chat_closed');
     }
 
     loadWelcomeMessage() {
         setTimeout(() => {
             this.addMessage('bot', this.config.welcomeMessage);
-            this.showQuickActions();
+            this.showQuickActions('welcome');
         }, 500);
-    }
-
-    showQuickActions() {
-        const actions = document.getElementById('chapiQuickActions');
-        if (actions) {
-            actions.style.display = 'flex';
-        }
-    }
-
-    hideQuickActions() {
-        const actions = document.getElementById('chapiQuickActions');
-        if (actions) {
-            actions.style.display = 'none';
-        }
-    }
-
-    sendMessage() {
-        const input = document.getElementById('chapiInput');
-        const message = input.value.trim();
-
-        if (!message) return;
-
-        // Add user message
-        this.addMessage('user', message);
-        this.trackInteraction('message_sent', { message });
-
-        // Clear input
-        input.value = '';
-        input.style.height = 'auto';
-
-        // Hide quick actions after first user message
-        this.hideQuickActions();
-
-        // Show typing indicator
-        this.showTypingIndicator();
-
-        // Process message with AI/Rules
-        setTimeout(() => {
-            this.processMessage(message);
-        }, 1000 + Math.random() * 1000); // Realistic typing delay
     }
 
     addMessage(sender, text, options = {}) {
@@ -542,15 +238,11 @@ class ChapiAssistant {
             minute: '2-digit'
         });
 
-        // Format text for better display
-        const formattedText = this.formatMessage(text);
-
         messageEl.innerHTML = `
             <div class="chapi-avatar">${avatar}</div>
             <div class="chapi-message-content">
-                <div class="chapi-message-text">${formattedText}</div>
+                <div class="chapi-message-text">${text}</div>
                 <div class="chapi-message-time">${time}</div>
-                ${options.actions ? this.createMessageActions(options.actions) : ''}
             </div>
         `;
 
@@ -568,356 +260,212 @@ class ChapiAssistant {
         return messageId;
     }
 
-    formatMessage(text) {
-        // Handle markdown-like formatting
-        return text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/\n/g, '<br>')
-            .replace(/(\d+\.\s)/g, '<br>$1'); // Line breaks for numbered lists
+    showQuickActions(type) {
+        const actions = this.getQuickActions(type);
+        if (actions.length === 0) return;
+
+        const chatBody = document.getElementById('chapiChatBody');
+        const actionsEl = document.createElement('div');
+        actionsEl.className = 'chapi-quick-actions';
+
+        actions.forEach(action => {
+            const button = document.createElement('button');
+            button.className = 'chapi-action-btn';
+            button.innerHTML = `${action.icon} ${action.text}`;
+            button.addEventListener('click', () => {
+                this.handleAction(action.action, action.data);
+                actionsEl.remove();
+            });
+            actionsEl.appendChild(button);
+        });
+
+        chatBody.appendChild(actionsEl);
+        this.scrollToBottom();
     }
 
-    createMessageActions(actions) {
-        const actionsHtml = actions.map(action =>
-            `<button class="chapi-message-action" onclick="chapiAssistant.handleMessageAction('${action.type}', '${action.value || ''}')">
-                ${action.icon} ${action.text}
-            </button>`
-        ).join('');
-
-        return `<div class="chapi-message-actions">${actionsHtml}</div>`;
-    }
-
-    handleMessageAction(type, value) {
-        this.trackInteraction('message_action', { type, value });
-
-        switch (type) {
-            case 'whatsapp':
-                window.open(`https://wa.me/${this.config.whatsappNumber.replace(/[^0-9]/g, '')}?text=Hola, vengo del chatbot de CHAPI y me interesa saber más`, '_blank');
-                break;
-            case 'email':
-                window.open(`mailto:${this.config.email}?subject=Consulta desde CHAPI&body=Hola, vengo del chatbot y me interesa saber más sobre CHAPI.`, '_blank');
-                break;
-            case 'lead':
-                this.showLeadModal();
-                break;
-            case 'demo':
-                this.addMessage('bot', '🎯 ¡Perfecto! Te voy a mostrar cómo funciona CHAPI. Aquí tienes algunas opciones:', {
-                    actions: [
-                        { type: 'whatsapp', icon: '📱', text: 'Demo por WhatsApp', value: this.config.whatsappNumber },
-                        { type: 'lead', icon: '📋', text: 'Agendar Demo Personalizada', value: 'demo' }
-                    ]
-                });
-                break;
-        }
-    }
-
-    processMessage(message) {
-        this.hideTypingIndicator();
-
-        // Detect intent
-        const intent = this.detectIntent(message);
-        let response = this.generateResponse(intent, message);
-
-        // Check for urgency
-        if (this.detectUrgency(message)) {
-            this.userProfile.urgencyLevel++;
-            if (this.userProfile.urgencyLevel >= 2) {
-                response += '\n\n🎁 **Oferta especial por urgencia**: ¡20% de descuento si decides hoy!';
-            }
-        }
-
-        // Add response with appropriate actions
-        const actions = this.getActionsForIntent(intent);
-        this.addMessage('bot', response, { actions });
-
-        // Track intent
-        this.trackInteraction('intent_detected', { intent: intent.name, confidence: intent.confidence });
-
-        // Check for lead capture opportunity
-        if (this.shouldOfferLeadCapture(intent, message)) {
-            setTimeout(() => {
-                this.offerLeadCapture();
-            }, 3000);
-        }
-    }
-
-    detectIntent(message) {
-        const messageLower = message.toLowerCase();
-        let bestMatch = { name: 'general', confidence: 0 };
-
-        // Check each intent
-        for (const [intentName, intentData] of Object.entries(this.intents)) {
-            let confidence = 0;
-
-            // Count keyword matches
-            for (const keyword of intentData.keywords) {
-                if (messageLower.includes(keyword)) {
-                    confidence += 1;
+    getQuickActions(type) {
+        const actions = {
+            welcome: [
+                {
+                    icon: '🚀',
+                    text: 'Crear flujo de ventas',
+                    action: 'start_sales_flow',
+                    data: { type: 'sales' }
+                },
+                {
+                    icon: '❓',
+                    text: 'Dudas sobre productos',
+                    action: 'show_faq',
+                    data: { category: 'products' }
+                },
+                {
+                    icon: '💰',
+                    text: 'Ver precios y planes',
+                    action: 'show_pricing',
+                    data: {}
+                },
+                {
+                    icon: '📞',
+                    text: 'Contactar humano',
+                    action: 'contact_human',
+                    data: {}
                 }
-            }
-
-            // Normalize confidence
-            confidence = confidence / intentData.keywords.length;
-
-            if (confidence > bestMatch.confidence) {
-                bestMatch = { name: intentName, confidence, data: intentData };
-            }
-        }
-
-        return bestMatch;
-    }
-
-    generateResponse(intent, message) {
-        if (intent.confidence > 0.3 && intent.data) {
-            // Use intent-specific response
-            const responses = intent.data.responses;
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-
-        // Fallback responses
-        const fallbacks = [
-            'Entiendo tu consulta. Te puedo ayudar con información sobre nuestros chatbots, precios, demostraciones o puedes contactar directamente con nuestro equipo.',
-            '¡Interesante pregunta! CHAPI puede ayudarte con muchas cosas. ¿Te interesa conocer nuestros planes, ver una demo o necesitas contactar con soporte?',
-            'No estoy 100% seguro de entender tu consulta específica, pero estoy aquí para ayudarte con cualquier duda sobre CHAPI. ¿Puedo ayudarte con precios, demostraciones o información técnica?'
-        ];
-
-        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
-    }
-
-    detectUrgency(message) {
-        const urgencyWords = ['urgente', 'rápido', 'ya', 'ahora', 'inmediato', 'pronto', 'necesito', 'tengo prisa'];
-        return urgencyWords.some(word => message.toLowerCase().includes(word));
-    }
-
-    getActionsForIntent(intent) {
-        const commonActions = [
-            { type: 'whatsapp', icon: '📱', text: 'WhatsApp', value: this.config.whatsappNumber },
-            { type: 'lead', icon: '📋', text: 'Cotización', value: 'quote' }
-        ];
-
-        switch (intent.name) {
-            case 'precios':
-            case 'urgente':
-                return [
-                    { type: 'lead', icon: '💰', text: 'Cotización Personalizada', value: 'pricing' },
-                    ...commonActions
-                ];
-            case 'demo':
-                return [
-                    { type: 'demo', icon: '🎯', text: 'Ver Demo', value: 'demo' },
-                    ...commonActions
-                ];
-            case 'contacto':
-                return commonActions;
-            default:
-                return commonActions.slice(0, 1); // Only WhatsApp for general queries
-        }
-    }
-
-    shouldOfferLeadCapture(intent, message) {
-        // Offer lead capture for high-intent messages
-        const highIntentKeywords = ['precio', 'costo', 'demo', 'cotización', 'información', 'necesito'];
-        return highIntentKeywords.some(keyword => message.toLowerCase().includes(keyword)) &&
-            !this.analytics.leadCaptured;
-    }
-
-    offerLeadCapture() {
-        if (this.analytics.leadCaptured) return;
-
-        this.addMessage('bot', '💡 **¡Antes de continuar!** ¿Te gustaría recibir una cotización personalizada? Solo te tomará 30 segundos y podrás obtener precios específicos para tu proyecto.', {
-            actions: [
-                { type: 'lead', icon: '📋', text: 'Sí, quiero cotización', value: 'offer' },
-                { type: 'whatsapp', icon: '📱', text: 'Mejor por WhatsApp', value: this.config.whatsappNumber }
-            ]
-        });
-    }
-
-    showLeadModal() {
-        const modal = document.getElementById('chapiLeadModal');
-        if (modal) {
-            modal.style.display = 'flex';
-            this.trackInteraction('lead_modal_opened');
-        }
-    }
-
-    closeLeadModal() {
-        const modal = document.getElementById('chapiLeadModal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-    }
-
-    submitLead() {
-        const form = document.getElementById('chapiLeadForm');
-        const formData = new FormData(form);
-
-        const leadData = {
-            name: document.getElementById('leadName').value,
-            email: document.getElementById('leadEmail').value,
-            phone: document.getElementById('leadPhone').value,
-            company: document.getElementById('leadCompany').value,
-            needs: document.getElementById('leadNeeds').value,
-            timestamp: Date.now(),
-            sessionId: this.sessionId
-        };
-
-        // Save lead data
-        this.userProfile = { ...this.userProfile, ...leadData };
-        this.analytics.leadCaptured = true;
-        this.analytics.conversion = true;
-
-        // Store in localStorage (in real app, send to server)
-        const leads = JSON.parse(localStorage.getItem('chapi_leads') || '[]');
-        leads.push(leadData);
-        localStorage.setItem('chapi_leads', JSON.stringify(leads));
-
-        this.saveAnalytics();
-        this.trackInteraction('lead_captured', leadData);
-
-        // Close modal and show success
-        this.closeLeadModal();
-
-        this.addMessage('bot', `¡Excelente, ${leadData.name}! 🎉\n\nHe recibido tu información y nuestro equipo se pondrá en contacto contigo muy pronto para darte una cotización personalizada.\n\n📧 Te enviaremos los detalles a: ${leadData.email}\n📱 Si prefieres contacto inmediato: ${this.config.whatsappNumber}`, {
-            actions: [
-                { type: 'whatsapp', icon: '📱', text: 'Contacto inmediato', value: this.config.whatsappNumber }
-            ]
-        });
-
-        // Clear form
-        form.reset();
-    }
-    data: { template: 'custom' }
-}
+            ],
+            sales_flow: [
+                {
+                    icon: '🛍️',
+                    text: 'E-commerce',
+                    action: 'create_flow',
+                    data: { template: 'ecommerce' }
+                },
+                {
+                    icon: '🍽️',
+                    text: 'Restaurante',
+                    action: 'create_flow',
+                    data: { template: 'restaurant' }
+                },
+                {
+                    icon: '🏢',
+                    text: 'Servicios',
+                    action: 'create_flow',
+                    data: { template: 'services' }
+                },
+                {
+                    icon: '🎯',
+                    text: 'Personalizado',
+                    action: 'create_flow',
+                    data: { template: 'custom' }
+                }
             ]
         };
 
-return actions[type] || [];
+        return actions[type] || [];
     }
 
     async handleAction(action, data) {
-    switch (action) {
-        case 'start_sales_flow':
-            this.addMessage('user', 'Quiero crear un flujo de ventas');
-            await this.delay(800);
-            this.addMessage('bot', '¡Perfecto! Te ayudo a crear un flujo de ventas personalizado. ¿Para qué tipo de negocio es?');
-            this.showQuickActions('sales_flow');
-            break;
+        switch (action) {
+            case 'start_sales_flow':
+                this.addMessage('user', 'Quiero crear un flujo de ventas');
+                await this.delay(800);
+                this.addMessage('bot', '¡Perfecto! Te ayudo a crear un flujo de ventas personalizado. ¿Para qué tipo de negocio es?');
+                this.showQuickActions('sales_flow');
+                break;
 
-        case 'show_faq':
-            this.addMessage('user', 'Tengo dudas sobre los productos');
-            await this.delay(800);
-            this.handleFAQ();
-            break;
+            case 'show_faq':
+                this.addMessage('user', 'Tengo dudas sobre los productos');
+                await this.delay(800);
+                this.handleFAQ();
+                break;
 
-        case 'show_pricing':
-            this.addMessage('user', 'Quiero ver precios y planes');
-            await this.delay(800);
-            this.showPricing();
-            break;
+            case 'show_pricing':
+                this.addMessage('user', 'Quiero ver precios y planes');
+                await this.delay(800);
+                this.showPricing();
+                break;
 
-        case 'contact_human':
-            this.addMessage('user', 'Quiero hablar con una persona');
-            await this.delay(800);
-            this.showContactOptions();
-            break;
+            case 'contact_human':
+                this.addMessage('user', 'Quiero hablar con una persona');
+                await this.delay(800);
+                this.showContactOptions();
+                break;
 
-        case 'create_flow':
-            this.addMessage('user', `Crear flujo para ${data.template}`);
-            await this.delay(800);
-            this.createFlowTemplate(data.template);
-            break;
+            case 'create_flow':
+                this.addMessage('user', `Crear flujo para ${data.template}`);
+                await this.delay(800);
+                this.createFlowTemplate(data.template);
+                break;
 
-        default:
-            this.addMessage('bot', 'Disculpa, no entendí esa acción. ¿Puedes intentar de nuevo?');
+            default:
+                this.addMessage('bot', 'Disculpa, no entendí esa acción. ¿Puedes intentar de nuevo?');
+        }
     }
-}
 
     async sendMessage() {
-    const input = document.getElementById('chapiInput');
-    const message = input.value.trim();
+        const input = document.getElementById('chapiInput');
+        const message = input.value.trim();
 
-    if (!message) return;
+        if (!message) return;
 
-    input.value = '';
-    input.style.height = 'auto';
+        input.value = '';
+        input.style.height = 'auto';
 
-    this.addMessage('user', message);
+        this.addMessage('user', message);
 
-    // Show typing indicator
-    this.showTyping();
+        // Show typing indicator
+        this.showTyping();
 
-    // Get bot response
-    await this.delay(1000 + Math.random() * 1000);
-    this.hideTyping();
+        // Get bot response
+        await this.delay(1000 + Math.random() * 1000);
+        this.hideTyping();
 
-    const response = this.config.enableAI ?
-        await this.getAIResponse(message) :
-        this.getStaticResponse(message);
+        const response = this.config.enableAI ?
+            await this.getAIResponse(message) :
+            this.getStaticResponse(message);
 
-    this.addMessage('bot', response);
+        this.addMessage('bot', response);
 
-    // Show relevant quick actions based on context
-    this.showContextualActions(message.toLowerCase());
-}
-
-getStaticResponse(message) {
-    const msg = message.toLowerCase();
-
-    // Respuestas basadas en palabras clave
-    if (msg.includes('precio') || msg.includes('costo') || msg.includes('plan')) {
-        return 'Nuestros planes inician desde $49 USD/mes. Tenemos opciones para startups, PyMES y empresas grandes. ¿Te gustaría ver los detalles?';
+        // Show relevant quick actions based on context
+        this.showContextualActions(message.toLowerCase());
     }
 
-    if (msg.includes('demo') || msg.includes('prueba')) {
-        return '¡Perfecto! Puedes probar CHAPI gratis por 30 días. Te ayudo a configurar tu demo personalizada. ¿Cuál es tu industria?';
-    }
+    getStaticResponse(message) {
+        const msg = message.toLowerCase();
 
-    if (msg.includes('whatsapp') || msg.includes('telegram')) {
-        return 'CHAPI se integra perfectamente con WhatsApp Business API, Telegram, web chat y más canales. ¿Quieres que te ayude a configurar alguno específico?';
-    }
+        // Respuestas basadas en palabras clave
+        if (msg.includes('precio') || msg.includes('costo') || msg.includes('plan')) {
+            return 'Nuestros planes inician desde $49 USD/mes. Tenemos opciones para startups, PyMES y empresas grandes. ¿Te gustaría ver los detalles?';
+        }
 
-    if (msg.includes('ia') || msg.includes('inteligencia') || msg.includes('gpt')) {
-        return 'Usamos GPT-4 y Groq Llama 3 para conversaciones naturales. Nuestros bots aprenden de cada interacción y mejoran automáticamente. ¿Te interesa alguna funcionalidad específica?';
-    }
+        if (msg.includes('demo') || msg.includes('prueba')) {
+            return '¡Perfecto! Puedes probar CHAPI gratis por 30 días. Te ayudo a configurar tu demo personalizada. ¿Cuál es tu industria?';
+        }
 
-    if (msg.includes('integra') || msg.includes('crm') || msg.includes('api')) {
-        return 'CHAPI se integra con +50 sistemas: CRMs (HubSpot, Salesforce), pagos (Stripe, MercadoPago), calendarios y más. ¿Con qué sistema necesitas integrar?';
-    }
+        if (msg.includes('whatsapp') || msg.includes('telegram')) {
+            return 'CHAPI se integra perfectamente con WhatsApp Business API, Telegram, web chat y más canales. ¿Quieres que te ayude a configurar alguno específico?';
+        }
 
-    if (msg.includes('flujo') || msg.includes('venta') || msg.includes('automatizar')) {
-        return 'Te ayudo a crear flujos de ventas automáticos que califican leads y cierran ventas 24/7. ¿Para qué tipo de negocio es?';
-    }
+        if (msg.includes('ia') || msg.includes('inteligencia') || msg.includes('gpt')) {
+            return 'Usamos GPT-4 y Groq Llama 3 para conversaciones naturales. Nuestros bots aprenden de cada interacción y mejoran automáticamente. ¿Te interesa alguna funcionalidad específica?';
+        }
 
-    if (msg.includes('soporte') || msg.includes('ayuda') || msg.includes('problema')) {
-        return 'Estoy aquí para ayudarte. También puedes contactar a nuestro equipo humano en soporte@chapibot.pro o WhatsApp +52 55 0000 0000. ¿Cuál es tu consulta específica?';
-    }
+        if (msg.includes('integra') || msg.includes('crm') || msg.includes('api')) {
+            return 'CHAPI se integra con +50 sistemas: CRMs (HubSpot, Salesforce), pagos (Stripe, MercadoPago), calendarios y más. ¿Con qué sistema necesitas integrar?';
+        }
 
-    if (msg.includes('gracias') || msg.includes('perfecto') || msg.includes('excelente')) {
-        return '¡De nada! Me alegra poder ayudarte. ¿Hay algo más en lo que pueda asistirte hoy?';
-    }
+        if (msg.includes('flujo') || msg.includes('venta') || msg.includes('automatizar')) {
+            return 'Te ayudo a crear flujos de ventas automáticos que califican leads y cierran ventas 24/7. ¿Para qué tipo de negocio es?';
+        }
 
-    // Respuesta por defecto
-    return 'Entiendo tu consulta. CHAPI puede ayudarte a automatizar ventas, generar leads y brindar soporte 24/7 con IA avanzada. ¿Te gustaría que empecemos con una demo personalizada?';
-}
+        if (msg.includes('soporte') || msg.includes('ayuda') || msg.includes('problema')) {
+            return 'Estoy aquí para ayudarte. También puedes contactar a nuestro equipo humano en soporte@chapibot.pro o WhatsApp +52 55 0000 0000. ¿Cuál es tu consulta específica?';
+        }
+
+        if (msg.includes('gracias') || msg.includes('perfecto') || msg.includes('excelente')) {
+            return '¡De nada! Me alegra poder ayudarte. ¿Hay algo más en lo que pueda asistirte hoy?';
+        }
+
+        // Respuesta por defecto
+        return 'Entiendo tu consulta. CHAPI puede ayudarte a automatizar ventas, generar leads y brindar soporte 24/7 con IA avanzada. ¿Te gustaría que empecemos con una demo personalizada?';
+    }
 
     async getAIResponse(message) {
-    if (!this.config.apiKey) {
-        return this.getStaticResponse(message);
-    }
+        if (!this.config.apiKey) {
+            return this.getStaticResponse(message);
+        }
 
-    try {
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.config.apiKey}`
-            },
-            body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
-                messages: [
-                    {
-                        role: 'system',
-                        content: `Eres CHAPI, un asistente virtual especializado en chatbots inteligentes para empresas. Tu empresa ofrece soluciones de automatización de ventas y soporte al cliente con IA.
+        try {
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.config.apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-3.5-turbo',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: `Eres CHAPI, un asistente virtual especializado en chatbots inteligentes para empresas. Tu empresa ofrece soluciones de automatización de ventas y soporte al cliente con IA.
 
                             Características de CHAPI:
                             - Chatbots con GPT-4 y Llama 3
@@ -928,42 +476,42 @@ getStaticResponse(message) {
                             - Soporte 24/7 en español
 
                             Responde de manera amigable, profesional y enfocada en ayudar al cliente a entender cómo CHAPI puede resolver sus necesidades específicas. Mantén las respuestas concisas (máximo 2-3 oraciones).`
-                    },
-                    ...this.messages.slice(-5).map(msg => ({
-                        role: msg.sender === 'bot' ? 'assistant' : 'user',
-                        content: msg.text
-                    })),
-                    {
-                        role: 'user',
-                        content: message
-                    }
-                ],
-                max_tokens: 150,
-                temperature: 0.7
-            })
-        });
+                        },
+                        ...this.messages.slice(-5).map(msg => ({
+                            role: msg.sender === 'bot' ? 'assistant' : 'user',
+                            content: msg.text
+                        })),
+                        {
+                            role: 'user',
+                            content: message
+                        }
+                    ],
+                    max_tokens: 150,
+                    temperature: 0.7
+                })
+            });
 
-        const data = await response.json();
-        return data.choices[0].message.content;
+            const data = await response.json();
+            return data.choices[0].message.content;
 
-    } catch (error) {
-        console.error('Error calling OpenAI API:', error);
-        return this.getStaticResponse(message);
+        } catch (error) {
+            console.error('Error calling OpenAI API:', error);
+            return this.getStaticResponse(message);
+        }
     }
-}
 
-showContextualActions(message) {
-    if (message.includes('precio') || message.includes('plan')) {
-        this.showQuickActions('pricing');
-    } else if (message.includes('demo') || message.includes('prueba')) {
-        this.showQuickActions('demo');
-    } else if (message.includes('flujo') || message.includes('venta')) {
-        this.showQuickActions('sales_flow');
+    showContextualActions(message) {
+        if (message.includes('precio') || message.includes('plan')) {
+            this.showQuickActions('pricing');
+        } else if (message.includes('demo') || message.includes('prueba')) {
+            this.showQuickActions('demo');
+        } else if (message.includes('flujo') || message.includes('venta')) {
+            this.showQuickActions('sales_flow');
+        }
     }
-}
 
-handleFAQ() {
-    const faqMessage = `
+    handleFAQ() {
+        const faqMessage = `
         <strong>Preguntas Frecuentes:</strong><br><br>
 
         <strong>🤖 ¿Qué hace CHAPI?</strong><br>
@@ -979,30 +527,30 @@ handleFAQ() {
         En 24 horas tienes tu chatbot funcionando completamente.
         `;
 
-    this.addMessage('bot', faqMessage);
-}
+        this.addMessage('bot', faqMessage);
+    }
 
-showPricing() {
-    const pricingMessage = `
+    showPricing() {
+        const pricingMessage = `
         <strong>💰 Planes CHAPI 2025:</strong><br><br>
 
-        <strong>🥉 BÁSICO - $990 MXN/mes</strong><br>
+        <strong>🥉 BÁSICO - $49 USD/mes</strong><br>
         • 1 canal • 50 leads/mes • Plantillas básicas<br><br>
 
-        <strong>🥈 PROFESIONAL - $1,990 MXN/mes</strong><br>
+        <strong>🥈 PROFESIONAL - $99 USD/mes</strong><br>
         • 2 canales • 500 leads/mes • IA avanzada • CRM<br><br>
 
-        <strong>🥇 EMPRESARIAL - $3,990 MXN/mes</strong><br>
+        <strong>🥇 EMPRESARIAL - $199 USD/mes</strong><br>
         • Todo ilimitado • Machine Learning • API custom<br><br>
 
         <strong>🎁 30 días gratis + ROI garantizado</strong>
         `;
 
-    this.addMessage('bot', pricingMessage);
-}
+        this.addMessage('bot', pricingMessage);
+    }
 
-showContactOptions() {
-    const contactMessage = `
+    showContactOptions() {
+        const contactMessage = `
         <strong>📞 Contacta con nuestro equipo:</strong><br><br>
 
         <strong>WhatsApp:</strong> +52 55 0000 0000<br>
@@ -1013,129 +561,64 @@ showContactOptions() {
         <a href="https://chapibot.pro/demo" target="_blank" style="color: #2f7afe;">chapibot.pro/demo</a>
         `;
 
-    this.addMessage('bot', contactMessage);
-}
-
-createFlowTemplate(template) {
-    const templates = {
-        ecommerce: {
-            name: 'E-commerce',
-            description: 'Flujo optimizado para tiendas online',
-            steps: [
-                'Saludo personalizado',
-                'Consulta de productos',
-                scrollToBottom() {
-                    const chatBody = document.getElementById('chapiChatBody');
-                    if(chatBody) {
-                        chatBody.scrollTop = chatBody.scrollHeight;
-                    }
-                }
-
-    // Analytics and utilities
-    getAnalytics() {
-                    return {
-                        ...this.analytics,
-                        sessionDuration: Date.now() - this.startTime,
-                        messagesPerSession: this.messages.length,
-                        userProfile: this.userProfile
-                    };
-                }
-
-    // Mobile optimization
-    optimizeForMobile() {
-                    const isMobile = window.innerWidth <= 768;
-                    const widget = this.widget;
-
-                    if(isMobile) {
-                        widget.classList.add('mobile');
-
-                        // Adjust chat window size for mobile
-                        const chatWindow = widget.querySelector('.chapi-chat-window');
-                        if (chatWindow && this.isOpen) {
-                            chatWindow.style.width = '100vw';
-                            chatWindow.style.height = '100vh';
-                            chatWindow.style.right = '0';
-                            chatWindow.style.bottom = '0';
-                            chatWindow.style.borderRadius = '0';
-                        }
-                    } else {
-                        widget.classList.remove('mobile');
-                    }
-                }
-
-    // Cleanup
-    destroy() {
-                    if(this.analyticsTimer) {
-                    clearInterval(this.analyticsTimer);
-        }
-
-        this.saveAnalytics();
-
-        if(this.widget) {
-            this.widget.remove();
-}
+        this.addMessage('bot', contactMessage);
     }
-}
 
-// Auto-initialize if config is available
-if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', () => {
-        if (window.chapiConfig) {
-            window.chapiAssistant = new ChapiAssistant(window.chapiConfig);
-        }
-    });
-}
-
-// Export for modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = ChapiAssistant;
-}
-'Carrito de compras',
-    'Proceso de pago',
-    'Confirmación y seguimiento'
+    createFlowTemplate(template) {
+        const templates = {
+            ecommerce: {
+                name: 'E-commerce',
+                description: 'Flujo optimizado para tiendas online',
+                steps: [
+                    'Saludo personalizado',
+                    'Consulta de productos',
+                    'Recomendaciones IA',
+                    'Carrito de compras',
+                    'Proceso de pago',
+                    'Confirmación y seguimiento'
                 ]
             },
-restaurant: {
-    name: 'Restaurante',
-        description: 'Automatización para reservas y pedidos',
-            steps: [
-                'Bienvenida al restaurante',
-                'Consulta de menú',
-                'Reserva de mesa',
-                'Pedidos para llevar',
-                'Confirmación automática',
-                'Recordatorios y feedback'
-            ]
-},
-services: {
-    name: 'Servicios',
-        description: 'Para empresas de servicios profesionales',
-            steps: [
-                'Calificación de lead',
-                'Consulta de necesidades',
-                'Propuesta personalizada',
-                'Agendamiento de citas',
-                'Seguimiento automático',
-                'Cierre de venta'
-            ]
-},
-custom: {
-    name: 'Personalizado',
-        description: 'Flujo adaptado a tu negocio específico',
-            steps: [
-                'Análisis de tu industria',
-                'Mapeo de customer journey',
-                'Diseño de conversaciones',
-                'Integración con sistemas',
-                'Testing y optimización',
-                'Lanzamiento y monitoreo'
-            ]
-}
+            restaurant: {
+                name: 'Restaurante',
+                description: 'Automatización para reservas y pedidos',
+                steps: [
+                    'Bienvenida al restaurante',
+                    'Consulta de menú',
+                    'Reserva de mesa',
+                    'Pedidos para llevar',
+                    'Confirmación automática',
+                    'Recordatorios y feedback'
+                ]
+            },
+            services: {
+                name: 'Servicios',
+                description: 'Para empresas de servicios profesionales',
+                steps: [
+                    'Calificación de lead',
+                    'Consulta de necesidades',
+                    'Propuesta personalizada',
+                    'Agendamiento de citas',
+                    'Seguimiento automático',
+                    'Cierre de venta'
+                ]
+            },
+            custom: {
+                name: 'Personalizado',
+                description: 'Flujo adaptado a tu negocio específico',
+                steps: [
+                    'Análisis de tu industria',
+                    'Mapeo de customer journey',
+                    'Diseño de conversaciones',
+                    'Integración con sistemas',
+                    'Testing y optimización',
+                    'Lanzamiento y monitoreo'
+                ]
+            }
         };
 
-const templateData = templates[template];
+        const templateData = templates[template];
 
-const message = `
+        const message = `
         <strong>🎯 Flujo: ${templateData.name}</strong><br>
         ${templateData.description}<br><br>
 
@@ -1148,15 +631,15 @@ const message = `
         ¿Te gustaría que empecemos con este flujo?
         `;
 
-this.addMessage('bot', message);
+        this.addMessage('bot', message);
     }
 
-showTyping() {
-    const chatBody = document.getElementById('chapiChatBody');
-    const typingEl = document.createElement('div');
-    typingEl.className = 'chapi-message bot';
-    typingEl.id = 'chapiTyping';
-    typingEl.innerHTML = `
+    showTyping() {
+        const chatBody = document.getElementById('chapiChatBody');
+        const typingEl = document.createElement('div');
+        typingEl.className = 'chapi-message bot';
+        typingEl.id = 'chapiTyping';
+        typingEl.innerHTML = `
             <div class="chapi-avatar">🤖</div>
             <div class="chapi-message-content">
                 <div class="chapi-typing">
@@ -1167,42 +650,42 @@ showTyping() {
             </div>
         `;
 
-    chatBody.appendChild(typingEl);
-    this.scrollToBottom();
-}
-
-hideTyping() {
-    const typingEl = document.getElementById('chapiTyping');
-    if (typingEl) {
-        typingEl.remove();
+        chatBody.appendChild(typingEl);
+        this.scrollToBottom();
     }
-}
 
-scrollToBottom() {
-    const chatBody = document.getElementById('chapiChatBody');
-    setTimeout(() => {
-        chatBody.scrollTop = chatBody.scrollHeight;
-    }, 100);
-}
-
-delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-// Public methods for external control
-addCustomMessage(text) {
-    this.addMessage('bot', text);
-}
-
-setConfig(newConfig) {
-    this.config = { ...this.config, ...newConfig };
-}
-
-destroy() {
-    if (this.widget) {
-        this.widget.remove();
+    hideTyping() {
+        const typingEl = document.getElementById('chapiTyping');
+        if (typingEl) {
+            typingEl.remove();
+        }
     }
-}
+
+    scrollToBottom() {
+        const chatBody = document.getElementById('chapiChatBody');
+        setTimeout(() => {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 100);
+    }
+
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Public methods for external control
+    addCustomMessage(text) {
+        this.addMessage('bot', text);
+    }
+
+    setConfig(newConfig) {
+        this.config = { ...this.config, ...newConfig };
+    }
+
+    destroy() {
+        if (this.widget) {
+            this.widget.remove();
+        }
+    }
 }
 
 // Auto-initialize if not in module environment
