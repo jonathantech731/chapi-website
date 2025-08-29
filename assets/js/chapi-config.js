@@ -40,13 +40,13 @@ const CHAPI_CONFIG = {
         'precio|costo|plan|cuanto': `
             💰 <strong>Nuestros planes 2025:</strong>
             <br><br>
-            🥉 <strong>BÁSICO - $990 MXN/mes</strong>
+            🥉 <strong>BÁSICO - $49 USD/mes</strong>
             <br>• 1 canal • 50 leads/mes • Plantillas básicas
             <br><br>
-            🥈 <strong>PROFESIONAL - $1,990 MXN/mes</strong> ⭐ Más popular
+            🥈 <strong>PROFESIONAL - $99 USD/mes</strong> ⭐ Más popular
             <br>• 2 canales • 500 leads/mes • IA avanzada • CRM
             <br><br>
-            🥇 <strong>EMPRESARIAL - $3,990 MXN/mes</strong>
+            🥇 <strong>EMPRESARIAL - $199 USD/mes</strong>
             <br>• Todo ilimitado • Machine Learning • API custom
             <br><br>
             🎁 <strong>30 días gratis + ROI garantizado</strong>
