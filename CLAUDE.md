@@ -9,12 +9,19 @@ This is a static website project deployed to GitHub Pages. No build process is r
 ### Local Development
 ```bash
 # Serve locally using any HTTP server
-# Option 1: Using VS Code Live Server extension
+# Option 1: Using VS Code Live Server extension (recommended)
 # Option 2: Using Python
 python -m http.server 8000
 
 # Option 3: Using Node.js http-server (if available)
 npx http-server
+```
+
+### Testing
+```bash
+# Open test pages for assistant functionality
+# Test basic assistant: open test-assistant.html in browser
+# Test advanced features: open test-chapi-pro.html in browser
 ```
 
 ### Deployment
@@ -39,13 +46,21 @@ This is a single-page landing website for CHAPI chatbot services with an integra
 - Responsive design with mobile-first approach
 - Animated background and smooth transitions
 - Integrated testimonials, pricing, and contact sections
+- All main site styles embedded in `<style>` tag within HTML
 
 #### 2. CHAPI Assistant System (`assets/js/`)
-- **`chapi-config.js`**: Configuration file for easy customization without touching code
-- **`chapi-assistant.js`**: Main widget logic with keyword-based responses
-- **`assets/css/chapi-assistant.css`**: Dedicated styles for the chat widget
+- **`chapi-config.js`**: Main configuration file - modify this for most customizations
+- **`chapi-assistant.js`**: Core widget logic with keyword-based responses
+- **`chapi-assistant-improved.js`**: Enhanced version with additional features
+- **`chapi-persuasion-engine.js`**: Advanced persuasion logic for conversions
+- **`assets/css/chapi-assistant.css`**: Base styles for the chat widget
+- **`assets/css/chapi-assistant-pro.css`**: Enhanced styles for pro version
 
-#### 3. Documentation (`docs/`)
+#### 3. Testing Pages
+- **`test-assistant.html`**: Test basic assistant functionality
+- **`test-chapi-pro.html`**: Test advanced pro features
+
+#### 4. Documentation (`docs/`)
 - Multiple markdown files with feature descriptions
 - Implementation guides for the assistant
 - Pricing and setup instructions
@@ -99,15 +114,28 @@ Brand colors are defined in CSS variables:
 ### File Organization
 
 ```
-├── index.html                    # Main landing page
+├── index.html                           # Main landing page
+├── test-assistant.html                  # Basic assistant testing
+├── test-chapi-pro.html                 # Pro features testing
 ├── assets/
-│   ├── css/chapi-assistant.css  # Assistant widget styles
+│   ├── css/
+│   │   ├── chapi-assistant.css         # Base assistant styles
+│   │   └── chapi-assistant-pro.css     # Enhanced assistant styles
 │   ├── js/
-│   │   ├── chapi-config.js      # Assistant configuration
-│   │   └── chapi-assistant.js   # Assistant logic
-│   └── images/                  # Static assets
-├── docs/                        # Documentation files
-└── CNAME                        # Custom domain config
+│   │   ├── chapi-config.js             # Main configuration (edit this!)
+│   │   ├── chapi-assistant.js          # Core assistant logic
+│   │   ├── chapi-assistant-improved.js # Enhanced assistant features
+│   │   └── chapi-persuasion-engine.js  # Conversion optimization
+│   ├── data/
+│   │   └── casos-exito.js              # Success stories data
+│   └── images/                         # Static assets
+├── docs/                               # Documentation files
+│   ├── CHAPI_ASSISTANT_GUIDE.md       # Main assistant documentation
+│   ├── CHAPI_ASSISTANT_IMPROVEMENTS.md # Feature improvements
+│   ├── FEATURES.md                     # Feature descriptions
+│   └── PRICING.md                      # Pricing information
+├── CLAUDE.md                           # This file
+└── CNAME                              # Custom domain config
 ```
 
 ## Customization Guidelines
@@ -132,8 +160,20 @@ Brand colors are defined in CSS variables:
 
 ## Important Notes
 
+### Production Considerations
 - This is a production website - test changes locally first
-- Assistant responses support basic HTML formatting
+- Git commits to `main` branch deploy automatically to production at https://chapibot.pro
+- Use test pages (`test-assistant.html`, `test-chapi-pro.html`) to verify assistant functionality
+
+### Technical Details  
+- Assistant responses support basic HTML formatting (`<strong>`, `<br>`, `<a>`)
 - All paths use relative references for GitHub Pages compatibility
 - No build process required - direct file editing
-- Git commits deploy automatically to production
+- Configuration changes in `chapi-config.js` take effect immediately
+- Keywords in `customResponses` use regex patterns with pipe separators (`|`)
+
+### Assistant Development
+- Most customization should be done through `chapi-config.js`
+- Multiple assistant versions available (basic, improved, pro)
+- OpenAI integration available but disabled by default (`enableAI: false`)
+- Contact information is centralized in config file for easy updates

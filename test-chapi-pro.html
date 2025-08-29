@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAPI Pro - Asistente con Motor de Persuasión</title>
+    <link rel="stylesheet" href="assets/css/chapi-assistant-pro.css">
+    <style>
+      :root {
+        --primary-color: #2f7afe;
+        --secondary-color: #00d4a6;
+        --dark-bg: #161c27;
+        --light-text: #e8eef8;
+        --success-color: #00d4a6;
+        --error-color: #ff5a5f;
+        --warning-color: #ffb100;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f7fa;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      header {
+        background-color: var(--dark-bg);
+        color: var(--light-text);
+        padding: 2rem 0;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      header p {
+        margin: 1rem 0 0;
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+
+      .feature-card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-card h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+      }
+
+      .feature-card p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .demo-section {
+        background-color: var(--dark-bg);
+        color: var(--light-text);
+        padding: 3rem 0;
+        text-align: center;
+        margin: 3rem 0;
+        border-radius: 10px;
+      }
+
+      .demo-section h2 {
+        margin-top: 0;
+      }
+
+      .demo-section p {
+        max-width: 700px;
+        margin: 1rem auto;
+        opacity: 0.9;
+      }
+
+      .demo-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 1rem;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #1c66e0;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background-color: var(--secondary-color);
+        color: var(--dark-bg);
+      }
+
+      .btn-secondary:hover {
+        background-color: #00b890;
+        transform: translateY(-2px);
+      }
+
+      .testimonials {
+        margin: 4rem 0;
+      }
+
+      .testimonials h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--dark-bg);
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .testimonial-card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 1rem;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 1rem;
+        object-fit: cover;
+      }
+
+      .author-info h4 {
+        margin: 0;
+        color: var(--primary-color);
+      }
+
+      .author-info p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #777;
+      }
+
+      footer {
+        background-color: var(--dark-bg);
+        color: var(--light-text);
+        padding: 2rem 0;
+        text-align: center;
+        margin-top: 4rem;
+      }
+
+      footer p {
+        opacity: 0.7;
+        margin: 0;
+      }
+
+      /* Estilos para dispositivos móviles */
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        header h1 {
+          font-size: 2rem;
+        }
+
+        .demo-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 100%;
+          max-width: 300px;
+          margin-bottom: 1rem;
+        }
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <h1>CHAPI Pro</h1>
+        <p>Asistente Virtual con Motor de Persuasión Avanzado</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>Inteligencia Persuasiva</h3>
+          <p>Nuestro motor de persuasión analiza el lenguaje, detecta objeciones y adapta las respuestas para maximizar
+            conversiones.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👤</div>
+          <h3>Perfilado de Usuario</h3>
+          <p>Identifica intereses, personalidad y etapa de compra para personalizar cada interacción de forma única.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Análisis de Sentimiento</h3>
+          <p>Detecta emociones en tiempo real y ajusta el tono de la conversación para mantener engagement positivo.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Técnicas de Persuasión</h3>
+          <p>Implementa principios de psicología como prueba social, escasez, reciprocidad y autoridad de forma natural.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Manejo de Objeciones</h3>
+          <p>Identifica y responde automáticamente a las preocupaciones comunes sobre precio, complejidad o privacidad.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Optimización Continua</h3>
+          <p>Aprende de cada interacción para mejorar constantemente las tasas de conversión y satisfacción.</p>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="container">
+          <h2>Experimenta el Poder de la Persuasión</h2>
+          <p>Prueba nuestro asistente mejorado con capacidades de persuasión avanzadas. Interactúa con él y observa cómo
+            adapta sus respuestas para maximizar la conversión.</p>
+          <div class="demo-buttons">
+            <button class="btn btn-primary" id="startChatBtn">Iniciar Chat</button>
+            <button class="btn btn-secondary" id="scheduleDemo">Agendar Demo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonials">
+        <h2>Lo que Dicen Nuestros Clientes</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "Desde que implementamos CHAPI Pro con su motor de persuasión, nuestras conversiones aumentaron un 67%. El
+              asistente maneja objeciones mejor que muchos de nuestros vendedores humanos."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Carlos Méndez</h4>
+                <p>Director de Marketing, TechSolutions</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "La capacidad del asistente para adaptar su comunicación según la personalidad del cliente es
+              impresionante. Detecta si alguien es analítico o emocional y ajusta su lenguaje automáticamente."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Ana Gómez</h4>
+                <p>CEO, Retail Innovation</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              "El manejo de objeciones es lo que más me impresiona. Cuando los clientes mencionan que es costoso, el
+              asistente responde con casos de ROI específicos que realmente convencen."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-info">
+                <h4>Miguel Rodríguez</h4>
+                <p>Director Comercial, GrupoFinance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>© 2025 CHAPI - Todos los derechos reservados</p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/chapi-advanced-config.js"></script>
+    <script src="assets/js/chapi-persuasion-engine.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Inicializar el motor de persuasión
+        window.chapiPersuasion = new ChapiPersuasionEngine();
+
+        // Botón para iniciar chat
+        const startChatBtn = document.getElementById('startChatBtn');
+        if (startChatBtn) {
+          startChatBtn.addEventListener('click', function () {
+            // Simular apertura del chat
+            if (window.chapiAssistant) {
+              window.chapiAssistant.open();
+            } else {
+              alert('Cargando el asistente CHAPI Pro...');
+              // Cargar dinámicamente el script del asistente
+              const script = document.createElement('script');
+              script.src = 'assets/js/chapi-assistant.js';
+              document.body.appendChild(script);
+
+              // Esperar a que cargue
+              setTimeout(() => {
+                if (window.chapiAssistant) {
+                  window.chapiAssistant.open();
+                }
+              }, 1000);
+            }
+          });
+        }
+
+        // Botón para agendar demo
+        const scheduleDemo = document.getElementById('scheduleDemo');
+        if (scheduleDemo) {
+          scheduleDemo.addEventListener('click', function () {
+            window.open('https://chapibot.pro/demo', '_blank');
+          });
+        }
+      });
+    </script>
+  </body>
+
+</html>

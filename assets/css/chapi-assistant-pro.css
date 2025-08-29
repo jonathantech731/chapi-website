@@ -1,0 +1,634 @@
+/**
+ * 🎨 CHAPI Assistant Pro CSS
+ * Estilos mejorados para el asistente virtual con capacidades persuasivas
+ * @version 2.1
+ */
+
+/* Variables CSS para personalización */
+:root {
+  /* Colores principales */
+  --chapi-primary: #2f7afe;
+  --chapi-secondary: #00d4a6;
+  --chapi-dark: #161c27;
+  --chapi-light: #e8eef8;
+
+  /* Estados */
+  --chapi-success: #00d4a6;
+  --chapi-error: #ff5a5f;
+  --chapi-warning: #ffb100;
+
+  /* Sombras y efectos */
+  --chapi-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  --chapi-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+  /* Tamaños */
+  --chapi-border-radius: 15px;
+  --chapi-button-size: 60px;
+  --chapi-mobile-button-size: 50px;
+
+  /* Transiciones */
+  --chapi-transition: all 0.3s ease;
+}
+
+/* Contenedor principal del asistente */
+.chapi-assistant {
+  position: fixed;
+  z-index: 999999;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--chapi-light);
+  transition: var(--chapi-transition);
+
+  /* Posicionamiento por defecto (bottom-right) */
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Posicionamiento alternativo */
+.chapi-assistant.bottom-left {
+  right: auto;
+  left: 20px;
+}
+
+.chapi-assistant.top-right {
+  bottom: auto;
+  top: 20px;
+}
+
+.chapi-assistant.top-left {
+  bottom: auto;
+  top: 20px;
+  right: auto;
+  left: 20px;
+}
+
+/* Botón principal del chat */
+.chapi-chat-button {
+  width: var(--chapi-button-size);
+  height: var(--chapi-button-size);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--chapi-shadow);
+  transition: var(--chapi-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.chapi-chat-button:hover {
+  transform: scale(1.05);
+  box-shadow: var(--chapi-shadow-hover);
+}
+
+.chapi-chat-button:active {
+  transform: scale(0.95);
+}
+
+/* Icono del chat */
+.chapi-chat-icon {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+  transition: var(--chapi-transition);
+}
+
+/* Punto de notificación */
+.chapi-notification-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--chapi-error);
+  border-radius: 50%;
+  border: 2px solid var(--chapi-dark);
+  animation: chapi-pulse 2s infinite;
+  display: block;
+}
+
+@keyframes chapi-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 90, 95, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 90, 95, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 90, 95, 0);
+  }
+}
+
+/* Ventana del chat */
+.chapi-chat-window {
+  position: absolute;
+  bottom: calc(var(--chapi-button-size) + 20px);
+  right: 0;
+  width: 380px;
+  height: 550px;
+  background-color: var(--chapi-dark);
+  border-radius: var(--chapi-border-radius);
+  box-shadow: var(--chapi-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: var(--chapi-transition);
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  max-height: calc(100vh - 120px);
+}
+
+.chapi-chat-window.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* Cabecera del chat */
+.chapi-chat-header {
+  background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  border-radius: var(--chapi-border-radius) var(--chapi-border-radius) 0 0;
+}
+
+.chapi-header-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapi-header-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chapi-header-subtitle {
+  margin: 5px 0 0;
+  font-size: 12px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+}
+
+.chapi-status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--chapi-success);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  animation: chapi-blink 2s infinite;
+}
+
+@keyframes chapi-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.chapi-close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--chapi-transition);
+}
+
+.chapi-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Cuerpo del chat */
+.chapi-chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  scroll-behavior: smooth;
+  background-color: var(--chapi-dark);
+}
+
+/* Estilos para la barra de desplazamiento */
+.chapi-chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chapi-chat-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chapi-chat-body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}
+
+.chapi-chat-body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mensajes */
+.chapi-message {
+  display: flex;
+  margin-bottom: 15px;
+  animation: chapi-fade-in 0.3s ease;
+}
+
+@keyframes chapi-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chapi-message.bot {
+  align-items: flex-start;
+}
+
+.chapi-message.user {
+  align-items: flex-end;
+  flex-direction: row-reverse;
+}
+
+.chapi-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+
+.chapi-message-content {
+  max-width: 70%;
+}
+
+.chapi-message.bot .chapi-message-content {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px 15px 15px 0;
+  padding: 12px 15px;
+}
+
+.chapi-message.user .chapi-message-content {
+  background-color: var(--chapi-primary);
+  border-radius: 15px 15px 0 15px;
+  padding: 12px 15px;
+}
+
+.chapi-message-text {
+  color: var(--chapi-light);
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.chapi-message-text a {
+  color: var(--chapi-secondary);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--chapi-secondary);
+  transition: var(--chapi-transition);
+}
+
+.chapi-message-text a:hover {
+  opacity: 0.8;
+}
+
+.chapi-message-time {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-top: 5px;
+  text-align: right;
+}
+
+/* Indicador de escritura */
+.chapi-typing {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.chapi-typing-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--chapi-light);
+  border-radius: 50%;
+  margin: 0 2px;
+  animation: chapi-typing 1.4s infinite ease-in-out;
+  opacity: 0.7;
+}
+
+.chapi-typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.chapi-typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.chapi-typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes chapi-typing {
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Área de entrada */
+.chapi-input-area {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chapi-input-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  padding: 5px 15px;
+  transition: var(--chapi-transition);
+}
+
+.chapi-input-container:focus-within {
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(47, 122, 254, 0.3);
+}
+
+.chapi-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--chapi-light);
+  font-size: 14px;
+  padding: 10px 0;
+  resize: none;
+  max-height: 100px;
+  outline: none;
+  font-family: inherit;
+}
+
+.chapi-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.chapi-send-btn {
+  background: transparent;
+  border: none;
+  color: var(--chapi-secondary);
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--chapi-transition);
+  padding: 0;
+  margin-left: 5px;
+}
+
+.chapi-send-btn:hover {
+  background-color: rgba(0, 212, 166, 0.1);
+}
+
+.chapi-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Acciones rápidas */
+.chapi-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+  animation: chapi-fade-in 0.3s ease;
+}
+
+.chapi-action-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--chapi-light);
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--chapi-transition);
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.chapi-action-btn:hover {
+  background-color: var(--chapi-primary);
+  transform: translateY(-2px);
+}
+
+/* Animación de entrada para el widget */
+@keyframes chapi-bounce-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Animación para mensajes nuevos */
+@keyframes chapi-message-in {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Adaptaciones para dispositivos móviles */
+@media (max-width: 768px) {
+  .chapi-chat-button {
+    width: var(--chapi-mobile-button-size);
+    height: var(--chapi-mobile-button-size);
+  }
+
+  .chapi-chat-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .chapi-chat-window {
+    width: calc(100vw - 40px);
+    height: 500px;
+    bottom: calc(var(--chapi-mobile-button-size) + 20px);
+    left: 20px;
+    right: 20px;
+  }
+
+  .chapi-message-content {
+    max-width: 80%;
+  }
+
+  .chapi-quick-actions {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 5px;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Modo de alto contraste para accesibilidad */
+.chapi-high-contrast {
+  --chapi-primary: #0078d4;
+  --chapi-secondary: #00b294;
+  --chapi-dark: #000000;
+  --chapi-light: #ffffff;
+  --chapi-success: #107c10;
+  --chapi-error: #d13438;
+  --chapi-warning: #ffb900;
+}
+
+/* Modo de texto grande para accesibilidad */
+.chapi-large-text {
+  font-size: 16px;
+}
+
+.chapi-large-text .chapi-message-text {
+  font-size: 16px;
+}
+
+.chapi-large-text .chapi-input {
+  font-size: 16px;
+}
+
+/* Efectos de hover y focus mejorados para accesibilidad */
+.chapi-input:focus,
+.chapi-send-btn:focus,
+.chapi-action-btn:focus,
+.chapi-close-btn:focus,
+.chapi-chat-button:focus {
+  outline: 2px solid var(--chapi-secondary);
+  outline-offset: 2px;
+}
+
+/* Efectos de transición suave */
+.chapi-message,
+.chapi-quick-actions,
+.chapi-action-btn,
+.chapi-input-container,
+.chapi-chat-button,
+.chapi-chat-window {
+  transition: var(--chapi-transition);
+}
+
+/* Mejoras visuales para links */
+.chapi-message-text a {
+  position: relative;
+  display: inline-block;
+}
+
+.chapi-message-text a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -1px;
+  left: 0;
+  background-color: var(--chapi-secondary);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.chapi-message-text a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Efectos de pulsación para botones en móviles */
+@media (hover: none) {
+
+  .chapi-action-btn:active,
+  .chapi-send-btn:active,
+  .chapi-close-btn:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+/* Mejoras para rendimiento en dispositivos de gama baja */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Soporte para modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+  .chapi-chat-button {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .chapi-chat-window {
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
+  }
+}
