@@ -81,6 +81,15 @@ __pycache__/
 *$py.class
 *.so
 
+# Testing and development
+test_integration.py
+demo_integration.py
+*.tmp
+*.test
+
+# Docker
+.dockerignore
+
 # Distribution / packaging
 .Python
 build/
