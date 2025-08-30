@@ -25,11 +25,11 @@ const CHAPI_CONFIG = {
     `,
 
     // ========================================
-    // 🤖 INTELIGENCIA ARTIFICIAL (OPCIONAL)
+    // 🤖 INTELIGENCIA ARTIFICIAL (SEGURA)
     // ========================================
 
-    enableAI: false, // Cambiar a true para habilitar OpenAI
-    apiKey: '', // Tu API key de OpenAI (ej: 'sk-...')
+    enableAI: false, // Cambiar a true para habilitar IA via proxy seguro
+    // NOTA: Ya no necesitas API key aquí - el proxy maneja la seguridad
 
     // ========================================
     // 💬 RESPUESTAS PERSONALIZADAS

@@ -1,0 +1,22 @@
+# CHAPI - Dependencias Python para Azure OpenAI y Telegram Bot
+
+# FastAPI y servidor web
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# Cliente HTTP asíncrono para Azure OpenAI
+aiohttp==3.9.1
+aiofiles==23.2.0
+
+# Bot de Telegram
+python-telegram-bot==20.7
+
+# Utilidades
+python-dotenv==1.0.0
+python-multipart==0.0.6
+
+# Desarrollo y testing (opcional)
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
