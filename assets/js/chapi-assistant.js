@@ -8,7 +8,6 @@
 class ChapiAssistant {
     constructor(config = {}) {
         this.config = {
-            apiKey: config.apiKey || '', // Para OpenAI (opcional)
             botName: config.botName || 'CHAPI',
             enableAI: config.enableAI || false,
             welcomeMessage: config.welcomeMessage || '¡Hola! Soy CHAPI, tu asistente virtual. ¿En qué puedo ayudarte hoy?',
@@ -449,53 +448,65 @@ class ChapiAssistant {
     }
 
     async getAIResponse(message) {
-        if (!this.config.apiKey) {
+        // Verificar si AI está habilitado (ya no necesitamos API key en frontend)
+        if (!this.config.enableAI) {
             return this.getStaticResponse(message);
         }
 
         try {
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.config.apiKey}`
-                },
-                body: JSON.stringify({
-                    model: 'gpt-3.5-turbo',
-                    messages: [
-                        {
-                            role: 'system',
-                            content: `Eres CHAPI, un asistente virtual especializado en chatbots inteligentes para empresas. Tu empresa ofrece soluciones de automatización de ventas y soporte al cliente con IA.
+            // Usar el nuevo cliente de chat API seguro
+            if (!window.ChapiChatAPI) {
+                console.error('ChapiChatAPI no está disponible');
+                return this.getStaticResponse(message);
+            }
 
-                            Características de CHAPI:
-                            - Chatbots con GPT-4 y Llama 3
-                            - Integración con WhatsApp, Telegram, web chat
-                            - Planes desde $49 USD/mes
-                            - Integración con CRMs, pagos, calendarios
-                            - ROI promedio 400-800%
-                            - Soporte 24/7 en español
+            const chatAPI = new window.ChapiChatAPI({ debug: false });
 
-                            Responde de manera amigable, profesional y enfocada en ayudar al cliente a entender cómo CHAPI puede resolver sus necesidades específicas. Mantén las respuestas concisas (máximo 2-3 oraciones).`
-                        },
-                        ...this.messages.slice(-5).map(msg => ({
-                            role: msg.sender === 'bot' ? 'assistant' : 'user',
-                            content: msg.text
-                        })),
-                        {
-                            role: 'user',
-                            content: message
-                        }
-                    ],
-                    max_tokens: 150,
-                    temperature: 0.7
-                })
+            // Preparar mensajes con contexto
+            const systemMessage = {
+                role: 'system',
+                content: `Eres CHAPI, un asistente virtual especializado en chatbots inteligentes para empresas. Tu empresa ofrece soluciones de automatización de ventas y soporte al cliente con IA.
+
+Características de CHAPI:
+- Chatbots con GPT-4 y Llama 3
+- Integración con WhatsApp, Telegram, web chat
+- Planes desde $49 USD/mes
+- Integración con CRMs, pagos, calendarios
+- ROI promedio 400-800%
+- Soporte 24/7 en español
+
+Responde de manera amigable, profesional y enfocada en ayudar al cliente a entender cómo CHAPI puede resolver sus necesidades específicas. Mantén las respuestas concisas (máximo 2-3 oraciones).`
+            };
+
+            // Incluir contexto de mensajes anteriores (últimos 5)
+            const contextMessages = this.messages.slice(-5).map(msg => ({
+                role: msg.sender === 'bot' ? 'assistant' : 'user',
+                content: msg.text
+            }));
+
+            const messages = [
+                systemMessage,
+                ...contextMessages,
+                { role: 'user', content: message }
+            ];
+
+            // Llamar al proxy seguro
+            const response = await chatAPI.askServer(messages, {
+                max_tokens: 150,
+                temperature: 0.7
             });
 
-            const data = await response.json();
-            return data.choices[0].message.content;
+            return response;
 
         } catch (error) {
-            console.error('Error calling OpenAI API:', error);
+            console.error('Error calling CHAPI Chat API:', error);
+            
+            // Mostrar mensaje de error amigable si es un error de red/servicio
+            if (error.message.includes('conexión') || error.message.includes('disponible')) {
+                return 'Disculpa, estoy teniendo problemas técnicos temporales. Por favor intenta de nuevo en un momento o contacta a nuestro equipo en soporte@chapibot.pro para ayuda inmediata.';
+            }
+            
+            // Fallback a respuestas estáticas
             return this.getStaticResponse(message);
         }
     }
@@ -703,8 +714,7 @@ function initChapiAssistant() {
     window.chapiAssistant = new ChapiAssistant({
         botName: 'CHAPI',
         companyName: 'CHAPI',
-        enableAI: false, // Set to true and add apiKey for OpenAI integration
-        apiKey: '', // Add your OpenAI API key here if needed
+        enableAI: false, // Cambiar a true para habilitar IA via proxy seguro
         welcomeMessage: '¡Hola! 👋 Soy CHAPI, tu asistente virtual especializado en chatbots inteligentes. ¿En qué puedo ayudarte hoy?'
     });
 }
