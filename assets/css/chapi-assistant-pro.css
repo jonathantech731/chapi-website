@@ -1,634 +1,592 @@
-/**
- * 🎨 CHAPI Assistant Pro CSS
- * Estilos mejorados para el asistente virtual con capacidades persuasivas
- * @version 2.1
- */
+/* 🤖 CHAPI Assistant Widget - Estilos PRO Mejorados */
 
-/* Variables CSS para personalización */
+/* Variables CSS para consistencia */
 :root {
-  /* Colores principales */
-  --chapi-primary: #2f7afe;
-  --chapi-secondary: #00d4a6;
-  --chapi-dark: #161c27;
-  --chapi-light: #e8eef8;
-
-  /* Estados */
-  --chapi-success: #00d4a6;
-  --chapi-error: #ff5a5f;
-  --chapi-warning: #ffb100;
-
-  /* Sombras y efectos */
-  --chapi-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  --chapi-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.2);
-
-  /* Tamaños */
-  --chapi-border-radius: 15px;
-  --chapi-button-size: 60px;
-  --chapi-mobile-button-size: 50px;
-
-  /* Transiciones */
-  --chapi-transition: all 0.3s ease;
+    --chapi-primary: #2f7afe;
+    --chapi-secondary: #00d4a6;
+    --chapi-bg: #0a0d14;
+    --chapi-glass: rgba(22, 28, 39, 0.95);
+    --chapi-text: #e8eef8;
+    --chapi-muted: #a9b3c4;
+    --chapi-radius: 16px;
+    --chapi-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    --chapi-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --chapi-green: #10b981;
+    --chapi-red: #ff4757;
+    --chapi-orange: #ffa502;
 }
 
-/* Contenedor principal del asistente */
-.chapi-assistant {
-  position: fixed;
-  z-index: 999999;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--chapi-light);
-  transition: var(--chapi-transition);
-
-  /* Posicionamiento por defecto (bottom-right) */
-  bottom: 20px;
-  right: 20px;
+/* Reset y base para el widget */
+.chapi-widget, .chapi-widget * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Posicionamiento alternativo */
-.chapi-assistant.bottom-left {
-  right: auto;
-  left: 20px;
+/* Container principal del widget */
+.chapi-widget {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.chapi-assistant.top-right {
-  bottom: auto;
-  top: 20px;
+/* Botón flotante (trigger) */
+.chapi-trigger {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--chapi-shadow);
+    transition: var(--chapi-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    overflow: hidden;
 }
 
-.chapi-assistant.top-left {
-  bottom: auto;
-  top: 20px;
-  right: auto;
-  left: 20px;
+.chapi-trigger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 25px 50px rgba(47, 122, 254, 0.3);
 }
 
-/* Botón principal del chat */
-.chapi-chat-button {
-  width: var(--chapi-button-size);
-  height: var(--chapi-button-size);
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--chapi-shadow);
-  transition: var(--chapi-transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.chapi-chat-button:hover {
-  transform: scale(1.05);
-  box-shadow: var(--chapi-shadow-hover);
-}
-
-.chapi-chat-button:active {
-  transform: scale(0.95);
-}
-
-/* Icono del chat */
-.chapi-chat-icon {
-  width: 30px;
-  height: 30px;
-  fill: currentColor;
-  transition: var(--chapi-transition);
-}
-
-/* Punto de notificación */
-.chapi-notification-dot {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 12px;
-  height: 12px;
-  background-color: var(--chapi-error);
-  border-radius: 50%;
-  border: 2px solid var(--chapi-dark);
-  animation: chapi-pulse 2s infinite;
-  display: block;
-}
-
-@keyframes chapi-pulse {
-  0% {
+.chapi-trigger:active {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(255, 90, 95, 0.7);
-  }
+}
 
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(255, 90, 95, 0);
-  }
+.chapi-trigger-icon {
+    font-size: 24px;
+    animation: chapi-pulse 2s infinite;
+}
 
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(255, 90, 95, 0);
-  }
+/* Badge de notificación */
+.chapi-notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--chapi-red);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    animation: chapi-bounce 1s infinite;
 }
 
 /* Ventana del chat */
-.chapi-chat-window {
-  position: absolute;
-  bottom: calc(var(--chapi-button-size) + 20px);
-  right: 0;
-  width: 380px;
-  height: 550px;
-  background-color: var(--chapi-dark);
-  border-radius: var(--chapi-border-radius);
-  box-shadow: var(--chapi-shadow);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: var(--chapi-transition);
-  opacity: 0;
-  transform: translateY(20px) scale(0.9);
-  pointer-events: none;
-  max-height: calc(100vh - 120px);
+.chapi-chat {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 380px;
+    height: 600px;
+    background: var(--chapi-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--chapi-radius);
+    box-shadow: var(--chapi-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0) translateY(20px);
+    opacity: 0;
+    transition: var(--chapi-transition);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.chapi-chat-window.active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: all;
+.chapi-chat-open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
 }
 
-/* Cabecera del chat */
-.chapi-chat-header {
-  background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  border-radius: var(--chapi-border-radius) var(--chapi-border-radius) 0 0;
+/* Header del chat */
+.chapi-header {
+    background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
 }
 
 .chapi-header-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.chapi-header-title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.chapi-header-subtitle {
-  margin: 5px 0 0;
-  font-size: 12px;
-  opacity: 0.9;
-  display: flex;
-  align-items: center;
-}
-
-.chapi-status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--chapi-success);
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 6px;
-  animation: chapi-blink 2s infinite;
-}
-
-@keyframes chapi-blink {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.chapi-close-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: var(--chapi-transition);
-}
-
-.chapi-close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Cuerpo del chat */
-.chapi-chat-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 15px;
-  scroll-behavior: smooth;
-  background-color: var(--chapi-dark);
-}
-
-/* Estilos para la barra de desplazamiento */
-.chapi-chat-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.chapi-chat-body::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.chapi-chat-body::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-}
-
-.chapi-chat-body::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Mensajes */
-.chapi-message {
-  display: flex;
-  margin-bottom: 15px;
-  animation: chapi-fade-in 0.3s ease;
-}
-
-@keyframes chapi-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.chapi-message.bot {
-  align-items: flex-start;
-}
-
-.chapi-message.user {
-  align-items: flex-end;
-  flex-direction: row-reverse;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .chapi-avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px;
-  flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.chapi-header-text {
+    flex: 1;
+}
+
+.chapi-header-title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.chapi-header-subtitle {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.chapi-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--chapi-transition);
+}
+
+.chapi-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Área de mensajes */
+.chapi-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgba(10, 13, 20, 0.5);
+    position: relative;
+}
+
+.chapi-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chapi-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chapi-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+/* Mensajes individuales */
+.chapi-message {
+    display: flex;
+    margin-bottom: 16px;
+    align-items: flex-start;
+    gap: 12px;
+    animation: chapi-slideIn 0.3s ease;
+}
+
+.chapi-message-user {
+    flex-direction: row-reverse;
+}
+
+.chapi-message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--chapi-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.chapi-message-user .chapi-message-avatar {
+    background: var(--chapi-green);
 }
 
 .chapi-message-content {
-  max-width: 70%;
-}
-
-.chapi-message.bot .chapi-message-content {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px 15px 15px 0;
-  padding: 12px 15px;
-}
-
-.chapi-message.user .chapi-message-content {
-  background-color: var(--chapi-primary);
-  border-radius: 15px 15px 0 15px;
-  padding: 12px 15px;
+    max-width: 75%;
+    flex: 1;
 }
 
 .chapi-message-text {
-  color: var(--chapi-light);
-  font-size: 14px;
-  line-height: 1.5;
-  word-break: break-word;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 16px;
+    color: var(--chapi-text);
+    line-height: 1.5;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.chapi-message-text a {
-  color: var(--chapi-secondary);
-  text-decoration: none;
-  border-bottom: 1px dotted var(--chapi-secondary);
-  transition: var(--chapi-transition);
-}
-
-.chapi-message-text a:hover {
-  opacity: 0.8;
+.chapi-message-user .chapi-message-text {
+    background: var(--chapi-primary);
+    color: white;
+    border-color: var(--chapi-primary);
 }
 
 .chapi-message-time {
-  font-size: 10px;
-  opacity: 0.7;
-  margin-top: 5px;
-  text-align: right;
+    font-size: 11px;
+    color: var(--chapi-muted);
+    margin-top: 4px;
+    text-align: right;
+}
+
+.chapi-message-user .chapi-message-time {
+    text-align: left;
+}
+
+/* Acciones de mensaje */
+.chapi-message-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chapi-message-action {
+    background: var(--chapi-primary);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: var(--chapi-transition);
+}
+
+.chapi-message-action:hover {
+    background: var(--chapi-secondary);
+    transform: translateY(-1px);
 }
 
 /* Indicador de escritura */
-.chapi-typing {
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
+.chapi-typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
-.chapi-typing-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--chapi-light);
-  border-radius: 50%;
-  margin: 0 2px;
-  animation: chapi-typing 1.4s infinite ease-in-out;
-  opacity: 0.7;
+.chapi-typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.chapi-typing-dot:nth-child(1) {
-  animation-delay: 0s;
+.chapi-typing-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--chapi-muted);
+    border-radius: 50%;
+    animation: chapi-typing 1.4s infinite ease-in-out;
 }
 
-.chapi-typing-dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.chapi-typing-dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes chapi-typing {
-
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
-  }
-
-  30% {
-    transform: translateY(-5px);
-  }
-}
-
-/* Área de entrada */
-.chapi-input-area {
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.chapi-input-container {
-  display: flex;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 25px;
-  padding: 5px 15px;
-  transition: var(--chapi-transition);
-}
-
-.chapi-input-container:focus-within {
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 0 2px rgba(47, 122, 254, 0.3);
-}
-
-.chapi-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--chapi-light);
-  font-size: 14px;
-  padding: 10px 0;
-  resize: none;
-  max-height: 100px;
-  outline: none;
-  font-family: inherit;
-}
-
-.chapi-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.chapi-send-btn {
-  background: transparent;
-  border: none;
-  color: var(--chapi-secondary);
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: var(--chapi-transition);
-  padding: 0;
-  margin-left: 5px;
-}
-
-.chapi-send-btn:hover {
-  background-color: rgba(0, 212, 166, 0.1);
-}
-
-.chapi-send-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.chapi-typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+.chapi-typing-dots span:nth-child(2) { animation-delay: -0.16s; }
 
 /* Acciones rápidas */
 .chapi-quick-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 10px 0;
-  animation: chapi-fade-in 0.3s ease;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
-.chapi-action-btn {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: var(--chapi-light);
-  padding: 8px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: var(--chapi-transition);
-  font-size: 13px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 100%;
+.chapi-quick-btn {
+    background: rgba(47, 122, 254, 0.1);
+    color: var(--chapi-primary);
+    border: 1px solid rgba(47, 122, 254, 0.3);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: var(--chapi-transition);
+    white-space: nowrap;
 }
 
-.chapi-action-btn:hover {
-  background-color: var(--chapi-primary);
-  transform: translateY(-2px);
+.chapi-quick-btn:hover {
+    background: var(--chapi-primary);
+    color: white;
 }
 
-/* Animación de entrada para el widget */
-@keyframes chapi-bounce-in {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  50% {
-    transform: scale(1.1);
-    opacity: 0.7;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+/* Container de input */
+.chapi-input-container {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
 }
 
-/* Animación para mensajes nuevos */
-@keyframes chapi-message-in {
-  0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.chapi-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 12px 16px;
+    color: var(--chapi-text);
+    font-size: 14px;
+    font-family: inherit;
+    resize: none;
+    max-height: 120px;
+    min-height: 44px;
+    transition: var(--chapi-transition);
 }
 
-/* Adaptaciones para dispositivos móviles */
-@media (max-width: 768px) {
-  .chapi-chat-button {
-    width: var(--chapi-mobile-button-size);
-    height: var(--chapi-mobile-button-size);
-  }
-
-  .chapi-chat-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .chapi-chat-window {
-    width: calc(100vw - 40px);
-    height: 500px;
-    bottom: calc(var(--chapi-mobile-button-size) + 20px);
-    left: 20px;
-    right: 20px;
-  }
-
-  .chapi-message-content {
-    max-width: 80%;
-  }
-
-  .chapi-quick-actions {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: 5px;
-    -webkit-overflow-scrolling: touch;
-  }
+.chapi-input:focus {
+    outline: none;
+    border-color: var(--chapi-primary);
+    box-shadow: 0 0 0 3px rgba(47, 122, 254, 0.1);
 }
 
-/* Modo de alto contraste para accesibilidad */
-.chapi-high-contrast {
-  --chapi-primary: #0078d4;
-  --chapi-secondary: #00b294;
-  --chapi-dark: #000000;
-  --chapi-light: #ffffff;
-  --chapi-success: #107c10;
-  --chapi-error: #d13438;
-  --chapi-warning: #ffb900;
+.chapi-input::placeholder {
+    color: var(--chapi-muted);
 }
 
-/* Modo de texto grande para accesibilidad */
-.chapi-large-text {
-  font-size: 16px;
+.chapi-send-btn {
+    width: 44px;
+    height: 44px;
+    background: var(--chapi-primary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--chapi-transition);
+    flex-shrink: 0;
 }
 
-.chapi-large-text .chapi-message-text {
-  font-size: 16px;
+.chapi-send-btn:hover {
+    background: var(--chapi-secondary);
+    transform: scale(1.05);
 }
 
-.chapi-large-text .chapi-input {
-  font-size: 16px;
-}
-
-/* Efectos de hover y focus mejorados para accesibilidad */
-.chapi-input:focus,
-.chapi-send-btn:focus,
-.chapi-action-btn:focus,
-.chapi-close-btn:focus,
-.chapi-chat-button:focus {
-  outline: 2px solid var(--chapi-secondary);
-  outline-offset: 2px;
-}
-
-/* Efectos de transición suave */
-.chapi-message,
-.chapi-quick-actions,
-.chapi-action-btn,
-.chapi-input-container,
-.chapi-chat-button,
-.chapi-chat-window {
-  transition: var(--chapi-transition);
-}
-
-/* Mejoras visuales para links */
-.chapi-message-text a {
-  position: relative;
-  display: inline-block;
-}
-
-.chapi-message-text a::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 1px;
-  bottom: -1px;
-  left: 0;
-  background-color: var(--chapi-secondary);
-  transform-origin: bottom right;
-  transition: transform 0.3s ease-out;
-}
-
-.chapi-message-text a:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-
-/* Efectos de pulsación para botones en móviles */
-@media (hover: none) {
-
-  .chapi-action-btn:active,
-  .chapi-send-btn:active,
-  .chapi-close-btn:active {
+.chapi-send-btn:active {
     transform: scale(0.95);
-    opacity: 0.8;
-  }
 }
 
-/* Mejoras para rendimiento en dispositivos de gama baja */
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Footer promocional */
+.chapi-footer {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--chapi-orange), #ff6b6b);
+    text-align: center;
+    color: white;
+    font-size: 12px;
 }
 
-/* Soporte para modo oscuro del sistema */
+.chapi-promo {
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chapi-widget {
+        bottom: 10px !important;
+        right: 10px !important;
+        left: 10px !important;
+    }
+
+    .chapi-chat {
+        width: calc(100vw - 20px);
+        height: 70vh;
+        max-height: 600px;
+        bottom: 80px;
+        right: 0;
+        left: 0;
+    }
+
+    .chapi-trigger {
+        width: 56px;
+        height: 56px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    .chapi-trigger-icon {
+        font-size: 20px;
+    }
+
+    .chapi-message-content {
+        max-width: 85%;
+    }
+}
+
+@media (max-width: 480px) {
+    .chapi-chat {
+        height: 80vh;
+        border-radius: 12px;
+    }
+
+    .chapi-header {
+        padding: 16px;
+    }
+
+    .chapi-messages {
+        padding: 16px;
+    }
+
+    .chapi-input-container {
+        padding: 16px;
+    }
+
+    .chapi-quick-actions {
+        padding: 12px 16px;
+    }
+}
+
+/* Animaciones */
+@keyframes chapi-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes chapi-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes chapi-slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes chapi-typing {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Estados especiales */
+.chapi-message-text strong {
+    color: var(--chapi-primary);
+    font-weight: 600;
+}
+
+.chapi-message-text a {
+    color: var(--chapi-secondary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.chapi-message-text a:hover {
+    text-decoration: underline;
+}
+
+/* Efectos de hover mejorados */
+.chapi-chat {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chapi-message {
+    transition: all 0.2s ease;
+}
+
+.chapi-message:hover {
+    transform: translateX(2px);
+}
+
+/* Soporte para modo oscuro */
 @media (prefers-color-scheme: dark) {
-  .chapi-chat-button {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-  }
+    :root {
+        --chapi-bg: #000000;
+        --chapi-glass: rgba(0, 0, 0, 0.95);
+        --chapi-text: #ffffff;
+    }
+}
 
-  .chapi-chat-window {
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
-  }
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .chapi-widget *,
+    .chapi-widget *::before,
+    .chapi-widget *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus para accesibilidad */
+.chapi-trigger:focus,
+.chapi-close:focus,
+.chapi-send-btn:focus,
+.chapi-input:focus,
+.chapi-quick-btn:focus,
+.chapi-message-action:focus {
+    outline: 2px solid var(--chapi-primary);
+    outline-offset: 2px;
+}
+
+/* Estados de carga */
+.chapi-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.chapi-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: chapi-shimmer 1.5s infinite;
+}
+
+@keyframes chapi-shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .chapi-trigger {
+        border: 2px solid white;
+    }
+
+    .chapi-message-text {
+        border-width: 2px;
+    }
+
+    .chapi-input {
+        border-width: 2px;
+    }
 }

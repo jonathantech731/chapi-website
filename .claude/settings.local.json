@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm init:*)"
+      "Bash(npm init *)"
     ],
     "deny": [],
     "ask": []

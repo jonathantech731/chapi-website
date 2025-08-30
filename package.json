@@ -1,23 +1,45 @@
 {
   "name": "chapi-website",
   "version": "1.0.0",
-  "description": "<div align=\"center\">",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "type": "module",
+  "description": "CHAPI Assistant - Automated chatbot solutions for business growth",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx live-server --port=3000 --host=localhost --open=/index.html --cors",
+    "dev-alt": "python simple-server.py",
+    "start": "npx live-server --port=3000 --host=localhost --open=/index.html --cors",
+    "preview": "npx live-server --port=3000 --host=localhost --open=/index.html --cors",
+    "test": "npx live-server --port=3001 --host=localhost --open=/test-assistant.html --cors",
+    "test-pro": "npx live-server --port=3002 --host=localhost --open=/test-chapi-pro.html --cors",
+    "build": "echo 'Build complete - Static site ready for GitHub Pages'",
+    "clean": "rmdir /s /q node_modules 2>nul || echo 'Already clean'",
+    "setup": "npm install && echo 'Setup complete! Run: npm run dev'",
+    "debug": "powershell -ExecutionPolicy Bypass -File debug-environment.ps1",
+    "diagnose": "node --version && npm --version && npm list live-server"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonathantech731/chapi-website.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "chatbot",
+    "ai",
+    "automation",
+    "chapi",
+    "sales",
+    "conversion",
+    "lead-generation",
+    "whatsapp-bot"
+  ],
+  "author": "CHAPI Team",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jonathantech731/chapi-website/issues"
   },
-  "homepage": "https://github.com/jonathantech731/chapi-website#readme"
+  "homepage": "https://chapibot.pro",
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }

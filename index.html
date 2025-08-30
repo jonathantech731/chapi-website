@@ -6,6 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CHAPI · Chatbots Inteligentes</title>
 
+        <!-- CHAPI Assistant Styles -->
+        <link rel="stylesheet" href="assets/css/chapi-assistant.css">
+
         <style>
             :root {
                 --bg: #0a0d14;
@@ -61,28 +64,78 @@
             }
 
             @keyframes backgroundFloat {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-20px); }
+
+                0%,
+                100% {
+                    transform: translateY(0px);
+                }
+
+                50% {
+                    transform: translateY(-20px);
+                }
             }
 
+            /* Animations */
             @keyframes fadeInUp {
-                from { opacity: 0; transform: translateY(40px); }
-                to { opacity: 1; transform: translateY(0); }
+                from {
+                    opacity: 0;
+                    transform: translateY(40px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
 
             @keyframes scaleIn {
-                from { opacity: 0; transform: scale(0.9); }
-                to { opacity: 1; transform: scale(1); }
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
             }
 
-            .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
-            .animate-scaleIn { animation: scaleIn 0.6s ease-out forwards; }
-            .animate-delay-1 { animation-delay: 0.1s; }
-            .animate-delay-2 { animation-delay: 0.2s; }
-            .animate-delay-3 { animation-delay: 0.3s; }
+            @keyframes glow {
+
+                0%,
+                100% {
+                    box-shadow: 0 0 20px rgba(47, 122, 254, 0.3);
+                }
+
+                50% {
+                    box-shadow: 0 0 30px rgba(47, 122, 254, 0.5);
+                }
+            }
+
+            .animate-fadeInUp {
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+
+            .animate-scaleIn {
+                animation: scaleIn 0.6s ease-out forwards;
+            }
+
+            .animate-delay-1 {
+                animation-delay: 0.1s;
+            }
+
+            .animate-delay-2 {
+                animation-delay: 0.2s;
+            }
+
+            .animate-delay-3 {
+                animation-delay: 0.3s;
+            }
 
             /* Typography */
-            h1, h2, h3 {
+            h1,
+            h2,
+            h3 {
                 font-weight: 700;
                 letter-spacing: -0.025em;
             }
@@ -127,7 +180,9 @@
                 transition: left 0.5s;
             }
 
-            .btn:hover::before { left: 100%; }
+            .btn:hover::before {
+                left: 100%;
+            }
 
             .btn-primary {
                 background: linear-gradient(135deg, var(--brand), var(--brand-light));
@@ -164,6 +219,7 @@
                 box-shadow: 0 12px 30px rgba(0, 212, 166, 0.4);
             }
 
+            /* Enhanced Tags */
             .tag {
                 display: inline-block;
                 padding: 8px 12px;
@@ -284,7 +340,8 @@
                 background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             }
 
-            .hero img, .hero video {
+            .hero img,
+            .hero video {
                 width: 100%;
                 display: block;
                 transition: var(--transition);
@@ -295,6 +352,350 @@
                 transform: scale(1.05);
             }
 
+            /* Trust Section */
+            .trust {
+                padding: 30px 0 20px;
+                color: var(--muted);
+                font-size: 14px;
+            }
+
+            .trust .logos {
+                display: flex;
+                gap: 32px;
+                flex-wrap: wrap;
+                opacity: 0.8;
+                margin-top: 16px;
+            }
+
+            /* Block Sections */
+            section.block {
+                padding: 80px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
+                position: relative;
+            }
+
+            h2.section-title {
+                font-size: clamp(28px, 4vw, 36px);
+                margin: 0 0 12px;
+                text-align: center;
+            }
+
+            p.section-sub {
+                color: var(--muted);
+                margin: 0 0 40px;
+                text-align: center;
+                font-size: 18px;
+            }
+
+            /* Enhanced Cards */
+            .features {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 24px;
+            }
+
+            .card {
+                background: var(--glass);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: var(--radius);
+                padding: 28px;
+                box-shadow: var(--shadow-soft);
+                backdrop-filter: blur(20px);
+                transition: var(--transition);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: linear-gradient(90deg, var(--brand), var(--accent));
+                transform: scaleX(0);
+                transition: var(--transition);
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .card:hover::before {
+                transform: scaleX(1);
+            }
+
+            .card h3 {
+                margin: 0 0 8px;
+                font-size: 20px;
+            }
+
+            .card p {
+                margin: 0;
+                color: var(--muted);
+                line-height: 1.6;
+            }
+
+            .card .top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+
+            .kpi {
+                font-weight: 700;
+                color: var(--accent);
+                font-size: 14px;
+                background: rgba(0, 212, 166, 0.1);
+                padding: 4px 8px;
+                border-radius: 6px;
+            }
+
+            /* Steps */
+            .steps {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 24px;
+            }
+
+            .step {
+                padding: 32px;
+                background: linear-gradient(135deg, #141c29, #0f141d);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: var(--radius);
+                transition: var(--transition);
+                position: relative;
+            }
+
+            .step:hover {
+                transform: translateY(-3px);
+                border-color: var(--brand);
+            }
+
+            .step .num {
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                background: linear-gradient(135deg, var(--brand), var(--brand-light));
+                color: #fff;
+                display: inline-grid;
+                place-items: center;
+                font-weight: 800;
+                margin-bottom: 16px;
+                font-size: 18px;
+            }
+
+            /* Integrations */
+            .integrations {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 16px;
+            }
+
+            .pill {
+                border: 1px dashed rgba(255, 255, 255, 0.2);
+                border-radius: 999px;
+                padding: 14px 18px;
+                text-align: center;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                transition: var(--transition);
+                font-weight: 500;
+            }
+
+            .pill:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-style: solid;
+                transform: translateY(-2px);
+            }
+
+            /* Pricing */
+            .pricing {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 24px;
+            }
+
+            .plan {
+                padding: 36px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: var(--radius);
+                background: linear-gradient(135deg, #121a27, #0d131c);
+                transition: var(--transition);
+                position: relative;
+            }
+
+            .plan .price {
+                font-size: 42px;
+                font-weight: 800;
+                margin: 10px 0;
+                background: linear-gradient(135deg, var(--text), var(--muted));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .plan .inc {
+                color: var(--muted);
+                margin: 0 0 12px;
+            }
+
+            .plan.best {
+                border-color: var(--brand);
+                box-shadow: 0 0 0 2px rgba(47, 122, 254, 0.2);
+                transform: scale(1.05);
+            }
+
+            .plan.best::before {
+                content: 'Más Popular';
+                position: absolute;
+                top: -12px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, var(--brand), var(--brand-light));
+                color: white;
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .bul {
+                margin: 20px 0 24px;
+                padding: 0;
+                list-style: none;
+            }
+
+            .bul li {
+                margin: 10px 0;
+                color: var(--text);
+                padding-left: 20px;
+                position: relative;
+            }
+
+            .bul li::before {
+                content: '✓';
+                position: absolute;
+                left: 0;
+                color: var(--success);
+                font-weight: bold;
+            }
+
+            /* Grid layouts */
+            .grid-2 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 24px;
+            }
+
+            .quote {
+                font-style: italic;
+                color: #d7e6ff;
+                font-size: 18px;
+                line-height: 1.6;
+            }
+
+            .author {
+                color: var(--muted);
+                font-size: 14px;
+                margin-top: 12px;
+            }
+
+            /* FAQ */
+            details.faq {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 20px;
+                margin-bottom: 12px;
+                backdrop-filter: blur(10px);
+                transition: var(--transition);
+            }
+
+            details.faq:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+            details summary {
+                cursor: pointer;
+                font-weight: 600;
+                padding: 8px 0;
+            }
+
+            details[open] summary {
+                margin-bottom: 12px;
+                color: var(--brand);
+            }
+
+            /* Contact Form */
+            .contact .panel {
+                padding: 36px;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 16px 18px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                color: var(--text);
+                font-family: inherit;
+                transition: var(--transition);
+                backdrop-filter: blur(10px);
+            }
+
+            input:focus,
+            textarea:focus {
+                outline: none;
+                border-color: var(--brand);
+                background: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 0 0 3px rgba(47, 122, 254, 0.1);
+            }
+
+            textarea {
+                min-height: 120px;
+                resize: vertical;
+            }
+
+            .stack {
+                display: grid;
+                gap: 16px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 50px 0;
+                color: #93a0b6;
+                font-size: 14px;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
+                background: linear-gradient(135deg, #0a0d14, #0f1419);
+            }
+
+            .cols {
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr;
+                gap: 24px;
+            }
+
+            .muted {
+                color: var(--muted);
+            }
+
+            /* Mobile Menu */
+            .mobile-menu-btn {
+                display: none;
+                background: none;
+                border: none;
+                color: var(--text);
+                font-size: 24px;
+                cursor: pointer;
+            }
+
             /* Responsive Design */
             @media (max-width: 1024px) {
                 .hero .grid {
@@ -302,12 +703,67 @@
                     gap: 40px;
                     text-align: center;
                 }
+
+                .features {
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                }
+
+                .steps,
+                .pricing {
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                }
+
+                .integrations {
+                    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                }
+
+                .grid-2 {
+                    grid-template-columns: 1fr;
+                }
+
+                .cols {
+                    grid-template-columns: 1fr;
+                }
+
+                .plan.best {
+                    transform: none;
+                }
             }
 
             @media (max-width: 768px) {
-                .nav ul { display: none; }
-                .hero { padding: 60px 0 40px; }
-                .hero h1 { font-size: 28px; }
+                .nav ul {
+                    display: none;
+                }
+
+                .mobile-menu-btn {
+                    display: block;
+                }
+
+                .hero {
+                    padding: 60px 0 40px;
+                }
+
+                .hero h1 {
+                    font-size: 28px;
+                }
+
+                section.block {
+                    padding: 60px 0;
+                }
+
+                .features,
+                .steps,
+                .pricing {
+                    grid-template-columns: 1fr;
+                }
+
+                .integrations {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .card {
+                    padding: 24px;
+                }
             }
 
             /* Loading Animation */
@@ -316,222 +772,25 @@
                 animation: fadeInUp 0.8s ease-out 0.1s forwards;
             }
 
-            /* CHAPI Assistant Styles - Optimized */
-            .chapi-assistant {
-                position: fixed !important;
-                bottom: 20px !important;
-                right: 20px !important;
-                z-index: 999999 !important;
-                font-family: system-ui, -apple-system, sans-serif !important;
+            /* Scroll Indicator */
+            .scroll-indicator {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 0%;
+                height: 3px;
+                background: linear-gradient(90deg, var(--brand), var(--accent));
+                z-index: 100;
+                transition: width 0.3s ease;
             }
 
-            .chapi-chat-button {
-                width: 64px !important;
-                height: 64px !important;
-                border-radius: 50% !important;
-                background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
-                border: none !important;
-                cursor: pointer !important;
-                color: white !important;
-                font-size: 24px !important;
-                box-shadow: 0 8px 20px rgba(47, 122, 254, 0.3) !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                transition: all 0.3s ease !important;
-                position: relative !important;
-            }
-
-            .chapi-chat-button:hover {
-                transform: translateY(-2px) !important;
-                box-shadow: 0 12px 30px rgba(47, 122, 254, 0.4) !important;
-            }
-
-            .chapi-chat-button::after {
-                content: '' !important;
-                position: absolute !important;
-                top: -2px !important;
-                right: -2px !important;
-                width: 12px !important;
-                height: 12px !important;
-                background: #00d4a6 !important;
-                border-radius: 50% !important;
-                border: 2px solid #161c27 !important;
-                animation: pulse 2s infinite !important;
-            }
-
-            @keyframes pulse {
-                0% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(1.1); opacity: 0.7; }
-                100% { transform: scale(1); opacity: 1; }
-            }
-
-            .chapi-chat-window {
-                position: absolute !important;
-                bottom: 80px !important;
-                right: 0 !important;
-                width: 350px !important;
-                height: 450px !important;
-                background: #161c27 !important;
-                border-radius: 16px !important;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
-                display: none !important;
-                flex-direction: column !important;
-                overflow: hidden !important;
-            }
-
-            .chapi-chat-window.open {
-                display: flex !important;
-            }
-
-            .chapi-chat-header {
-                padding: 16px !important;
-                background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
-                color: white !important;
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-            }
-
-            .chapi-chat-header h3 {
-                margin: 0 !important;
-                font-size: 16px !important;
-            }
-
-            .chapi-close-btn {
-                background: none !important;
-                border: none !important;
-                color: white !important;
-                font-size: 20px !important;
-                cursor: pointer !important;
-                width: 24px !important;
-                height: 24px !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-            }
-
-            .chapi-chat-body {
-                flex: 1 !important;
-                padding: 16px !important;
-                overflow-y: auto !important;
-                color: #e8eef8 !important;
-            }
-
-            .chapi-message {
-                margin-bottom: 12px !important;
-                padding: 10px 12px !important;
-                border-radius: 12px !important;
-                background: rgba(47, 122, 254, 0.1) !important;
-                border: 1px solid rgba(47, 122, 254, 0.2) !important;
-                line-height: 1.4 !important;
-                animation: fadeInMessage 0.3s ease-out !important;
-            }
-
-            @keyframes fadeInMessage {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-
-            .chapi-message.user {
-                background: rgba(0, 212, 166, 0.1) !important;
-                border: 1px solid rgba(0, 212, 166, 0.2) !important;
-                margin-left: 40px !important;
-                text-align: right !important;
-            }
-
-            .chapi-message a {
-                color: #00d4a6 !important;
-                text-decoration: none !important;
-                font-weight: 500 !important;
-            }
-
-            .chapi-message a:hover {
-                color: #1ae6b8 !important;
-                text-decoration: underline !important;
-            }
-
-            .chapi-quick-actions {
-                display: flex !important;
-                flex-wrap: wrap !important;
-                gap: 8px !important;
-                margin: 12px 0 8px 0 !important;
-            }
-
-            .chapi-quick-action-btn {
-                padding: 6px 12px !important;
-                border: 1px solid rgba(47, 122, 254, 0.3) !important;
-                border-radius: 16px !important;
-                background: rgba(47, 122, 254, 0.1) !important;
-                color: #4a8bff !important;
-                font-size: 12px !important;
-                cursor: pointer !important;
-                transition: all 0.3s ease !important;
-                white-space: nowrap !important;
-            }
-
-            .chapi-quick-action-btn:hover {
-                background: rgba(47, 122, 254, 0.2) !important;
-                transform: translateY(-1px) !important;
-            }
-
-            .chapi-chat-input {
-                padding: 16px !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-                display: flex !important;
-                gap: 8px !important;
-            }
-
-            .chapi-input {
-                flex: 1 !important;
-                padding: 10px 12px !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
-                border-radius: 8px !important;
-                background: rgba(255, 255, 255, 0.05) !important;
-                color: #e8eef8 !important;
-                font-family: inherit !important;
-                transition: all 0.3s ease !important;
-            }
-
-            .chapi-input:focus {
-                outline: none !important;
-                border-color: #2f7afe !important;
-                background: rgba(255, 255, 255, 0.08) !important;
-                box-shadow: 0 0 0 2px rgba(47, 122, 254, 0.1) !important;
-            }
-
-            .chapi-input::placeholder {
-                color: #a9b3c4 !important;
-                opacity: 0.7 !important;
-            }
-
-            .chapi-send-btn {
-                padding: 10px 16px !important;
-                background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
-                border: none !important;
-                border-radius: 8px !important;
-                color: white !important;
-                cursor: pointer !important;
-                font-weight: 500 !important;
-                transition: all 0.3s ease !important;
-            }
-
-            .chapi-send-btn:hover {
-                transform: translateY(-1px) !important;
-                box-shadow: 0 4px 12px rgba(47, 122, 254, 0.3) !important;
-            }
-
-            @media (max-width: 480px) {
-                .chapi-chat-window {
-                    width: 300px !important;
-                    height: 400px !important;
-                }
-            }
         </style>
     </head>
 
     <body>
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" id="scrollIndicator"></div>
+
         <header>
             <div class="wrap nav">
                 <div class="left">
@@ -539,12 +798,14 @@
                     <span class="tag">Ventas · Soporte · Automatización</span>
                 </div>
                 <nav>
-                    <ul>
+                    <ul id="navMenu">
                         <li><a href="#features">Funciones</a></li>
+                        <li><a href="#steps">Cómo funciona</a></li>
                         <li><a href="#pricing">Planes</a></li>
                         <li><a href="#demo">Demo</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
                 </nav>
             </div>
         </header>
@@ -554,7 +815,8 @@
             <div class="wrap grid">
                 <div class="loading">
                     <h1>Chatbots de ventas que cierran oportunidades 24/7</h1>
-                    <p class="lead">Implementación profesional en WhatsApp, Telegram y Web. Integramos tu negocio con automatizaciones reales (n8n, CRMs, pago), sin depender de la nube si lo necesitas.</p>
+                    <p class="lead">Implementación profesional en WhatsApp, Telegram y Web. Integramos tu negocio con
+                        automatizaciones reales (n8n, CRMs, pago), sin depender de la nube si lo necesitas.</p>
                     <div style="display:flex;gap:16px;flex-wrap:wrap;margin:32px 0;">
                         <a href="#demo" class="btn btn-primary">
                             <span>🚀</span> Probar demo
@@ -562,334 +824,365 @@
                         <a href="#pricing" class="btn btn-ghost">Ver planes</a>
                         <a href="#contacto" class="btn btn-accent">Cotizar proyecto</a>
                     </div>
-                    <div style="color: var(--muted); margin-top: 20px;">
-                        <strong>Conectado con:</strong> Stripe · MercadoPago · Gmail · Google Sheets · APIs propias
+                    <div class="trust">
+                        <div><strong>Conectado con:</strong> Stripe · MercadoPago · Gmail · Google Sheets · APIs propias
+                        </div>
                     </div>
                 </div>
                 <div class="panel loading animate-delay-2">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23161c27'/%3E%3Cstop offset='100%25' style='stop-color:%230f141d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23bg)'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%232f7afe' opacity='0.3'/%3E%3Ctext x='400' y='300' text-anchor='middle' fill='%23e8eef8' font-size='24' font-family='system-ui'%3EChatbot Demo%3C/text%3E%3Ctext x='400' y='330' text-anchor='middle' fill='%23a9b3c4' font-size='14'%3EPreview de CHAPI%3C/text%3E%3C/svg%3E" alt="Demo chatbot CHAPI">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23161c27'/%3E%3Cstop offset='100%25' style='stop-color:%230f141d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23bg)'/%3E%3Ccircle cx='400' cy='300' r='100' fill='%232f7afe' opacity='0.3'/%3E%3Ctext x='400' y='300' text-anchor='middle' fill='%23e8eef8' font-size='24' font-family='system-ui'%3EChatbot Demo%3C/text%3E%3Ctext x='400' y='330' text-anchor='middle' fill='%23a9b3c4' font-size='14'%3EPreview de CHAPI%3C/text%3E%3C/svg%3E"
+                        alt="Demo chatbot CHAPI">
                 </div>
             </div>
         </section>
 
-        <!-- CHAPI Assistant Widget -->
-        <div class="chapi-assistant" id="chapiAssistant">
-            <button class="chapi-chat-button" id="chapiChatButton">💬</button>
-            <div class="chapi-chat-window" id="chapiChatWindow">
-                <div class="chapi-chat-header">
-                    <h3>🤖 CHAPI Assistant</h3>
-                    <button class="chapi-close-btn" id="chapiCloseBtn">×</button>
-                </div>
-                <div class="chapi-chat-body" id="chapiChatBody">
-                    <div class="chapi-message">
-                        ¡Hola! 👋 Soy <strong>CHAPI</strong>, tu asistente virtual especializado en chatbots inteligentes.
-                        <br><br>
-                        Estoy aquí para ayudarte a:
-                        <br>• 🚀 Crear flujos de ventas automáticos
-                        <br>• 💰 Conocer nuestros planes y precios
-                        <br>• 📱 Probar demos en vivo
-                        <br>• 📞 Conectarte con nuestro equipo
-                        <br><br>
-                        ¿En qué puedo ayudarte hoy?
+        <!-- Features -->
+        <section id="features" class="block">
+            <div class="wrap">
+                <h2 class="section-title loading">Funciones clave para vender más</h2>
+                <p class="section-sub loading">Pensadas para PyMES y equipos comerciales que necesitan resultados
+                    medibles.</p>
+                <div class="features">
+                    <div class="card loading animate-delay-1">
+                        <div class="top">
+                            <h3>🎯 Embudo automatizado</h3>
+                            <span class="kpi">+30% conversión</span>
+                        </div>
+                        <p>Captura, califica y agenda automáticamente. Seguimiento con recordatorios y notas en CRM.</p>
+                    </div>
+                    <div class="card loading animate-delay-2">
+                        <div class="top">
+                            <h3>🧠 IA en respuestas</h3>
+                            <span class="kpi">Contexto real</span>
+                        </div>
+                        <p>Respuestas naturales con memoria y reglas. Control de tono y límites para evitar errores.</p>
+                    </div>
+                    <div class="card loading animate-delay-3">
+                        <div class="top">
+                            <h3>📱 Multicanal</h3>
+                            <span class="kpi">WhatsApp · Telegram · Web</span>
+                        </div>
+                        <p>Un solo asistente en todos los canales. Panel único de conversaciones e indicadores.</p>
+                    </div>
+                    <div class="card loading animate-delay-1">
+                        <div class="top">
+                            <h3>🔗 Integraciones</h3>
+                            <span class="kpi">n8n · APIs</span>
+                        </div>
+                        <p>Conecta pagos, catálogos, hojas de cálculo y correo. Flujos escalables, auditables y sin
+                            vendor lock-in.</p>
+                    </div>
+                    <div class="card loading animate-delay-2">
+                        <div class="top">
+                            <h3>📋 Plantillas listas</h3>
+                            <span class="kpi">Sectorizadas</span>
+                        </div>
+                        <p>Ventas, soporte, reservas, leads inmobiliarios, clínicas, restaurantes, e-commerce.</p>
+                    </div>
+                    <div class="card loading animate-delay-3">
+                        <div class="top">
+                            <h3>📊 Métricas</h3>
+                            <span class="kpi">Dashboard</span>
+                        </div>
+                        <p>Tasa de respuesta, conversaciones, conversiones, embudos por canal y agente.</p>
                     </div>
                 </div>
-                <div class="chapi-chat-input">
-                    <input type="text" class="chapi-input" id="chapiInput" placeholder="Escribe tu mensaje...">
-                    <button class="chapi-send-btn" id="chapiSendBtn">Enviar</button>
+            </div>
+        </section>
+
+        <!-- Steps -->
+        <section id="steps" class="block">
+            <div class="wrap">
+                <h2 class="section-title loading">Cómo funciona</h2>
+                <p class="section-sub loading">En tres pasos estás vendiendo con tu asistente.</p>
+                <div class="steps">
+                    <div class="step loading animate-delay-1">
+                        <div class="num">1</div>
+                        <h3>Definimos objetivos</h3>
+                        <p>Guion de ventas, preguntas frecuentes, fuentes de datos y canales.</p>
+                    </div>
+                    <div class="step loading animate-delay-2">
+                        <div class="num">2</div>
+                        <h3>Configuramos el flujo</h3>
+                        <p>Plantillas + IA + reglas. Conexión n8n y CRM. Pruebas controladas.</p>
+                    </div>
+                    <div class="step loading animate-delay-3">
+                        <div class="num">3</div>
+                        <h3>Lanzamiento y mejora</h3>
+                        <p>Monitoreo, métricas y optimización continua para maximizar cierre.</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Integrations -->
+        <section class="block">
+            <div class="wrap">
+                <h2 class="section-title loading">Integraciones</h2>
+                <p class="section-sub loading">Conectamos con tus herramientas actuales.</p>
+                <div class="integrations">
+                    <div class="pill loading">WhatsApp Business API</div>
+                    <div class="pill loading">Telegram Bot</div>
+                    <div class="pill loading">Widget Web</div>
+                    <div class="pill loading">Google Sheets</div>
+                    <div class="pill loading">Stripe / MercadoPago</div>
+                    <div class="pill loading">Gmail / SMTP</div>
+                    <div class="pill loading">Make / Zapier</div>
+                    <div class="pill loading">CRMs</div>
+                    <div class="pill loading">Webhooks</div>
+                    <div class="pill loading">n8n</div>
+                    <div class="pill loading">REST APIs</div>
+                    <div class="pill loading">Bases de datos</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo -->
+        <section id="demo" class="block">
+            <div class="wrap grid-2">
+                <div class="card loading">
+                    <h3>🚀 Probar demo en vivo</h3>
+                    <p class="muted">Experimenta nuestro chatbot en acción:</p>
+                    <div style="display: flex; flex-direction: column; gap: 16px; margin: 20px 0;">
+                        <a class="btn btn-primary"
+                            href="https://wa.me/522228588674?text=Hola%20quiero%20probar%20el%20chatbot" target="_blank"
+                            rel="noopener">
+                            <span>📱</span> Demo WhatsApp
+                        </a>
+                        <a class="btn btn-ghost" href="https://t.me/demo_bot" target="_blank" rel="noopener">
+                            <span>✈️</span> Demo Telegram
+                        </a>
+                    </div>
+                </div>
+                <div class="panel loading animate-delay-1">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='demobg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23161c27'/%3E%3Cstop offset='100%25' style='stop-color:%23121722'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23demobg)' rx='16'/%3E%3Crect x='20' y='20' width='360' height='40' fill='%232f7afe' rx='20'/%3E%3Ctext x='200' y='45' text-anchor='middle' fill='white' font-size='14'%3EDemo Interactivo%3C/text%3E%3Crect x='20' y='80' width='280' height='30' fill='%2300d4a6' opacity='0.8' rx='15'/%3E%3Ctext x='30' y='100' fill='%23001a14' font-size='12'%3E¡Hola! ¿En qué puedo ayudarte?%3C/text%3E%3Crect x='100' y='130' width='280' height='30' fill='%23e8eef8' opacity='0.9' rx='15'/%3E%3Ctext x='110' y='150' fill='%230a0d14' font-size='12'%3EQuiero información sobre precios%3C/text%3E%3C/svg%3E"
+                        alt="Demo preview">
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing" class="block">
+            <div class="wrap">
+                <h2 class="section-title loading">Planes y precios</h2>
+                <p class="section-sub loading">Todos incluyen soporte y métricas básicas. Facturación mensual.</p>
+                <div class="pricing">
+                    <div class="plan loading animate-delay-1">
+                        <div class="tag">Inicio</div>
+                        <div class="price">$990<span style="font-size: 18px; font-weight: 500;"> MXN/mes</span></div>
+                        <p class="inc">1 canal · Web o Telegram</p>
+                        <ul class="bul">
+                            <li>Plantilla base de ventas</li>
+                            <li>50 leads/mes</li>
+                            <li>Integración Google Sheets</li>
+                            <li>Soporte por email</li>
+                        </ul>
+                        <a class="btn btn-ghost" href="#contacto">Empezar</a>
+                    </div>
+                    <div class="plan best loading animate-delay-2">
+                        <div class="tag">Recomendado</div>
+                        <div class="price">$1,990<span style="font-size: 18px; font-weight: 500;"> MXN/mes</span></div>
+                        <p class="inc">2 canales · Web + WhatsApp</p>
+                        <ul class="bul">
+                            <li>Embudo con calificación de leads</li>
+                            <li>IA con memoria breve</li>
+                            <li>Integración n8n + pagos</li>
+                            <li>Dashboard de métricas</li>
+                            <li>Soporte prioritario</li>
+                        </ul>
+                        <a class="btn btn-primary" href="#contacto">Elegir Pro</a>
+                    </div>
+                    <div class="plan loading animate-delay-3">
+                        <div class="tag">Empresas</div>
+                        <div class="price">$3,990<span style="font-size: 18px; font-weight: 500;"> MXN/mes</span></div>
+                        <p class="inc">Multicanal + SLA</p>
+                        <ul class="bul">
+                            <li>IA avanzada y reglas</li>
+                            <li>Dashboards y reportes</li>
+                            <li>Múltiples integraciones</li>
+                            <li>Soporte 24/7</li>
+                            <li>Consultoría incluida</li>
+                        </ul>
+                        <a class="btn btn-ghost" href="#contacto">Hablar con ventas</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="block">
+            <div class="wrap grid-2">
+                <div class="card loading">
+                    <h3>💬 Resultados reales</h3>
+                    <p class="quote">"En 30 días duplicamos las conversaciones calificadas y reducimos el tiempo de
+                        respuesta a menos de 2 minutos. El ROI fue inmediato."</p>
+                    <p class="author">María González, Directora Comercial · TechCorp</p>
+                </div>
+                <div class="card loading animate-delay-1">
+                    <h3>🍽️ Caso de éxito</h3>
+                    <p>Restaurante con reservas automatizadas: +42% de mesas ocupadas entre semana. Integración con
+                        Sheets y recordatorios por WhatsApp. Reducción del 80% en llamadas perdidas.</p>
+                    <p class="author">Implementado en 15 días</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="block">
+            <div class="wrap">
+                <h2 class="section-title loading">Preguntas frecuentes</h2>
+                <details class="faq loading">
+                    <summary>¿Necesito número verificado de WhatsApp Business?</summary>
+                    <div class="muted" style="margin-top: 12px;">
+                        Recomendado para envíos proactivos con plantilla. Para respuestas entrantes no es obligatorio.
+                        Te ayudamos con la verificación.
+                    </div>
+                </details>
+                <details class="faq loading">
+                    <summary>¿Puedo conectar mi CRM actual?</summary>
+                    <div class="muted" style="margin-top: 12px;">
+                        Sí. Usamos n8n y APIs para sincronizar contactos, notas y etapas del embudo con HubSpot,
+                        Salesforce, Pipedrive y más.
+                    </div>
+                </details>
+                <details class="faq loading">
+                    <summary>¿La IA es obligatoria o puedo usar solo flujos?</summary>
+                    <div class="muted" style="margin-top: 12px;">
+                        No es obligatoria. Podemos iniciar con guiones controlados y luego activar IA por secciones
+                        según tu comodidad.
+                    </div>
+                </details>
+                <details class="faq loading">
+                    <summary>¿Qué tan rápido puedo ver resultados?</summary>
+                    <div class="muted" style="margin-top: 12px;">
+                        La mayoría de clientes ven mejoras en 7-15 días. El setup completo toma entre 2-4 semanas
+                        dependiendo de las integraciones.
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contacto" class="block contact">
+            <div class="wrap grid-2">
+                <div class="panel card loading">
+                    <h3>💬 Contáctanos</h3>
+                    <p class="muted">Cuéntanos sobre tu negocio y preparamos una demo personalizada en 24 horas.</p>
+                    <div class="stack" style="margin-top: 24px;">
+                        <input required placeholder="Nombre completo" id="nombre">
+                        <input required type="email" placeholder="Correo electrónico" id="email">
+                        <input placeholder="WhatsApp (opcional)" id="telefono">
+                        <textarea
+                            placeholder="¿Qué objetivo quieres lograr con el chatbot? ¿Cuántos leads manejas mensualmente?"
+                            id="mensaje"></textarea>
+                        <button class="btn btn-accent" type="button" onclick="enviarFormulario()">
+                            <span>🚀</span> Solicitar demo gratuita
+                        </button>
+                    </div>
+                </div>
+                <div class="card loading animate-delay-1">
+                    <h3>📞 Contacto directo</h3>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/522228588674">+52 222 858 8674</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a></p>
+                    <p><strong>Horario:</strong> Lun-Vie 9:00 - 18:00 (GMT-6)</p>
+
+                    <hr style="border: 1px solid rgba(255,255,255,0.1); margin: 24px 0;">
+
+                    <h3>🎯 ¿Qué incluye la demo?</h3>
+                    <ul class="bul" style="font-size: 14px;">
+                        <li>Análisis de tu proceso actual</li>
+                        <li>Chatbot configurado para tu sector</li>
+                        <li>Prueba en tu WhatsApp Business</li>
+                        <li>Propuesta de integración personalizada</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="wrap cols">
+                <div>
+                    <div class="brand" style="margin-bottom: 16px;">CHAPI · Chatbots Inteligentes</div>
+                    <p class="muted">Automatización inteligente para equipos de ventas modernos. Más conversiones, menos
+                        trabajo manual.</p>
+                    <p style="font-size: 12px; margin-top: 20px;">© 2024 CHAPI. Todos los derechos reservados.</p>
+                </div>
+                <div>
+                    <h4>Producto</h4>
+                    <p><a href="#features">Funciones</a></p>
+                    <p><a href="#pricing">Precios</a></p>
+                    <p><a href="#demo">Demo</a></p>
+                </div>
+                <div>
+                    <h4>Empresa</h4>
+                    <p><a href="#contacto">Contacto</a></p>
+                    <p><a href="#">Soporte</a></p>
+                    <p><a href="#">Blog</a></p>
+                </div>
+            </div>
+        </footer>
 
         <script>
-            // CHAPI Assistant Configuration - Optimized
-            const CHAPI_CONFIG = {
-                responses: {
-                    'precio|costo|plan|cuanto': {
-                        text: `💰 <strong>Nuestros planes 2025:</strong>
-                        <br><br>
-                        🥉 <strong>BÁSICO - $49 USD/mes</strong>
-                        <br>• 1 canal (Web o Telegram)
-                        <br>• Plantilla base de ventas
-                        <br>• 50 leads/mes
-                        <br>• Integración Google Sheets
-                        <br>• Soporte por email
-                        <br><br>
-                        🥈 <strong>PRO - $99 USD/mes</strong> ⭐ Más popular
-                        <br>• 2 canales (Web + WhatsApp)
-                        <br>• Embudo con calificación de leads
-                        <br>• IA con memoria breve
-                        <br>• Integración n8n + pagos
-                        <br>• Dashboard de métricas
-                        <br><br>
-                        🥇 <strong>EMPRESARIAL - $199 USD/mes</strong>
-                        <br>• Multicanal + SLA
-                        <br>• IA avanzada y reglas
-                        <br>• Dashboards y reportes
-                        <br>• Múltiples integraciones
-                        <br>• Soporte 24/7
-                        <br><br>
-                        🎁 <strong>30 días gratis + ROI garantizado</strong>`,
-                        actions: ['demo', 'contacto']
-                    },
-                    'demo|prueba|test': {
-                        text: `🚀 <strong>¡Perfecto! Te ayudo con tu demo gratuita.</strong>
-                        <br><br>
-                        <strong>Opciones disponibles:</strong>
-                        <br>📱 WhatsApp: <a href="https://wa.me/522228588674?text=Hola%20quiero%20una%20demo" target="_blank">+52 222 858 8674</a>
-                        <br>✈️ Telegram: <a href="https://t.me/demo_bot" target="_blank">@demo_bot</a>
-                        <br>🌐 Web: Pruébalo ahora mismo en este chat
-                        <br><br>
-                        ¿Qué tipo de chatbot te interesa?`,
-                        actions: ['whatsapp', 'ecommerce', 'restaurante']
-                    },
-                    'whatsapp|wa': {
-                        text: `📱 <strong>WhatsApp Business API - El canal más efectivo</strong>
-                        <br><br>
-                        ✅ <strong>Funcionalidades:</strong>
-                        <br>• Mensajes con plantillas verificadas
-                        <br>• Botones interactivos y listas
-                        <br>• Integración con catálogos
-                        <br>• Notificaciones automáticas
-                        <br>• Chat en vivo con agentes
-                        <br><br>
-                        ✅ <strong>Resultados típicos:</strong>
-                        <br>• +70% tasa de apertura
-                        <br>• +45% conversión vs email
-                        <br>• -80% tiempo de respuesta
-                        <br><br>
-                        <a href="https://wa.me/522228588674" target="_blank">📞 Hablar ahora por WhatsApp</a>`,
-                        actions: ['contacto', 'precios']
-                    },
-                    'flujo|venta|automatizar': {
-                        text: `🎯 <strong>Creamos flujos que venden automáticamente:</strong>
-                        <br><br>
-                        <strong>📈 Resultados comprobados:</strong>
-                        <br>• +300% leads capturados
-                        <br>• +45% conversión de ventas
-                        <br>• -80% costos de atención
-                        <br>• ROI promedio: 400-800%
-                        <br><br>
-                        <strong>🏭 Tipos de flujo disponibles:</strong>
-                        <br>🛍️ <strong>E-commerce:</strong> carrito, pagos, seguimiento
-                        <br>🍽️ <strong>Restaurante:</strong> reservas, menú, delivery
-                        <br>🏢 <strong>Servicios:</strong> leads, citas, propuestas`,
-                        actions: ['ecommerce', 'restaurante', 'contacto']
-                    },
-                    'contacto|soporte|ayuda': {
-                        text: `🆘 <strong>Nuestro equipo está aquí para ayudarte:</strong>
-                        <br><br>
-                        <strong>📞 Contacto directo:</strong>
-                        <br>• WhatsApp: <a href="https://wa.me/522228588674" target="_blank">+52 222 858 8674</a>
-                        <br>• Email: <a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a>
-                        <br>• Horario: Lun-Vie 9:00-18:00 (GMT-6)
-                        <br><br>
-                        <strong>🚀 Soporte premium 24/7:</strong>
-                        <br>Disponible en planes Profesional y Empresarial`,
-                        actions: ['whatsapp', 'demo']
-                    }
-                },
-                quickActions: {
-                    'demo': { icon: '🚀', text: 'Ver demo' },
-                    'precios': { icon: '💰', text: 'Ver precios' },
-                    'contacto': { icon: '📞', text: 'Contactar' },
-                    'whatsapp': { icon: '📱', text: 'WhatsApp' },
-                    'ecommerce': { icon: '🛍️', text: 'E-commerce' },
-                    'restaurante': { icon: '🍽️', text: 'Restaurante' }
-                }
-            };
+            // Scroll indicator
+            function updateScrollIndicator() {
+                const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                document.getElementById('scrollIndicator').style.width = scrolled + '%';
+            }
 
-            // CHAPI Assistant Class - Simplified and Robust
-            class ChapiAssistant {
-                constructor() {
-                    this.isOpen = false;
-                    this.init();
-                }
-
-                init() {
-                    try {
-                        this.setupElements();
-                        this.setupEventListeners();
-                        this.showWelcomeActions();
-                        console.log('CHAPI: Assistant initialized successfully');
-                    } catch (error) {
-                        console.error('CHAPI Error:', error);
-                        setTimeout(() => this.init(), 2000);
-                    }
-                }
-
-                setupElements() {
-                    this.chatButton = document.getElementById('chapiChatButton');
-                    this.chatWindow = document.getElementById('chapiChatWindow');
-                    this.closeBtn = document.getElementById('chapiCloseBtn');
-                    this.sendBtn = document.getElementById('chapiSendBtn');
-                    this.input = document.getElementById('chapiInput');
-                    this.chatBody = document.getElementById('chapiChatBody');
-
-                    if (!this.chatButton || !this.chatWindow || !this.input) {
-                        throw new Error('Required elements not found');
-                    }
-                }
-
-                setupEventListeners() {
-                    this.chatButton.addEventListener('click', () => this.toggleChat());
-                    this.closeBtn.addEventListener('click', () => this.closeChat());
-                    this.sendBtn.addEventListener('click', () => this.sendMessage());
-                    this.input.addEventListener('keypress', (e) => {
-                        if (e.key === 'Enter') this.sendMessage();
-                    });
-
-                    // Dynamic send button
-                    this.input.addEventListener('input', () => {
-                        if (this.input.value.trim()) {
-                            this.sendBtn.textContent = '→';
-                            this.sendBtn.style.background = 'linear-gradient(135deg, #00d4a6, #1ae6b8)';
-                        } else {
-                            this.sendBtn.textContent = 'Enviar';
-                            this.sendBtn.style.background = 'linear-gradient(135deg, #2f7afe, #00d4a6)';
-                        }
-                    });
-                }
-
-                toggleChat() {
-                    this.isOpen = !this.isOpen;
-                    this.chatWindow.classList.toggle('open', this.isOpen);
-                    this.chatButton.textContent = this.isOpen ? '×' : '💬';
-
-                    if (this.isOpen) {
-                        this.input.focus();
-                    }
-                }
-
-                closeChat() {
-                    this.isOpen = false;
-                    this.chatWindow.classList.remove('open');
-                    this.chatButton.textContent = '💬';
-                }
-
-                showWelcomeActions() {
-                    setTimeout(() => {
-                        this.addQuickActions(['precios', 'demo', 'whatsapp']);
-                    }, 1000);
-                }
-
-                sendMessage() {
-                    const message = this.input.value.trim();
-                    if (!message) return;
-
-                    this.addUserMessage(message);
-                    this.input.value = '';
-                    this.input.disabled = true;
-                    this.sendBtn.disabled = true;
-
-                    this.showTypingIndicator();
-                    setTimeout(() => this.processMessage(message), 800 + Math.random() * 800);
-                }
-
-                addUserMessage(message) {
-                    const userMessage = document.createElement('div');
-                    userMessage.className = 'chapi-message user';
-                    userMessage.textContent = message;
-                    this.chatBody.appendChild(userMessage);
-                    this.scrollToBottom();
-                }
-
-                showTypingIndicator() {
-                    const indicator = document.createElement('div');
-                    indicator.className = 'chapi-message';
-                    indicator.id = 'typingIndicator';
-                    indicator.innerHTML = '<em>🤖 CHAPI está escribiendo...</em>';
-                    indicator.style.fontStyle = 'italic';
-                    indicator.style.color = '#4a8bff';
-                    this.chatBody.appendChild(indicator);
-                    this.scrollToBottom();
-                }
-
-                removeTypingIndicator() {
-                    const indicator = document.getElementById('typingIndicator');
-                    if (indicator) indicator.remove();
-                }
-
-                processMessage(message) {
-                    this.removeTypingIndicator();
-
-                    let response = null;
-                    let actions = [];
-
-                    // Find matching response
-                    for (const [pattern, config] of Object.entries(CHAPI_CONFIG.responses)) {
-                        if (new RegExp(pattern, 'i').test(message)) {
-                            response = config.text;
-                            actions = config.actions || [];
-                            break;
-                        }
-                    }
-
-                    // Default response
-                    if (!response) {
-                        response = `¡Gracias por contactarnos! 😊
-                        <br><br>
-                        Para una atención personalizada sobre "<em>${message}</em>", puedes:
-                        <br><br>
-                        📱 <strong>WhatsApp:</strong> <a href="https://wa.me/522228588674" target="_blank">+52 222 858 8674</a>
-                        <br>✉️ <strong>Email:</strong> <a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a>
-                        <br><br>
-                        O pregúntame sobre:`;
-                        actions = ['precios', 'demo', 'whatsapp'];
-                    }
-
-                    this.addBotMessage(response);
-                    if (actions.length > 0) {
-                        setTimeout(() => this.addQuickActions(actions), 300);
-                    }
-
-                    this.input.disabled = false;
-                    this.sendBtn.disabled = false;
-                    this.input.focus();
-                }
-
-                addBotMessage(html) {
-                    const botMessage = document.createElement('div');
-                    botMessage.className = 'chapi-message';
-                    botMessage.innerHTML = html;
-                    this.chatBody.appendChild(botMessage);
-                    this.scrollToBottom();
-                }
-
-                addQuickActions(actionKeys) {
-                    const container = document.createElement('div');
-                    container.className = 'chapi-quick-actions';
-
-                    actionKeys.forEach(key => {
-                        const config = CHAPI_CONFIG.quickActions[key];
-                        if (!config) return;
-
-                        const button = document.createElement('button');
-                        button.className = 'chapi-quick-action-btn';
-                        button.textContent = `${config.icon} ${config.text}`;
-
-                        button.addEventListener('click', () => {
-                            this.input.value = key;
-                            this.sendMessage();
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
                         });
+                    }
+                });
+            });
 
-                        container.appendChild(button);
-                    });
+            // Enhanced form submission
+            function enviarFormulario() {
+                const nombre = document.getElementById('nombre').value;
+                const email = document.getElementById('email').value;
+                const telefono = document.getElementById('telefono').value;
+                const mensaje = document.getElementById('mensaje').value;
 
-                    this.chatBody.appendChild(container);
-                    this.scrollToBottom();
+                if (!nombre || !email) {
+                    alert('Por favor completa nombre y correo electrónico.');
+                    return;
                 }
 
-                scrollToBottom() {
-                    this.chatBody.scrollTop = this.chatBody.scrollHeight;
-                }
+                // Simulate sending
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span>⏳</span> Enviando...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    alert(`¡Gracias ${nombre}! Te contactaremos en las próximas 24 horas para agendar tu demo personalizada.`);
+                    btn.innerHTML = '<span>✅</span> ¡Mensaje enviado!';
+
+                    // Reset form
+                    setTimeout(() => {
+                        document.getElementById('nombre').value = '';
+                        document.getElementById('email').value = '';
+                        document.getElementById('telefono').value = '';
+                        document.getElementById('mensaje').value = '';
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }, 3000);
+                }, 2000);
             }
 
-            // Initialize when DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => new ChapiAssistant());
-            } else {
-                new ChapiAssistant();
-            }
+            // Mobile menu (basic implementation)
+            document.getElementById('mobileMenuBtn').addEventListener('click', function () {
+                const menu = document.getElementById('navMenu');
+                menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+            });
 
             // Animation on scroll
             function animateOnScroll() {
@@ -905,8 +1198,634 @@
                 });
             }
 
-            window.addEventListener('scroll', animateOnScroll);
-            document.addEventListener('DOMContentLoaded', animateOnScroll);
+            // Event listeners
+            window.addEventListener('scroll', () => {
+                updateScrollIndicator();
+                animateOnScroll();
+            });
+
+            // Initial load
+            document.addEventListener('DOMContentLoaded', function () {
+                animateOnScroll();
+                updateScrollIndicator();
+            });
+
+            // Add some interactive features
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Enhanced button interactions
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    // Add ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255,255,255,0.2)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple 0.6s linear';
+                    ripple.style.pointerEvents = 'none';
+
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Add ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+            document.head.appendChild(style);
+        </script>
+
+        <!-- CHAPI Assistant Widget -->
+        <div id="chapiAssistant"
+            style="position: fixed; bottom: 20px; right: 20px; z-index: 999999; font-family: system-ui, -apple-system, sans-serif;">
+            <button id="chapiChatButton"
+                style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #2f7afe, #00d4a6); border: none; cursor: pointer; color: white; font-size: 24px; box-shadow: 0 8px 20px rgba(47, 122, 254, 0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; position: relative;">
+                💬
+                <span
+                    style="position: absolute; top: -2px; right: -2px; width: 12px; height: 12px; background: #00d4a6; border-radius: 50%; border: 2px solid #161c27; animation: pulse 2s infinite;"></span>
+            </button>
+            <div id="chapiChatWindow"
+                style="position: absolute; bottom: 80px; right: 0; width: 350px; height: 450px; background: #161c27; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); display: none; flex-direction: column; overflow: hidden;">
+                <div
+                    style="padding: 16px; background: linear-gradient(135deg, #2f7afe, #00d4a6); color: white; display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; font-size: 16px;">🤖 CHAPI Assistant</h3>
+                    <button id="chapiCloseBtn"
+                        style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">×</button>
+                </div>
+                <div id="chapiChatBody" style="flex: 1; padding: 16px; overflow-y: auto; color: #e8eef8;">
+                    <div
+                        style="margin-bottom: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(47, 122, 254, 0.1); border: 1px solid rgba(47, 122, 254, 0.2); line-height: 1.4;">
+                        ¡Hola! 👋 Soy <strong>CHAPI</strong>, tu asistente virtual especializado en chatbots
+                        inteligentes.
+                        <br><br>
+                        Estoy aquí para ayudarte a:
+                        <br>• 🚀 Crear flujos de ventas automáticos
+                        <br>• 💰 Conocer nuestros planes y precios
+                        <br>• 📱 Probar demos en vivo
+                        <br>• 📞 Conectarte con nuestro equipo
+                        <br><br>
+                        ¿En qué puedo ayudarte hoy?
+                    </div>
+                </div>
+                <div style="padding: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 8px;">
+                    <input type="text" id="chapiInput" placeholder="Escribe tu mensaje..."
+                        style="flex: 1; padding: 10px 12px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: #e8eef8; font-family: inherit; transition: all 0.3s ease;">
+                    <button id="chapiSendBtn"
+                        style="padding: 10px 16px; background: linear-gradient(135deg, #2f7afe, #00d4a6); border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Enviar</button>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                50% {
+                    transform: scale(1.1);
+                    opacity: 0.7;
+                }
+
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            #chapiChatButton:hover {
+                transform: translateY(-2px) !important;
+                box-shadow: 0 12px 30px rgba(47, 122, 254, 0.4) !important;
+            }
+
+            #chapiInput:focus {
+                outline: none;
+                border-color: #2f7afe;
+                background: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 0 0 2px rgba(47, 122, 254, 0.1);
+            }
+
+            #chapiSendBtn:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(47, 122, 254, 0.3);
+            }
+
+            @media (max-width: 480px) {
+                #chapiChatWindow {
+                    width: 300px !important;
+                    height: 400px !important;
+                }
+            }
+
+        </style>
+
+        <script>
+            // Configuración del asistente CHAPI - Simplificada y funcional
+            const CHAPI_CONFIG = {
+                botName: 'CHAPI',
+                companyName: 'CHAPI',
+                welcomeMessage: `
+                    ¡Hola! 👋 Soy <strong>CHAPI</strong>, tu asistente virtual especializado en chatbots inteligentes.
+                    <br><br>
+                    Estoy aquí para ayudarte a:
+                    <br>• 🚀 Crear flujos de ventas automáticos
+                    <br>• 💰 Conocer nuestros planes y precios
+                    <br>• 📱 Probar demos en vivo
+                    <br>• 📞 Conectarte con nuestro equipo
+                    <br><br>
+                    ¿En qué puedo ayudarte hoy?
+                `,
+                enableAI: false,
+                customResponses: {
+                    'precio|costo|plan|cuanto|precio': {
+                        response: `💰 <strong>PRECIOS ESPECIALES MÉXICO 2025:</strong>
+                        <br><br>
+                        🔥 <strong>¡ÚLTIMA SEMANA DE PROMOCIÓN!</strong> 🔥
+                        <br><br>
+                        🥉 <strong>BÁSICO - $6,000 MXN/mes</strong> (antes $8,500)
+                        <br>• 1 canal WhatsApp • 100 leads/mes • ROI garantizado +300%
+                        <br>• ⚡ Configuración en 24 horas
+                        <br><br>
+                        🥈 <strong>PRO - $12,000 MXN/mes</strong> ⭐ MÁS VENDIDO
+                        <br>• 3 canales • 500 leads/mes • IA avanzada • ROI +500%
+                        <br>• 💰 Recuperas inversión en 15 días (garantizado)
+                        <br><br>
+                        🥇 <strong>EMPRESARIAL - $20,000 MXN/mes</strong>
+                        <br>• Todo ilimitado • ROI +800% • Soporte 24/7 • CRM incluido
+                        <br>• 🎯 Casos de éxito: +$150,000 MXN extra/mes promedio
+                        <br><br>
+                        <strong>⏰ OFERTA TERMINA EN 48 HORAS</strong>
+                        <br>✅ 7 días gratis + ROI garantizado o devolvemos tu dinero
+                        <br>✅ Setup gratuito ($5,000 MXN de valor)
+                        <br>✅ 1 mes extra GRATIS si decides hoy`,
+                        quickActions: ['demo', 'contacto']
+                    },
+                    'demo|prueba|test|ejemplo': {
+                        response: `🚀 <strong>¡DEMO GRATUITA CON RESULTADOS REALES!</strong>
+                        <br><br>
+                        💥 <strong>Te muestro cómo nuestros clientes en México han logrado:</strong>
+                        <br>• Pizzería Don Luigi (CDMX): +$85,000 MXN/mes en 30 días
+                        <br>• Boutique Stylish (GDL): +300% ventas online
+                        <br>• Clínica Dental Sonríe (MTY): +150% citas agendadas
+                        <br><br>
+                        <strong>📱 DEMO PERSONALIZADA INMEDIATA:</strong>
+                        <br>• WhatsApp: <a href="https://wa.me/522228588674?text=URGENTE:%20Quiero%20demo%20personalizada%20AHORA" target="_blank">+52 222 858 8674</a>
+                        <br>• ⚡ Configuramos tu chatbot EN VIVO (15 minutos)
+                        <br>• 📊 Te mostramos TU potencial de ganancias
+                        <br><br>
+                        <strong>⏰ SOLO PARA LAS PRÓXIMAS 5 DEMOS:</strong>
+                        <br>🎁 Setup completamente GRATIS ($5,000 MXN)
+                        <br>🎁 1 mes adicional SIN COSTO
+                        <br>🎁 ROI garantizado o devolvemos tu inversión
+                        <br><br>
+                        ¿Cuál es tu giro de negocio? (Resp. en 30 segundos)`,
+                        quickActions: ['whatsapp', 'ecommerce', 'restaurante']
+                    },
+                    'whatsapp|wa|business': {
+                        response: `📱 <strong>WHATSAPP: EL CANAL MÁS RENTABLE EN MÉXICO</strong>
+                        <br><br>
+                        🔥 <strong>CASOS DE ÉXITO COMPROBADOS:</strong>
+                        <br>• RestauranteDeliciosos: +$120,000 MXN/mes en pedidos
+                        <br>• AutopartesPremium: +450% cotizaciones cerradas
+                        <br>• EscuelaIdiomas: +280% inscripciones
+                        <br><br>
+                        ⚡ <strong>RESULTADOS GARANTIZADOS EN MÉXICO:</strong>
+                        <br>• 94% tasa de apertura (vs 18% email)
+                        <br>• +65% conversión directa a venta
+                        <br>• -90% tiempo de respuesta
+                        <br>• +$80,000 MXN promedio adicional/mes
+                        <br><br>
+                        💰 <strong>ROI PROMEDIO: 850% en 90 días</strong>
+                        <br><br>
+                        <strong>⚠️ ATENCIÓN: Solo 3 espacios disponibles este mes</strong>
+                        <br>📞 <a href="https://wa.me/522228588674?text=URGENTE:%20Quiero%20implementar%20WhatsApp%20YA" target="_blank">RESERVAR MI ESPACIO AHORA</a>
+                        <br><br>
+                        💥 <strong>Setup en 24 horas o GRATIS</strong>`,
+                        quickActions: ['contacto', 'precios']
+                    },
+                    'ia|inteligencia|gpt|ai|artificial': {
+                        response: `🧠 <strong>Nuestra IA es de última generación:</strong>
+                        <br><br>
+                        🚀 <strong>GPT-4 Turbo</strong> - Conversaciones naturales
+                        <br>⚡ <strong>Groq Llama 3</strong> - Respuestas ultra-rápidas (500ms)
+                        <br>🎯 <strong>Análisis de sentimiento</strong> - Detecta emociones del cliente
+                        <br>🧩 <strong>Detección de intención</strong> - Entiende necesidades reales
+                        <br>📚 <strong>Memoria contextual</strong> - Recuerda conversaciones previas
+                        <br>🛡️ <strong>Filtros de seguridad</strong> - Evita respuestas inapropiadas
+                        <br><br>
+                        <strong>Control total:</strong>
+                        <br>• Defines el tono y personalidad
+                        <br>• Estableces límites y reglas
+                        <br>• Supervisión en tiempo real
+                        <br><br>
+                        ¿Te interesa alguna funcionalidad específica?`,
+                        quickActions: ['demo', 'precios']
+                    },
+                    'integra|crm|api|conectar|n8n': {
+                        response: `🔗 <strong>CHAPI se integra con +50 sistemas:</strong>
+                        <br><br>
+                        <strong>💼 CRMs populares:</strong>
+                        <br>• HubSpot, Salesforce, Pipedrive
+                        <br>• Zoho, ActiveCampaign, Monday
+                        <br><br>
+                        <strong>💳 Procesadores de pago:</strong>
+                        <br>• Stripe, MercadoPago, PayPal
+                        <br>• OpenPay, Conekta, Square
+                        <br><br>
+                        <strong>📅 Calendarios y citas:</strong>
+                        <br>• Google Calendar, Calendly
+                        <br>• Microsoft Outlook, Acuity
+                        <br><br>
+                        <strong>📊 Automatización:</strong>
+                        <br>• n8n (recomendado)
+                        <br>• Make.com, Zapier
+                        <br>• API REST personalizada
+                        <br><br>
+                        ¿Con qué sistema necesitas integrar?`,
+                        quickActions: ['contacto', 'demo']
+                    },
+                    'flujo|venta|automatizar|workflow|embudo': {
+                        response: `🎯 <strong>AUTOMATIZACIÓN QUE GENERA MILLONES</strong>
+                        <br><br>
+                        💥 <strong>CASOS DE ÉXITO EN MÉXICO (últimos 90 días):</strong>
+                        <br>• TiendaRopa "Moda Chic" (Puebla): +$890,000 MXN extras
+                        <br>• Inmobiliaria "Casas Premium" (QRO): +$2.1M MXN en cierres
+                        <br>• Academia "Inglés Fácil" (GDL): +$450,000 MXN inscripciones
+                        <br>• SpaRelajante (CDMX): +$320,000 MXN en citas
+                        <br><br>
+                        🚀 <strong>RESULTADOS GARANTIZADOS:</strong>
+                        <br>• +400% leads calificados en 30 días
+                        <br>• +75% conversión de visitante a cliente
+                        <br>• -85% tiempo de equipo en tareas repetitivas
+                        <br>• ROI promedio: +950% en 6 meses
+                        <br><br>
+                        💰 <strong>POTENCIAL DE TU NEGOCIO:</strong>
+                        <br>🏪 E-commerce: +$150,000-500,000 MXN/mes adicionales
+                        <br>🍽️ Restaurante: +$80,000-300,000 MXN/mes en pedidos
+                        <br>🏢 Servicios: +$200,000-800,000 MXN/mes en contratos
+                        <br><br>
+                        <strong>⚠️ ÚLTIMOS 2 ESPACIOS DE ENERO:</strong>
+                        <br>🎁 Setup GRATIS ($8,000 MXN) si reservas HOY
+                        <br>🎁 ROI garantizado +300% o devolvemos tu dinero`,
+                        quickActions: ['ecommerce', 'restaurante', 'servicios']
+                    },
+                    'soporte|ayuda|problema|contacto|humano': {
+                        response: `🆘 <strong>CONTACTO DIRECTO CON ESPECIALISTA EN VENTAS</strong>
+                        <br><br>
+                        🔥 <strong>ASESORÍA GRATUITA INMEDIATA:</strong>
+                        <br>• WhatsApp: <a href="https://wa.me/522228588674?text=URGENTE:%20Necesito%20asesoría%20personalizada" target="_blank">+52 222 858 8674</a>
+                        <br>• Email VIP: <a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a>
+                        <br>• Respuesta garantizada: < 15 minutos
+                        <br><br>
+                        💥 <strong>QUÉ OBTIENES GRATIS EN LA LLAMADA:</strong>
+                        <br>• Análisis de tu negocio actual (valor $3,000 MXN)
+                        <br>• Estrategia personalizada de automatización
+                        <br>• Cálculo exacto de TU ROI potencial
+                        <br>• Propuesta sin compromiso
+                        <br><br>
+                        ⚡ <strong>SOPORTE 24/7 PREMIUM</strong>
+                        <br>Disponible para todos los planes (implementación garantizada)
+                        <br><br>
+                        <strong>⏰ ATENCIÓN LIMITADA:</strong>
+                        <br>Solo atendemos 5 consultas gratuitas por día
+                        <br>🎁 BONIFICACIÓN: Si contratas HOY, setup 100% GRATIS`,
+                        quickActions: ['whatsapp', 'email', 'demo']
+                    },
+                    'gracias|perfecto|excelente|genial|ok': {
+                        response: `🎉 ¡De nada! Me alegra mucho poder ayudarte.
+                        <br><br>
+                        Recuerda que estoy aquí 24/7 para resolver tus dudas sobre:
+                        <br>• 🤖 Chatbots inteligentes
+                        <br>• 🚀 Automatización de ventas
+                        <br>• 🔗 Integración con sistemas
+                        <br>• 💰 Planes y precios
+                        <br><br>
+                        ¿Hay algo más en lo que pueda asistirte hoy?`,
+                        quickActions: ['precios', 'demo', 'contacto']
+                    }
+                },
+                quickActionsConfig: {
+                    'demo': { icon: '🚀', text: 'Ver demo', action: 'demo|prueba' },
+                    'precios': { icon: '💰', text: 'Ver precios', action: 'precio|plan' },
+                    'contacto': { icon: '📞', text: 'Contactar', action: 'soporte|contacto' },
+                    'whatsapp': { icon: '📱', text: 'WhatsApp', action: 'whatsapp' },
+                    'ecommerce': { icon: '🛍️', text: 'E-commerce', action: 'E-commerce: Carrito automatizado, pagos integrados, seguimiento de pedidos, recuperación de carritos abandonados. ¿Te interesa?' },
+                    'restaurante': { icon: '🍽️', text: 'Restaurante', action: 'Restaurante: Reservas automáticas, menú interactivo, pedidos delivery, confirmaciones. ¿Quieres ver cómo funciona?' },
+                    'servicios': { icon: '🏢', text: 'Servicios', action: 'Servicios profesionales: Captura de leads, agendamiento de citas, envío de propuestas, seguimiento. ¿Te ayudo a configurarlo?' },
+                    'email': { icon: '✉️', text: 'Email', action: '📧 Puedes escribirnos a jovany2224@gmail.com o usar el formulario de contacto en la página. ¡Te respondemos en 24 horas!' }
+                }
+            };
+
+            // Configuración de respuestas
+            const responses = {
+                'precio|costo|plan|cuanto': `💰 <strong>PRECIOS ESPECIALES MÉXICO 2025:</strong>
+                <br><br>
+                🔥 <strong>¡ÚLTIMA SEMANA DE PROMOCIÓN!</strong> 🔥
+                <br><br>
+                🥉 <strong>BÁSICO - $6,000 MXN/mes</strong> (antes $8,500)
+                <br>• 1 canal WhatsApp • 100 leads/mes • ROI garantizado +300%
+                <br>• ⚡ Configuración en 24 horas
+                <br><br>
+                🥈 <strong>PRO - $12,000 MXN/mes</strong> ⭐ MÁS VENDIDO
+                <br>• 3 canales • 500 leads/mes • IA avanzada • ROI +500%
+                <br>• 💰 Recuperas inversión en 15 días (garantizado)
+                <br><br>
+                🥇 <strong>EMPRESARIAL - $20,000 MXN/mes</strong>
+                <br>• Todo ilimitado • ROI +800% • Soporte 24/7 • CRM incluido
+                <br>• 🎯 Casos de éxito: +$150,000 MXN extra/mes promedio
+                <br><br>
+                <strong>⏰ OFERTA TERMINA EN 48 HORAS</strong>
+                <br>✅ 7 días gratis + ROI garantizado o devolvemos tu dinero
+                <br>✅ Setup gratuito ($5,000 MXN de valor)
+                <br>✅ 1 mes extra GRATIS si decides hoy`,
+
+                'demo|prueba|test': `🚀 <strong>¡DEMO GRATUITA CON RESULTADOS REALES!</strong>
+                <br><br>
+                💥 <strong>Te muestro cómo nuestros clientes en México han logrado:</strong>
+                <br>• Pizzería Don Luigi (CDMX): +$85,000 MXN/mes en 30 días
+                <br>• Boutique Stylish (GDL): +300% ventas online
+                <br>• Clínica Dental Sonríe (MTY): +150% citas agendadas
+                <br><br>
+                <strong>📱 DEMO PERSONALIZADA INMEDIATA:</strong>
+                <br>• WhatsApp: <a href="https://wa.me/522228588674?text=URGENTE:%20Quiero%20demo%20personalizada%20AHORA" target="_blank">+52 222 858 8674</a>
+                <br>• ⚡ Configuramos tu chatbot EN VIVO (15 minutos)
+                <br>• 📊 Te mostramos TU potencial de ganancias
+                <br><br>
+                <strong>⏰ SOLO PARA LAS PRÓXIMAS 5 DEMOS:</strong>
+                <br>🎁 Setup completamente GRATIS ($5,000 MXN)
+                <br>🎁 1 mes adicional SIN COSTO
+                <br>🎁 ROI garantizado o devolvemos tu inversión
+                <br><br>
+                ¿Cuál es tu giro de negocio? (Resp. en 30 segundos)`,
+
+                'whatsapp|wa': `📱 <strong>WHATSAPP: EL CANAL MÁS RENTABLE EN MÉXICO</strong>
+                <br><br>
+                🔥 <strong>CASOS DE ÉXITO COMPROBADOS:</strong>
+                <br>• RestauranteDeliciosos: +$120,000 MXN/mes en pedidos
+                <br>• AutopartesPremium: +450% cotizaciones cerradas
+                <br>• EscuelaIdiomas: +280% inscripciones
+                <br><br>
+                ⚡ <strong>RESULTADOS GARANTIZADOS EN MÉXICO:</strong>
+                <br>• 94% tasa de apertura (vs 18% email)
+                <br>• +65% conversión directa a venta
+                <br>• -90% tiempo de respuesta
+                <br>• +$80,000 MXN promedio adicional/mes
+                <br><br>
+                💰 <strong>ROI PROMEDIO: 850% en 90 días</strong>
+                <br><br>
+                <strong>⚠️ ATENCIÓN: Solo 3 espacios disponibles este mes</strong>
+                <br>📞 <a href="https://wa.me/522228588674?text=URGENTE:%20Quiero%20implementar%20WhatsApp%20YA" target="_blank">RESERVAR MI ESPACIO AHORA</a>
+                <br><br>
+                💥 <strong>Setup en 24 horas o GRATIS</strong>`,
+
+                'automatizar|flujo|venta': `🎯 <strong>AUTOMATIZACIÓN QUE GENERA MILLONES</strong>
+                <br><br>
+                💥 <strong>CASOS DE ÉXITO EN MÉXICO (últimos 90 días):</strong>
+                <br>• TiendaRopa "Moda Chic" (Puebla): +$890,000 MXN extras
+                <br>• Inmobiliaria "Casas Premium" (QRO): +$2.1M MXN en cierres
+                <br>• Academia "Inglés Fácil" (GDL): +$450,000 MXN inscripciones
+                <br>• SpaRelajante (CDMX): +$320,000 MXN en citas
+                <br><br>
+                🚀 <strong>RESULTADOS GARANTIZADOS:</strong>
+                <br>• +400% leads calificados en 30 días
+                <br>• +75% conversión de visitante a cliente
+                <br>• -85% tiempo de equipo en tareas repetitivas
+                <br>• ROI promedio: +950% en 6 meses
+                <br><br>
+                💰 <strong>POTENCIAL DE TU NEGOCIO:</strong>
+                <br>🏪 E-commerce: +$150,000-500,000 MXN/mes adicionales
+                <br>🍽️ Restaurante: +$80,000-300,000 MXN/mes en pedidos
+                <br>🏢 Servicios: +$200,000-800,000 MXN/mes en contratos
+                <br><br>
+                <strong>⚠️ ÚLTIMOS 2 ESPACIOS DE ENERO:</strong>
+                <br>🎁 Setup GRATIS ($8,000 MXN) si reservas HOY
+                <br>🎁 ROI garantizado +300% o devolvemos tu dinero`,
+
+                'contacto|soporte|ayuda': `🆘 <strong>CONTACTO DIRECTO CON ESPECIALISTA EN VENTAS</strong>
+                <br><br>
+                🔥 <strong>ASESORÍA GRATUITA INMEDIATA:</strong>
+                <br>• WhatsApp: <a href="https://wa.me/522228588674?text=URGENTE:%20Necesito%20asesoría%20personalizada" target="_blank">+52 222 858 8674</a>
+                <br>• Email VIP: <a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a>
+                <br>• Respuesta garantizada: < 15 minutos
+                <br><br>
+                💥 <strong>QUÉ OBTIENES GRATIS EN LA LLAMADA:</strong>
+                <br>• Análisis de tu negocio actual (valor $3,000 MXN)
+                <br>• Estrategia personalizada de automatización
+                <br>• Cálculo exacto de TU ROI potencial
+                <br>• Propuesta sin compromiso
+                <br><br>
+                ⚡ <strong>SOPORTE 24/7 PREMIUM</strong>
+                <br>Disponible para todos los planes (implementación garantizada)
+                <br><br>
+                <strong>⏰ ATENCIÓN LIMITADA:</strong>
+                <br>Solo atendemos 5 consultas gratuitas por día
+                <br>🎁 BONIFICACIÓN: Si contratas HOY, setup 100% GRATIS`
+            };
+
+            // Inicializar asistente
+            function initChapiAssistant() {
+
+                const chatButton = document.getElementById('chapiChatButton');
+                const chatWindow = document.getElementById('chapiChatWindow');
+                const closeBtn = document.getElementById('chapiCloseBtn');
+                const sendBtn = document.getElementById('chapiSendBtn');
+                const input = document.getElementById('chapiInput');
+                const chatBody = document.getElementById('chapiChatBody');
+
+                let isOpen = false;
+
+                // Abrir/cerrar chat
+                chatButton.addEventListener('click', function () {
+                    isOpen = !isOpen;
+                    chatWindow.style.display = isOpen ? 'flex' : 'none';
+                    chatButton.innerHTML = isOpen ? '×' : '💬';
+                    if (isOpen) {
+                        input.focus();
+                        addWelcomeButtons();
+                    }
+                });
+
+                closeBtn.addEventListener('click', function () {
+                    isOpen = false;
+                    chatWindow.style.display = 'none';
+                    chatButton.innerHTML = '💬';
+                });
+
+                // Enviar mensaje
+                function sendMessage() {
+                    const message = input.value.trim();
+                    if (!message) return;
+
+                    // Agregar mensaje usuario
+                    const userMsg = document.createElement('div');
+                    userMsg.style.cssText = 'margin-bottom: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(0, 212, 166, 0.1); border: 1px solid rgba(0, 212, 166, 0.2); margin-left: 40px; text-align: right; line-height: 1.4;';
+                    userMsg.textContent = message;
+                    chatBody.appendChild(userMsg);
+
+                    input.value = '';
+
+                    // Indicador de escritura
+                    const typing = document.createElement('div');
+                    typing.style.cssText = 'margin-bottom: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(47, 122, 254, 0.1); border: 1px solid rgba(47, 122, 254, 0.2); color: #4a8bff; font-style: italic;';
+                    typing.innerHTML = '🤖 CHAPI está escribiendo...';
+                    chatBody.appendChild(typing);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+
+                    // Respuesta del bot
+                    setTimeout(() => {
+                        typing.remove();
+
+                        let response = null;
+                        for (const [pattern, text] of Object.entries(responses)) {
+                            if (new RegExp(pattern, 'i').test(message)) {
+                                response = text;
+                                break;
+                            }
+                        }
+
+                        if (!response) {
+                            response = `¡Gracias por contactarnos! 😊
+                            <br><br>
+                            Para "<em>${message}</em>", puedes contactarnos:
+                            <br><br>
+                            📱 <a href="https://wa.me/522228588674" target="_blank">+52 222 858 8674</a>
+                            <br>✉️ <a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a>
+                            <br><br>
+                            O pregúntame sobre precios, demos o WhatsApp.`;
+                        }
+
+                        const botMsg = document.createElement('div');
+                        botMsg.style.cssText = 'margin-bottom: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(47, 122, 254, 0.1); border: 1px solid rgba(47, 122, 254, 0.2); line-height: 1.4;';
+                        botMsg.innerHTML = response;
+                        chatBody.appendChild(botMsg);
+                        chatBody.scrollTop = chatBody.scrollHeight;
+
+                        // Agregar botones rápidos
+                        if (message.toLowerCase().includes('precio')) addQuickButtons(['demo', 'whatsapp']);
+                        else if (message.toLowerCase().includes('demo')) addQuickButtons(['precios', 'whatsapp']);
+                        else addQuickButtons(['precios', 'demo', 'whatsapp']);
+
+                    }, 1000 + Math.random() * 1000);
+                }
+
+                // Botones de acción rápida
+                function addQuickButtons(actions) {
+                    setTimeout(() => {
+                        const container = document.createElement('div');
+                        container.style.cssText = 'display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0;';
+
+                        const buttons = {
+                            'precios': '💰 Ver precios',
+                            'demo': '🚀 Ver demo',
+                            'whatsapp': '📱 WhatsApp'
+                        };
+
+                        actions.forEach(action => {
+                            const btn = document.createElement('button');
+                            btn.style.cssText = 'padding: 6px 12px; border: 1px solid rgba(47, 122, 254, 0.3); border-radius: 16px; background: rgba(47, 122, 254, 0.1); color: #4a8bff; font-size: 12px; cursor: pointer; transition: all 0.3s ease;';
+                            btn.textContent = buttons[action] || action;
+                            btn.addEventListener('click', () => {
+                                input.value = action;
+                                sendMessage();
+                            });
+                            btn.addEventListener('mouseover', () => {
+                                btn.style.background = 'rgba(47, 122, 254, 0.2)';
+                            });
+                            btn.addEventListener('mouseout', () => {
+                                btn.style.background = 'rgba(47, 122, 254, 0.1)';
+                            });
+                            container.appendChild(btn);
+                        });
+
+                        chatBody.appendChild(container);
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                    }, 300);
+                }
+
+                // Botones de bienvenida
+                function addWelcomeButtons() {
+                    setTimeout(() => {
+                        if (!chatBody.querySelector('.welcome-actions')) {
+                            const container = document.createElement('div');
+                            container.className = 'welcome-actions';
+                            container.style.cssText = 'display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0;';
+
+                            ['precios', 'demo', 'whatsapp'].forEach(action => {
+                                const btn = document.createElement('button');
+                                btn.style.cssText = 'padding: 6px 12px; border: 1px solid rgba(47, 122, 254, 0.3); border-radius: 16px; background: rgba(47, 122, 254, 0.1); color: #4a8bff; font-size: 12px; cursor: pointer; transition: all 0.3s ease;';
+                                btn.textContent = {
+                                    'precios': '💰 Ver precios',
+                                    'demo': '🚀 Ver demo',
+                                    'whatsapp': '📱 WhatsApp'
+                                }[action];
+                                btn.addEventListener('click', () => {
+                                    input.value = action;
+                                    sendMessage();
+                                });
+                                container.appendChild(btn);
+                            });
+
+                            chatBody.appendChild(container);
+                            chatBody.scrollTop = chatBody.scrollHeight;
+                        }
+                    }, 1000);
+                }
+
+                sendBtn.addEventListener('click', sendMessage);
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+
+                // Botón dinámico
+                input.addEventListener('input', function () {
+                    sendBtn.innerHTML = this.value.trim() ? '→' : 'Enviar';
+                    sendBtn.style.background = this.value.trim() ?
+                        'linear-gradient(135deg, #00d4a6, #1ae6b8)' :
+                        'linear-gradient(135deg, #2f7afe, #00d4a6)';
+                });
+
+                console.log('CHAPI: Assistant initialized successfully!');
+            }
+
+            // Inicializar cuando esté listo
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initChapiAssistant);
+            } else {
+                initChapiAssistant();
+            }
+
+
+
+
+
         </script>
     </body>
+
 </html>
