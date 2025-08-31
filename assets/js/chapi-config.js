@@ -38,20 +38,20 @@ const CHAPI_CONFIG = {
     customResponses: {
         // Palabras clave y sus respuestas
         'precio|costo|plan|cuanto': `
-            💰 <strong>Nuestros planes 2025:</strong>
+            💰 <strong>Nuestros planes 2025 (Pesos Mexicanos):</strong>
             <br><br>
-            🥉 <strong>BÁSICO - $49 USD/mes</strong>
-            <br>• 1 canal • 50 leads/mes • Plantillas básicas
+            🥉 <strong>BÁSICO - $300 MXN/mes</strong>
+            <br>• WhatsApp Business • Gestión de reservas • 100 conversaciones/mes
             <br><br>
-            🥈 <strong>PROFESIONAL - $99 USD/mes</strong> ⭐ Más popular
-            <br>• 2 canales • 500 leads/mes • IA avanzada • CRM
+            🥈 <strong>PREMIUM - $600 MXN/mes</strong> ⭐ Más popular
+            <br>• WhatsApp + Telegram + Web • Sistema delivery • 500 conversaciones/mes
             <br><br>
-            🥇 <strong>EMPRESARIAL - $199 USD/mes</strong>
-            <br>• Todo ilimitado • Machine Learning • API custom
+            🥇 <strong>ULTRA - $1,000 MXN/mes</strong>
+            <br>• Múltiples sucursales • IA avanzada • Conversaciones ilimitadas
             <br><br>
-            🎁 <strong>30 días gratis + ROI garantizado</strong>
+            🎁 <strong>Prueba gratis por 7 días</strong>
             <br><br>
-            ¿Te gustaría una demo personalizada?
+            ¿Te gustaría una demo personalizada para tu restaurante?
         `,
 
         'demo|prueba|test': `
@@ -62,7 +62,7 @@ const CHAPI_CONFIG = {
             <br>• Telegram: <a href="https://t.me/Womiie_bot" target="_blank">@Womiie_bot</a>
             <br>• Agendar llamada: <a href="https://chapibot.pro/demo" target="_blank">chapibot.pro/demo</a>
             <br><br>
-            ¿Cuál prefieres? Configuramos tu chatbot en 24 horas 📅
+            ¿Cuál prefieres? Configuramos tu chatbot para restaurante en 24 horas 📅
         `,
 
         'whatsapp|telegram|canal': `
