@@ -1,0 +1,52 @@
+Instalación iniciada el 08/30/2025 22:43:04
+2025-08-30 22:43:04 - 
+1️⃣ Verificando Node.js...
+2025-08-30 22:43:04 - ✅ Node.js: v22.18.0
+2025-08-30 22:43:04 - 
+2️⃣ Verificando npm...
+2025-08-30 22:43:05 - ✅ npm: 10.9.3
+2025-08-30 22:43:05 - 
+3️⃣ Limpiando caché de npm...
+npm warn using --force Recommended protections disabled.
+Unknown command: "pm"
+
+To see a list of supported npm commands, run:
+  npm help
+2025-08-30 22:43:06 - ✅ Caché limpiado
+2025-08-30 22:43:06 - 
+4️⃣ Instalando dependencias del proyecto...
+Unknown command: "pm"
+
+To see a list of supported npm commands, run:
+  npm help
+2025-08-30 22:43:07 - ✅ Dependencias instaladas
+2025-08-30 22:43:07 - 
+5️⃣ Instalando Claude CLI globalmente...
+Unknown command: "pm"
+
+To see a list of supported npm commands, run:
+  npm help
+2025-08-30 22:43:07 - ✅ Instalación global completada
+2025-08-30 22:43:07 - 
+6️⃣ Verificando Claude CLI global...
+2025-08-30 22:43:08 - ⚠️ Claude CLI global no disponible
+2025-08-30 22:43:08 - 
+7️⃣ Instalando Claude CLI localmente...
+Unknown command: "pm"
+
+To see a list of supported npm commands, run:
+  npm help
+2025-08-30 22:43:10 - ✅ Instalación local completada
+2025-08-30 22:43:10 - 
+8️⃣ Verificando Claude CLI con npx...
+2025-08-30 22:43:17 - 
+9️⃣ Probando ejecución directa...
+2025-08-30 22:43:20 - 
+============================================
+2025-08-30 22:43:20 - ❌ INSTALACIÓN FALLÓ
+2025-08-30 22:43:20 - ============================================
+2025-08-30 22:43:20 - 
+🔧 Ejecuta como Administrador y reinicia PowerShell
+2025-08-30 22:43:20 - 📝 Revisa el log en: installation-log-ps.txt
+2025-08-30 22:43:20 - 
+✅ PROCESO COMPLETADO

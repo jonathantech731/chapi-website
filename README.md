@@ -78,6 +78,160 @@ code .
 # O simplemente abrir index.html en el navegador
 ```
 
+## 🤖 Integración Azure OpenAI (Backend Seguro)
+
+### **🔒 Arquitectura de Seguridad**
+
+Este proyecto implementa una integración segura con Azure OpenAI que **NO expone claves API en el frontend**.
+
+```
+Frontend (JS) ──➤ Proxy Seguro (Python) ──➤ Azure OpenAI
+     ❌ Sin API keys        ✅ API keys seguras
+```
+
+### **📁 Archivos Backend**
+
+| Archivo | Descripción | Uso |
+|---------|-------------|-----|
+| `chapi_proxy.py` | Servidor FastAPI proxy seguro | Producción |
+| `chapi_azure_openai.py` | Función centralizada Azure OpenAI | Shared library |
+| `telegram_chapi_bot.py` | Bot de Telegram | Opcional |
+| `assets/js/chat-api.js` | Cliente frontend para proxy | Frontend |
+| `requirements.txt` | Dependencias Python | Instalación |
+| `.env.example` | Variables de entorno template | Configuración |
+
+### **⚙️ Configuración Rápida**
+
+1. **Instalar dependencias Python:**
+```bash
+pip install -r requirements.txt
+```
+
+2. **Configurar variables de entorno:**
+```bash
+cp .env.example .env
+# Editar .env con tus credenciales reales
+```
+
+3. **Iniciar el proxy seguro:**
+```bash
+python chapi_proxy.py
+```
+
+4. **Habilitar IA en frontend:**
+```javascript
+// En chapi-config.js
+enableAI: true  // Ya no necesita API key aquí
+```
+
+### **🔐 Variables de Entorno Requeridas**
+
+```bash
+# Azure OpenAI (OBLIGATORIO)
+AZURE_OPENAI_ENDPOINT=https://tu-recurso.openai.azure.com/
+AZURE_OPENAI_DEPLOYMENT=gpt35-chapi
+AZURE_OPENAI_KEY=tu-clave-azure-aqui
+
+# CORS (OPCIONAL - por defecto chapibot.pro)
+ALLOWED_ORIGINS=https://chapibot.pro,http://localhost:8000
+
+# Bot Telegram (OPCIONAL)
+TELEGRAM_BOT_TOKEN=tu-bot-token-aqui
+```
+
+### **🛡️ Características de Seguridad**
+
+- ✅ **API keys solo en servidor** - Nunca en frontend
+- ✅ **Rate limiting** - 60 requests/minuto por IP
+- ✅ **CORS configurado** - Solo orígenes permitidos
+- ✅ **Validación de entrada** - Previene inyecciones
+- ✅ **Manejo de errores** - Sin exposición de datos internos
+- ✅ **Timeouts configurables** - Previene hang requests
+- ✅ **Logs detallados** - Para monitoring y debugging
+
+### **🔄 Endpoints API Proxy**
+
+| Endpoint | Método | Descripción |
+|----------|--------|-------------|
+| `/` | GET | Health check básico |
+| `/health` | GET | Estado detallado del servicio |
+| `/api/chat` | POST | Chat completions via Azure OpenAI |
+
+**Ejemplo de request:**
+```javascript
+const response = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    messages: [
+      {role: 'user', content: '¿Qué es CHAPI?'}
+    ],
+    max_tokens: 500,
+    temperature: 0.2
+  })
+});
+```
+
+### **🔧 Desarrollo vs Producción**
+
+**Desarrollo:**
+```bash
+# Iniciar proxy en puerto 8000
+python chapi_proxy.py
+
+# Frontend usa window.location.origin automaticamente
+```
+
+**Producción:**
+```bash
+# Variables de entorno en sistema/Docker
+export AZURE_OPENAI_KEY="clave-real-aqui"
+export ALLOWED_ORIGINS="https://chapibot.pro"
+
+# Iniciar con gunicorn o similar
+gunicorn chapi_proxy:app --host 0.0.0.0 --port 8000
+```
+
+### **⚠️ Seguridad Crítica**
+
+> **🚨 IMPORTANTE:** Si alguna vez se expuso una API key en código público:
+> 1. **Rotar la clave INMEDIATAMENTE** en Azure
+> 2. Actualizar variables de entorno
+> 3. Reiniciar servicios
+> 4. Monitorear uso anómalo
+
+**Nunca hagas esto:**
+```javascript
+❌ const apiKey = "sk-1234567890abcdef..."; // NUNCA en frontend
+❌ fetch('https://api.openai.com/v1/...', {
+     headers: { 'Authorization': `Bearer ${apiKey}` } // INSEGURO
+   });
+```
+
+**Haz esto:**
+```javascript
+✅ const response = await fetch('/api/chat', { // Usar proxy local
+     method: 'POST',
+     body: JSON.stringify({messages: [...]})
+   });
+```
+
+### **🤖 Bot de Telegram**
+
+```bash
+# Configurar bot token en .env
+TELEGRAM_BOT_TOKEN=123456789:ABCDEF...
+
+# Iniciar bot
+python telegram_chapi_bot.py
+```
+
+**Comandos disponibles:**
+- `/start` - Iniciar conversación
+- `/planes` - Ver precios
+- `/demo` - Solicitar demostración
+- `/contacto` - Información de contacto
+
 ### **Deploy Automático**
 
 El sitio se despliega automáticamente a través de GitHub Pages cuando se hace push a la rama `main`.

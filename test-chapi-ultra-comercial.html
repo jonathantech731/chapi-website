@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAPI Assistant Ultra Comercial - Test</title>
+    <meta name="description" content="Chatbot comercial ultra-agresivo para maximizar conversiones y ventas">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/chapi-assistant-pro.css">
+
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .test-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .hero {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 60px 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero h1 {
+        font-size: 3.5em;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
+      }
+
+      .hero h2 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      .cta-button {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        border: none;
+        padding: 20px 40px;
+        font-size: 1.2em;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(238, 90, 36, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(238, 90, 36, 0.4);
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .feature {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+      }
+
+      .feature p {
+        color: #7f8c8d;
+        line-height: 1.6;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        margin: 40px 0;
+        flex-wrap: wrap;
+      }
+
+      .stat {
+        text-align: center;
+        margin: 10px;
+      }
+
+      .stat-number {
+        font-size: 3em;
+        font-weight: 800;
+        color: #ff6b6b;
+        display: block;
+      }
+
+      .stat-label {
+        color: #2c3e50;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="test-container">
+      <div class="hero">
+        <h1>🚀 CHAPI PRO</h1>
+        <h2>Chatbot Ultra Comercial - Máxima Conversión</h2>
+        <p style="font-size: 1.1em; color: #7f8c8d; margin-bottom: 30px;">
+          El asistente de ventas digital más agresivo y efectivo para PyMEs mexicanas
+        </p>
+        <button class="cta-button" onclick="openChapiChat()">
+          💰 Iniciar Consulta de Ventas
+        </button>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-number">94%</span>
+          <span class="stat-label">Tasa de Conversión</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">380%</span>
+          <span class="stat-label">ROI Promedio</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">24h</span>
+          <span class="stat-label">Implementación</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">+45%</span>
+          <span class="stat-label">Incremento Ventas</span>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <h3>🎯 Discovery Agresivo</h3>
+          <p>Califica prospectos en 2-3 preguntas estratégicas y identifica dolor comercial real</p>
+        </div>
+        <div class="feature">
+          <h3>💰 Presentación con ROI</h3>
+          <p>Calcula retorno de inversión inmediato en pesos mexicanos reales</p>
+        </div>
+        <div class="feature">
+          <h3>⚡ Cierre Múltiple</h3>
+          <p>Maneja objeciones y convierte cada "no" en oportunidad de venta</p>
+        </div>
+        <div class="feature">
+          <h3>🏆 Casos de Éxito</h3>
+          <p>Usa testimonios reales de clientes mexicanos para generar confianza</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAPI Assistant Scripts -->
+    <script src="assets/js/chapi-config-ultra-comercial.js"></script>
+    <script src="assets/js/chapi-assistant-ultra-comercial.js"></script>
+
+    <script>
+      // Función para abrir el chat con configuración ultra-comercial
+      function openChapiChat() {
+        if (typeof ChapiAssistantUltraComercial !== 'undefined') {
+          // Verificar si ya existe una instancia
+          if (window.chapiAssistant) {
+            window.chapiAssistant.open();
+          } else {
+            // Crear nueva instancia
+            window.chapiAssistant = new ChapiAssistantUltraComercial();
+            setTimeout(() => window.chapiAssistant.open(), 500);
+          }
+
+          console.log('🚀 CHAPI Ultra Comercial iniciado');
+        } else {
+          console.error('❌ ChapiAssistantUltraComercial no está disponible');
+          alert('Error: No se pudo cargar el asistente. Verifique la configuración.');
+        }
+      }
+
+      // Auto-inicializar después de 3 segundos para testing
+      setTimeout(() => {
+        if (window.location.search.includes('auto=true')) {
+          openChapiChat();
+        }
+      }, 3000);
+
+      // Mostrar configuración cargada en consola
+      console.log('🔧 Configuración Ultra Comercial:', window.chapiConfigUltraComercial);
+      console.log('🤖 Asistente Ultra Comercial disponible:', typeof ChapiAssistantUltraComercial !== 'undefined');
+    </script>
+  </body>
+
+</html>
