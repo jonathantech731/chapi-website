@@ -83,6 +83,8 @@ cd chapi-website
 ```
 
 **¡Eso es todo!** El script automático:
+
+
 - ✅ Instala dependencias Python
 - ✅ Configura variables de entorno
 - ✅ Inicia backend FastAPI (puerto 8000)
@@ -130,23 +132,31 @@ Frontend (JS) ──➤ Proxy Seguro (Python) ──➤ Azure OpenAI
 
 ### **⚙️ Configuración Rápida**
 
+
 1. **Instalar dependencias Python:**
+
 ```bash
 pip install -r requirements.txt
 ```
 
+
 2. **Configurar variables de entorno:**
+
 ```bash
 cp .env.example .env
 # Editar .env con tus credenciales reales
+
 ```
 
 3. **Iniciar el proxy seguro:**
+
 ```bash
+
 python chapi_proxy.py
 ```
 
 4. **Habilitar IA en frontend:**
+
 ```javascript
 // En chapi-config.js
 enableAI: true  // Ya no necesita API key aquí
@@ -181,11 +191,13 @@ TELEGRAM_BOT_TOKEN=tu-bot-token-aqui
 
 | Endpoint | Método | Descripción |
 |----------|--------|-------------|
+
 | `/` | GET | Health check básico |
 | `/health` | GET | Estado detallado del servicio |
 | `/api/chat` | POST | Chat completions via Azure OpenAI |
 
 **Ejemplo de request:**
+
 ```javascript
 const response = await fetch('/api/chat', {
   method: 'POST',
@@ -197,13 +209,16 @@ const response = await fetch('/api/chat', {
     max_tokens: 500,
     temperature: 0.2
   })
+
 });
 ```
 
 ### **🔧 Desarrollo vs Producción**
 
 **Desarrollo:**
+
 ```bash
+
 # Iniciar proxy en puerto 8000
 python chapi_proxy.py
 
@@ -211,10 +226,12 @@ python chapi_proxy.py
 ```
 
 **Producción:**
+
 ```bash
 # Variables de entorno en sistema/Docker
 export AZURE_OPENAI_KEY="clave-real-aqui"
 export ALLOWED_ORIGINS="https://chapibot.pro"
+>
 
 # Iniciar con gunicorn o similar
 gunicorn chapi_proxy:app --host 0.0.0.0 --port 8000
@@ -222,13 +239,17 @@ gunicorn chapi_proxy:app --host 0.0.0.0 --port 8000
 
 ### **⚠️ Seguridad Crítica**
 
+
 > **🚨 IMPORTANTE:** Si alguna vez se expuso una API key en código público:
+>
 > 1. **Rotar la clave INMEDIATAMENTE** en Azure
 > 2. Actualizar variables de entorno
 > 3. Reiniciar servicios
 > 4. Monitorear uso anómalo
 
+
 **Nunca hagas esto:**
+
 ```javascript
 ❌ const apiKey = "sk-1234567890abcdef..."; // NUNCA en frontend
 ❌ fetch('https://api.openai.com/v1/...', {
@@ -237,12 +258,14 @@ gunicorn chapi_proxy:app --host 0.0.0.0 --port 8000
 ```
 
 **Haz esto:**
+
 ```javascript
 ✅ const response = await fetch('/api/chat', { // Usar proxy local
      method: 'POST',
      body: JSON.stringify({messages: [...]})
    });
 ```
+
 
 ### **🤖 Bot de Telegram**
 
@@ -255,6 +278,7 @@ python telegram_chapi_bot.py
 ```
 
 **Comandos disponibles:**
+
 - `/start` - Iniciar conversación
 - `/planes` - Ver precios
 - `/demo` - Solicitar demostración
@@ -382,5 +406,21 @@ assets/
 - 🎨 Interfaz adaptada a tu marca
 
 **📖 Documentación completa:** [docs/CHAPI_ASSISTANT_GUIDE.md](docs/CHAPI_ASSISTANT_GUIDE.md)
+
+## 🎬 Video Demo Integrado
+
+> **¡NUEVO!** Ahora puedes ver el asistente CHAPI en acción directamente en la página principal.
+
+- ✅ Video de demostración embebido en la sección "Demo"
+- ✅ Diseño responsivo y profesional
+- ✅ Ubicación estratégica junto a los botones de prueba
+- ✅ URL del video: [https://youtu.be/kxe0WOkGOvE?si=W9t77Xo9e6tjJBJB](https://youtu.be/kxe0WOkGOvE?si=W9t77Xo9e6tjJBJB)
+- ✅ Archivo de prueba: `test-video-demo.html`
+
+### ¿Cómo probar el video demo?
+
+1. Abre `test-video-demo.html` en tu navegador para verificar la integración local
+2. Sube los archivos a Hostinger y Railway siguiendo la guía de deployment
+3. Verifica que el video aparece correctamente en chapibot.pro
 
 ---
