@@ -1,23 +1,181 @@
-# CHAPI Assistant - Comandos de Desarrollo
-# Guía rápida de todos los comandos disponibles
+# 🚀 COMANDOS RÁPIDOS - CHAPI ASSISTANT
 
-## 🚀 CONFIGURACIÓN AUTOMÁTICA (RECOMENDADO)
+## ⚡ INICIO SÚPER RÁPIDO
 
-### Scripts Automáticos
 ```powershell
-# Configuración completa + diagnóstico + servidor
-.\auto-setup.ps1 -StartServer
+# Opción 1: Comando directo (Recomendado)
+.\start-chapi-integrated.ps1
 
-# Solo diagnóstico (sin iniciar servidor)
-.\auto-setup.ps1
-
-# Script batch simple (doble clic)
-start-chapi.bat
+# Opción 2: Con npm
+npm run chapi
 ```
 
-## 📦 COMANDOS NPM
+**¡Eso es todo!** Se abre automáticamente en tu navegador con el asistente funcionando.
 
-### Servidor de Desarrollo
+---
+
+## 🛠️ COMANDOS PRINCIPALES
+
+### 🔧 Primera Configuración
+```powershell
+# Solo necesario la primera vez
+.\configurar-seguridad.ps1
+# O también:
+npm run config
+```
+
+### 🚀 Iniciar Sistema Completo
+```powershell
+# Inicia backend + frontend automáticamente
+.\start-chapi-integrated.ps1
+# O también:
+npm run chapi
+```
+
+### 🔍 Verificar Sistema
+```powershell
+# Validar que todo esté correcto
+.\validacion-final.ps1
+# O también:
+npm run validate
+```
+
+### 📊 Ver Resumen Completo
+```powershell
+# Mostrar todo lo implementado
+.\verificacion-completa.ps1
+# O también:
+npm run verify
+```
+
+---
+
+## 🌐 URLs IMPORTANTES
+
+| URL | Descripción | Cuándo Usar |
+|-----|-------------|-------------|
+| `http://localhost:3000` | **Landing page con asistente** | Siempre - Tu página principal |
+| `http://localhost:8000/health` | Estado del backend | Para verificar que el backend funciona |
+| `http://localhost:8000/docs` | Documentación API | Para desarrolladores |
+| `http://localhost:8000/stats` | Estadísticas de uso | Para ver métricas |
+
+---
+
+## � COMANDOS ALTERNATIVOS
+
+### Solo Frontend (sin asistente AI)
+```powershell
+npm run dev
+# Abre solo la landing page en puerto 3000
+```
+
+### Solo Backend
+```powershell
+python chapi_proxy.py
+# Inicia solo el backend en puerto 8000
+```
+
+### Instalar Dependencias
+```powershell
+npm install
+pip install -r requirements.txt
+```
+
+---
+
+## 🚨 COMANDOS DE EMERGENCIA
+
+### Rotar API Key Comprometida
+```powershell
+.\emergencia-rotar-clave.bat
+```
+
+### Reconfigurar Todo
+```powershell
+.\configurar-seguridad.ps1
+```
+
+### Cerrar Todo
+```powershell
+# Ctrl+C en las ventanas de terminal abiertas
+# O cerrar las ventanas directamente
+```
+
+---
+
+## 🎯 FLUJO DE TRABAJO TÍPICO
+
+### Primera Vez:
+```powershell
+1. .\configurar-seguridad.ps1    # Configurar Azure OpenAI
+2. .\start-chapi-integrated.ps1  # Iniciar sistema
+3. Abrir http://localhost:3000   # Probar asistente
+```
+
+### Uso Diario:
+```powershell
+1. .\start-chapi-integrated.ps1  # Solo este comando
+```
+
+### Personalización:
+```powershell
+1. Editar flows.yaml            # Cambiar conversaciones
+2. Editar chapi-config.js       # Modificar respuestas
+3. .\start-chapi-integrated.ps1 # Reiniciar para ver cambios
+```
+
+---
+
+## 📚 ARCHIVOS IMPORTANTES
+
+| Archivo | Para Qué | Cuándo Editar |
+|---------|----------|---------------|
+| `flows.yaml` | Flujos conversacionales | Personalizar conversaciones |
+| `chapi-config.js` | Respuestas específicas | Cambiar respuestas por sector |
+| `.env` | Configuración API keys | Solo si cambias claves |
+| `index.html` | Landing page | Solo para diseño web |
+
+---
+
+## 💡 TIPS ÚTILES
+
+### ✅ Comando Más Usado
+```powershell
+.\start-chapi-integrated.ps1
+```
+*Este comando hace todo automáticamente*
+
+### ✅ Para Personalizar Rápido
+1. Edita `flows.yaml` para cambiar conversaciones
+2. Edita `chapi-config.js` para respuestas específicas
+3. Reinicia con `.\start-chapi-integrated.ps1`
+
+### ✅ Para Ver Logs
+El script de inicio muestra logs en tiempo real de:
+- ✅ Backend FastAPI
+- ✅ Servidor web
+- ✅ Estado de conexiones
+- ✅ Errores si los hay
+
+### ✅ Para Parar el Sistema
+- Simplemente cierra las ventanas de terminal
+- O presiona `Ctrl+C` en cada ventana
+
+---
+
+## 🎉 ¡LISTO PARA USAR!
+
+**Tu asistente CHAPI está completamente implementado.**
+
+👉 **Ejecuta ahora:** `.\start-chapi-integrated.ps1`
+
+🌐 **Abre tu navegador en:** `http://localhost:3000`
+
+💬 **Prueba el asistente** haciendo clic en el widget flotante
+
+---
+
+*¿Necesitas ayuda? Lee `docs/CHAPI_ASSISTANT_INTEGRATION.md` para la guía completa.*
 ```powershell
 npm run dev          # Live-server en puerto 3000
 npm run dev-alt      # Servidor Python alternativo

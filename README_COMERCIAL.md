@@ -1,50 +1,41 @@
-# 🚀 CHAPI ULTRA COMERCIAL - README
+# 🚀 CHAPI ASSISTANT COMERCIAL - README
 
-## 🎯 PROMPT COMERCIAL IMPLEMENTADO CON ÉXITO
+## 🎯 ASISTENTE COMERCIAL COMPLETAMENTE INTEGRADO
 
-Tu **PROMPT COMERCIAL ULTRA-AGRESIVO** está completamente implementado y listo para generar ventas inmediatas en PyMEs mexicanas.
+Tu **ASISTENTE COMERCIAL INTELIGENTE** está completamente implementado con flujos conversacionales personalizados, backend seguro y gestión automática de leads.
 
-## ⚡ INICIO RÁPIDO
+## ⚡ INICIO SÚPER RÁPIDO
 
-### **⚠️ IMPORTANTE: Solo UNA ventana**
-
-Si se abrieron múltiples ventanas del navegador, usa estos comandos:
+### **🎯 Una Sola Línea de Comando**
 
 ```powershell
-# 1. Cerrar todos los servidores primero
-npm run stop
-
-# 2. Luego iniciar solo el comercial
-npm run comercial
+.\start-chapi-integrated.ps1
 ```
 
-### **Opción 1: Script Automático (Recomendado)**
+**¡ESO ES TODO!** Este comando:
+- ✅ Verifica dependencias automáticamente
+- ✅ Configura Azure OpenAI si es necesario
+- ✅ Inicia backend FastAPI (puerto 8000)
+- ✅ Inicia servidor web (puerto 3000)
+- ✅ Abre automáticamente la landing page
+- ✅ Activa el asistente comercial integrado
+
+### **⚠️ Primera vez? Configurar Azure OpenAI**
 
 ```powershell
-npm run comercial
-```
-*Abre tu página principal: http://localhost:3000/index.html*
-
-### **Opción 2: Página de Testing Específica**
-
-```powershell
-npm run test-comercial
-```
-*Abre página de testing: http://localhost:3000/test-chapi-ultra-comercial.html*
-
-### **Opción 3: Directo**
-
-```powershell
-npx live-server --port=3000 --open=/index.html
+# Solo la primera vez
+.\configurar-seguridad.ps1
 ```
 
 ## 🎯 ¿QUÉ ESTÁ IMPLEMENTADO?
 
-### ✅ **VENDEDOR AUTOMÁTICO COMPLETO**
+### ✅ **VENDEDOR AUTOMÁTICO INTEGRAL**
 
-- **Identidad:** Especialista #1 en chatbots para PyMEs mexicanas
-- **Objetivo:** Vender paquetes de $300, $600 o $1000 MXN HOY
-- **Personalidad:** Vendedor mexicano directo, confiable, urgente
+- **✨ Widget Flotante:** Integrado en landing page principal
+- **🎯 Flujos por Sector:** Restaurante, E-commerce, Servicios, Salud, etc.
+- **🤖 IA Conversacional:** Backend FastAPI + Azure OpenAI
+- **📊 Gestión de Leads:** SQLite + notificaciones email
+- **🔒 Seguridad Total:** API keys nunca expuestas en frontend
 
 ### ✅ **FLUJO DE VENTA ESTRUCTURADO**
 

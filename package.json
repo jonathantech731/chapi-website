@@ -14,7 +14,11 @@
     "clean": "rmdir /s /q node_modules 2>nul || echo 'Already clean'",
     "setup": "npm install && echo 'Setup complete! Run: npm run dev'",
     "debug": "powershell -ExecutionPolicy Bypass -File debug-environment.ps1",
-    "diagnose": "node --version && npm --version && npm list live-server"
+    "diagnose": "node --version && npm --version && npm list live-server",
+    "chapi": "powershell -ExecutionPolicy Bypass -File start-chapi-integrated.ps1",
+    "config": "powershell -ExecutionPolicy Bypass -File configurar-seguridad.ps1",
+    "validate": "powershell -ExecutionPolicy Bypass -File validacion-final.ps1",
+    "verify": "powershell -ExecutionPolicy Bypass -File verificacion-completa.ps1"
   },
   "devDependencies": {
     "live-server": "^1.2.2"

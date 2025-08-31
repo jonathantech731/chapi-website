@@ -1,12 +1,12 @@
 # 🤖 CHAPI Website
 
 <div align="center">
-  
+
   ![CHAPI Banner](https://img.shields.io/badge/CHAPI-Chatbots_Inteligentes-2f7afe?style=for-the-badge&logo=robot&logoColor=white)
   ![Version](https://img.shields.io/badge/Version-2.0-00d4a6?style=for-the-badge)
   ![Status](https://img.shields.io/badge/Status-Activo-success?style=for-the-badge)
   ![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Deployment-222?style=for-the-badge&logo=github&logoColor=white)
-  
+
   **[🌐 Sitio en Vivo](https://chapibot.pro)** · **[📧 Contacto](mailto:soporte@chapibot.pro)**
 
 </div>
@@ -36,7 +36,11 @@ Este repositorio contiene el código fuente del sitio web oficial de CHAPI, dise
 - ✅ Sistema de analytics avanzado
 - ✅ Chat widget embebido
 - ✅ Testimonios y casos de éxito
-- ✅ **🤖 Asistente Virtual CHAPI integrado**
+- ✅ **🤖 Asistente Virtual CHAPI completamente integrado**
+- ✅ **🔄 Flujos conversacionales personalizados por sector**
+- ✅ **🗄️ Gestión automática de leads**
+- ✅ **📧 Notificaciones por email**
+- ✅ **🔒 Backend FastAPI seguro con Azure OpenAI**
 
 ### 📊 **SEO & Performance**
 
@@ -59,23 +63,47 @@ Este repositorio contiene el código fuente del sitio web oficial de CHAPI, dise
 ### **Prerequisitos**
 
 - Git instalado
-
+- **Python 3.8+ (para backend FastAPI)**
 - Navegador web moderno
 - Editor de código (VS Code recomendado)
+- **Cuenta de Azure OpenAI activa**
 
-### **Instalación Local**
+### **🎯 Inicio Rápido - Integrado**
 
-```bash
-# Clonar el repositorio
+```powershell
+# 1. Clonar el repositorio
 git clone https://github.com/tu-usuario/chapi-website.git
 cd chapi-website
 
-# Abrir en VS Code
-code .
+# 2. Configurar el asistente automáticamente
+.\configurar-seguridad.ps1
 
+# 3. Iniciar todo el sistema integrado
+.\start-chapi-integrated.ps1
+```
 
-# Servir localmente (usando Live Server)
-# O simplemente abrir index.html en el navegador
+**¡Eso es todo!** El script automático:
+- ✅ Instala dependencias Python
+- ✅ Configura variables de entorno
+- ✅ Inicia backend FastAPI (puerto 8000)
+- ✅ Inicia servidor web (puerto 3000)
+- ✅ Abre automáticamente la landing page con asistente funcionando
+
+### **🔧 Desarrollo Manual**
+
+```bash
+# Instalar dependencias Python
+pip install -r requirements.txt
+
+# Configurar .env
+cp .env.example .env
+# Editar .env con tus credenciales
+
+# Iniciar backend
+python chapi_proxy.py
+
+# En otra terminal, iniciar frontend
+python -m http.server 3000
 ```
 
 ## 🤖 Integración Azure OpenAI (Backend Seguro)
@@ -303,10 +331,10 @@ chapi-website/
 
 <div align="center">
 
-**📧 Email Técnico:** <dev@chapibot.pro>  
-**📧 Email Comercial:** <soporte@chapibot.pro>  
-**🌐 Sitio Web:** [chapibot.pro](https://chapibot.pro)  
-**📍 Ubicación:** México 🇲🇽  
+**📧 Email Técnico:** <dev@chapibot.pro>
+**📧 Email Comercial:** <soporte@chapibot.pro>
+**🌐 Sitio Web:** [chapibot.pro](https://chapibot.pro)
+**📍 Ubicación:** México 🇲🇽
 
 </div>
 
@@ -317,11 +345,11 @@ Este proyecto está bajo Licencia MIT - ver el archivo [LICENSE](LICENSE) para m
 ---
 
 <div align="center">
-  
+
   **Desarrollado con ❤️ por el equipo CHAPI**
-  
+
   <sub>© 2025 CHAPI - Todos los derechos reservados</sub>
-  
+
 </div>
 
 ## 🤖 Asistente Virtual CHAPI

@@ -7,7 +7,7 @@
         <title>CHAPI · Chatbots Inteligentes</title>
 
         <!-- CHAPI Assistant Styles -->
-        <link rel="stylesheet" href="assets/css/chapi-assistant.css">
+        <link rel="stylesheet" href="assets/css/chapi-assistant-integrated.css">
 
         <style>
             :root {
@@ -1814,20 +1814,25 @@
                         'linear-gradient(135deg, #2f7afe, #00d4a6)';
                 });
 
-                console.log('CHAPI: Assistant initialized successfully!');
-            }
+        </script>
 
-            // Inicializar cuando esté listo
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initChapiAssistant);
-            } else {
-                initChapiAssistant();
-            }
+        <!-- CHAPI Assistant Integration -->
+        <script src="assets/js/chapi-assistant.js"></script>
 
+        <script>
+                // Configuración específica para la landing page
+                document.addEventListener('DOMContentLoaded', function () {
+                    // El asistente se inicializa automáticamente desde chapi-assistant.js
+                    console.log('🚀 CHAPI Assistant integrado en la landing page');
 
-
-
-
+                    // Opcional: Analytics tracking
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'chapi_assistant_loaded', {
+                            'event_category': 'engagement',
+                            'event_label': 'widget_integration'
+                        });
+                    }
+                });
         </script>
     </body>
 
