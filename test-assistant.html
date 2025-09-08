@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test CHAPI Assistant</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: #0a0d14;
+                color: white;
+                min-height: 100vh;
+            }
+
+            .test-info {
+                background: #161c27;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+
+            .status {
+                padding: 10px;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .success {
+                background: #10b981;
+            }
+
+            .error {
+                background: #ff4757;
+            }
+
+            .warning {
+                background: #ffb020;
+            }
+
+            /* Estilos para el contenido principal */
+            .main-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .hero-section {
+                text-align: center;
+                padding: 40px 20px;
+                background: linear-gradient(135deg, rgba(47, 122, 254, 0.1), rgba(0, 212, 166, 0.1));
+                border-radius: 16px;
+                margin-bottom: 40px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 16px;
+                background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+                color: #a9b3c4;
+                margin-bottom: 32px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-buttons {
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 12px 24px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: none;
+                cursor: pointer;
+                display: inline-block;
+            }
+
+            .btn-primary {
+                background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                color: white;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(47, 122, 254, 0.4);
+            }
+
+            .btn-secondary {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+
+            /* Secciones */
+            .features-section,
+            .demo-section,
+            .pricing-section,
+            .contact-section {
+                margin-bottom: 60px;
+            }
+
+            .features-section h3,
+            .demo-section h3,
+            .pricing-section h3,
+            .contact-section h3 {
+                text-align: center;
+                font-size: 2rem;
+                margin-bottom: 40px;
+                color: #e8eef8;
+            }
+
+            /* Sección de Demo Video */
+            .demo-subtitle {
+                text-align: center;
+                font-size: 1.2rem;
+                color: #a9b3c4;
+                margin-bottom: 40px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .video-container {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .video-wrapper {
+                background: #161c27;
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                overflow: hidden;
+                margin-bottom: 40px;
+                position: relative;
+            }
+
+            .video-placeholder {
+                height: 400px;
+                background: linear-gradient(135deg, rgba(47, 122, 254, 0.1), rgba(0, 212, 166, 0.1));
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .video-placeholder:hover {
+                background: linear-gradient(135deg, rgba(47, 122, 254, 0.2), rgba(0, 212, 166, 0.2));
+                transform: scale(1.02);
+            }
+
+            .play-button {
+                text-align: center;
+                margin-bottom: 30px;
+                transition: all 0.3s ease;
+            }
+
+            .play-button:hover {
+                transform: scale(1.1);
+            }
+
+            .play-icon {
+                font-size: 4rem;
+                margin-bottom: 10px;
+                background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                filter: drop-shadow(0 4px 8px rgba(47, 122, 254, 0.3));
+            }
+
+            .play-text {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: #e8eef8;
+                margin-bottom: 10px;
+            }
+
+            .video-preview {
+                background: rgba(22, 28, 39, 0.8);
+                padding: 30px;
+                border-radius: 12px;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                max-width: 400px;
+            }
+
+            .preview-content h4 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+                color: #e8eef8;
+                text-align: center;
+            }
+
+            .preview-content p {
+                color: #a9b3c4;
+                margin: 8px 0;
+                font-size: 1.1rem;
+            }
+
+            .video-player iframe {
+                border-radius: 12px;
+            }
+
+            /* Información del video */
+            .video-info {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 24px;
+                margin-bottom: 40px;
+            }
+
+            .info-card {
+                background: #161c27;
+                padding: 24px;
+                border-radius: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .info-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(47, 122, 254, 0.3);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .info-icon {
+                font-size: 2.5rem;
+                margin-bottom: 16px;
+            }
+
+            .info-card h4 {
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+                color: #e8eef8;
+            }
+
+            .info-card p {
+                color: #a9b3c4;
+                line-height: 1.5;
+            }
+
+            /* Acciones del demo */
+            .demo-actions {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .demo-actions .btn-primary,
+            .demo-actions .btn-secondary {
+                padding: 16px 32px;
+                font-size: 1.1rem;
+            }
+
+            /* Grid de características */
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+            }
+
+            .feature-card {
+                background: #161c27;
+                padding: 32px 24px;
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(47, 122, 254, 0.3);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .feature-icon {
+                font-size: 3rem;
+                margin-bottom: 16px;
+            }
+
+            .feature-card h4 {
+                font-size: 1.25rem;
+                margin-bottom: 12px;
+                color: #e8eef8;
+            }
+
+            .feature-card p {
+                color: #a9b3c4;
+                line-height: 1.6;
+            }
+
+            /* Grid de precios */
+            .pricing-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 24px;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .pricing-card {
+                background: #161c27;
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                overflow: hidden;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .pricing-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .pricing-card.featured {
+                border-color: rgba(47, 122, 254, 0.5);
+                transform: scale(1.05);
+            }
+
+            .pricing-card.featured::before {
+                content: "⭐ POPULAR";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                color: white;
+                text-align: center;
+                padding: 8px;
+                font-size: 0.875rem;
+                font-weight: 600;
+            }
+
+            .plan-header {
+                padding: 24px 24px 16px;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .pricing-card.featured .plan-header {
+                padding-top: 48px;
+            }
+
+            .plan-header h4 {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+                color: #e8eef8;
+            }
+
+            .price {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #2f7afe;
+                margin-bottom: 8px;
+            }
+
+            .price span {
+                font-size: 1rem;
+                color: #a9b3c4;
+                font-weight: 400;
+            }
+
+            .plan-features {
+                padding: 24px;
+                list-style: none;
+                margin: 0;
+            }
+
+            .plan-features li {
+                padding: 8px 0;
+                color: #a9b3c4;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .plan-features li:last-child {
+                border-bottom: none;
+            }
+
+            /* Grid de contacto */
+            .contact-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 24px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .contact-card {
+                background: #161c27;
+                padding: 32px 24px;
+                border-radius: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+
+            .contact-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(47, 122, 254, 0.3);
+            }
+
+            .contact-icon {
+                font-size: 3rem;
+                margin-bottom: 16px;
+            }
+
+            .contact-card h4 {
+                font-size: 1.25rem;
+                margin-bottom: 12px;
+                color: #e8eef8;
+            }
+
+            .contact-card a {
+                color: #2f7afe;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .contact-card a:hover {
+                color: #00d4a6;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .hero-section h2 {
+                    font-size: 2rem;
+                }
+
+                .hero-subtitle {
+                    font-size: 1rem;
+                }
+
+                .cta-buttons {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .pricing-card.featured {
+                    transform: none;
+                }
+
+                .features-grid,
+                .pricing-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                /* Demo responsive */
+                .video-placeholder {
+                    height: 300px;
+                    padding: 20px;
+                }
+
+                .play-icon {
+                    font-size: 3rem;
+                }
+
+                .play-text {
+                    font-size: 1.2rem;
+                }
+
+                .video-preview {
+                    padding: 20px;
+                    max-width: 100%;
+                }
+
+                .preview-content h4 {
+                    font-size: 1.2rem;
+                }
+
+                .preview-content p {
+                    font-size: 1rem;
+                }
+
+                .demo-actions {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .demo-actions .btn-primary,
+                .demo-actions .btn-secondary {
+                    width: 100%;
+                    max-width: 300px;
+                }
+
+                .video-info {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .video-placeholder {
+                    height: 250px;
+                    padding: 15px;
+                }
+
+                .demo-subtitle {
+                    font-size: 1rem;
+                    padding: 0 15px;
+                }
+            }
+
+        </style>
+
+        <!-- CHAPI Assistant Styles -->
+        <link rel="stylesheet" href="assets/css/chapi-assistant.css">
+        
+        <!-- CHAPI Chat API Client -->
+        <script src="assets/js/chat-api.js"></script>
+    </head>
+
+    <body>
+        <div class="test-info">
+            <h1>🧪 Test CHAPI Assistant</h1>
+            <p>Esta página es para probar que el asistente CHAPI funciona correctamente en tu dispositivo.</p>
+
+            <div id="deviceInfo">
+                <h3>📱 Información del Dispositivo:</h3>
+                <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+                <p><strong>Pantalla:</strong> <span id="screenSize"></span></p>
+                <p><strong>Viewport:</strong> <span id="viewport"></span></p>
+                <p><strong>Es Móvil:</strong> <span id="isMobile"></span></p>
+            </div>
+
+            <div id="testResults">
+                <h3>🔍 Resultados del Test:</h3>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button onclick="runTests()"
+                    style="background: #2f7afe; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer;">
+                    🔄 Ejecutar Tests
+                </button>
+                <button onclick="forceShow()"
+                    style="background: #00d4a6; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; margin-left: 10px;">
+                    👁️ Forzar Mostrar Widget
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección de Información Principal -->
+        <div class="main-content">
+            <div class="hero-section">
+                <h2>🤖 CHAPI - Chatbots Inteligentes</h2>
+                <p class="hero-subtitle">Implementación profesional en WhatsApp, Telegram y Web. Integramos tu negocio
+                    con automatizaciones reales (n8n, CRMs, pago), sin depender de la nube si lo necesitas.</p>
+
+                <div class="cta-buttons">
+                    <a href="#pricing" class="btn-primary">Ver planes</a>
+                    <a href="#demo" class="btn-secondary">🚀 Probar demo</a>
+                </div>
+            </div>
+
+            <!-- Sección de Características -->
+            <div class="features-section" id="features">
+                <h3>✨ Características Principales</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h4>Crear flujos de ventas automáticos</h4>
+                        <p>Automatiza todo el proceso de ventas desde el primer contacto hasta el cierre.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h4>Conocer nuestros planes y precios</h4>
+                        <p>Planes flexibles adaptados a las necesidades de tu negocio.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h4>Probar demos en vivo</h4>
+                        <p>Experimenta nuestros chatbots en acción antes de decidir.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h4>Conectarte con nuestro equipo</h4>
+                        <p>Soporte técnico especializado y atención personalizada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Demo Video -->
+            <div class="demo-section" id="demo">
+                <h3>🎬 Ve Nuestro Chatbot en Acción</h3>
+                <p class="demo-subtitle">Descubre cómo nuestros chatbots inteligentes pueden transformar tu negocio</p>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <!-- Placeholder para video - puedes reemplazar con tu video real -->
+                        <div class="video-placeholder" id="videoPlaceholder">
+                            <div class="play-button" onclick="loadDemoVideo()">
+                                <div class="play-icon">▶️</div>
+                                <div class="play-text">Ver Demo</div>
+                            </div>
+                            <div class="video-preview">
+                                <div class="preview-content">
+                                    <h4>🤖 Demo Interactivo</h4>
+                                    <p>• Respuestas automáticas inteligentes</p>
+                                    <p>• Integración con WhatsApp</p>
+                                    <p>• Flujos de ventas automatizados</p>
+                                    <p>• Conexión con CRM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video real (inicialmente oculto) -->
+                        <div class="video-player" id="videoPlayer" style="display: none;">
+                            <iframe id="demoIframe" width="100%" height="400" frameborder="0" allowfullscreen
+                                title="CHAPI Chatbot Demo">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Información adicional del video -->
+                    <div class="video-info">
+                        <div class="info-card">
+                            <div class="info-icon">⚡</div>
+                            <h4>Implementación Rápida</h4>
+                            <p>Tu chatbot estará funcionando en menos de 24 horas</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🎯</div>
+                            <h4>Personalización Total</h4>
+                            <p>Adaptamos el chatbot a tu negocio específico</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">📈</div>
+                            <h4>Resultados Medibles</h4>
+                            <p>Incrementa tus ventas y mejora la atención al cliente</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción después del demo -->
+                <div class="demo-actions">
+                    <a href="https://wa.me/522228588674?text=Hola%2C%20me%20interesa%20una%20demo%20personalizada"
+                        target="_blank" class="btn-primary">
+                        📱 Solicitar Demo Personalizada
+                    </a>
+                    <a href="#pricing" class="btn-secondary">
+                        💰 Ver Precios
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sección de Precios -->
+            <div class="pricing-section" id="pricing">
+                <h3>💰 Planes y Precios</h3>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <h4>🥉 BÁSICO</h4>
+                            <div class="price">$990 <span>MXN/mes</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✅ Chatbot básico para WhatsApp</li>
+                            <li>✅ Respuestas automáticas</li>
+                            <li>✅ Soporte por email</li>
+                            <li>✅ Configuración inicial</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card featured">
+                        <div class="plan-header">
+                            <h4>🥈 PRO</h4>
+                            <div class="price">$1,990 <span>MXN/mes</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✅ Todo lo del plan Básico</li>
+                            <li>✅ Integración con CRM</li>
+                            <li>✅ Múltiples plataformas</li>
+                            <li>✅ Análisis avanzados</li>
+                            <li>✅ Soporte prioritario</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="plan-header">
+                            <h4>🥇 EMPRESARIAL</h4>
+                            <div class="price">$3,990 <span>MXN/mes</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>✅ Todo lo del plan Pro</li>
+                            <li>✅ IA personalizada</li>
+                            <li>✅ Integraciones ilimitadas</li>
+                            <li>✅ Soporte 24/7</li>
+                            <li>✅ Consultoría especializada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Contacto -->
+            <div class="contact-section" id="contact">
+                <h3>📞 Contacto</h3>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📱</div>
+                        <h4>WhatsApp</h4>
+                        <p><a href="https://wa.me/522228588674" target="_blank">+52 222 858 8674</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">✉️</div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:jovany2224@gmail.com">jovany2224@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Debug: Widget super simple para asegurar que aparezca -->
+        <div id="debugWidget" style="
+            position: fixed !important;
+            bottom: 100px !important;
+            right: 20px !important;
+            z-index: 9999999 !important;
+            width: 80px !important;
+            height: 80px !important;
+            background: red !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+            font-size: 20px !important;
+            cursor: pointer !important;
+            border: 3px solid yellow !important;
+        " onclick="alert('Widget debug funciona!')">
+            🔴
+        </div>
+
+        <!-- CHAPI Assistant Widget Inline (Funcional) -->
+        <script>
+            // Configuración integrada del asistente CHAPI MEJORADO
+            const CHAPI_CONFIG_ENHANCED = {
+                botName: 'CHAPI',
+                companyName: 'CHAPI',
+                welcomeMessage: '¡Hola! 👋 Soy CHAPI, tu asistente virtual especializado en chatbots inteligentes. ¿En qué puedo ayudarte hoy?',
+                enableAI: false,
+
+                // Sistema de reconocimiento de intenciones mejorado
+                intents: {
+                    saludo: ['hola', 'hello', 'hi', 'buenas', 'qué tal', 'buenos días', 'buenas tardes', 'buenas noches'],
+                    precios: ['precio', 'costo', 'cuánto', 'plan', 'tarifa', 'cuota', 'mensualidad', 'pagar'],
+                    demo: ['demo', 'prueba', 'mostrar', 'ver funcionando', 'ejemplo', 'test'],
+                    contacto: ['contacto', 'hablar', 'llamar', 'whatsapp', 'email', 'teléfono', 'comunícame'],
+                    caracteristicas: ['qué hace', 'funciones', 'características', 'beneficios', 'ventajas'],
+                    urgente: ['urgente', 'rápido', 'ya', 'ahora mismo', 'inmediato'],
+                    tiempo: ['cuánto tiempo', 'cuándo', 'rapidez', 'implementación'],
+                    integración: ['crm', 'integrar', 'conectar', 'n8n', 'zapier', 'api'],
+                    soporte: ['soporte', 'ayuda', 'support', 'asistencia', 'problema'],
+                    horarios: ['horario', 'cuando', 'disponible', 'atienden']
+                },
+
+                // FAQ mejorado
+                smartFAQ: {
+                    'cuánto tiempo': '⏱️ La implementación toma 24-48 horas máximo. Tu chatbot estará funcionando antes de lo que imaginas!',
+                    'funciona con': '🔗 Compatible con WhatsApp, Telegram, web, Facebook Messenger y más de 100+ plataformas',
+                    'soporte 24': '🌟 Soporte 24/7 en plan Empresarial, prioritario en Pro, email en Básico',
+                    'integración crm': '⚙️ Integramos con Salesforce, HubSpot, Pipedrive, Zoho y más de 100+ CRMs',
+                    'sin internet': '🌐 Sí! Podemos implementar soluciones on-premise sin depender de la nube',
+                    'costo setup': '🎁 Setup GRATUITO incluido en todos los planes. ¡Sin costos ocultos!',
+                    'garantía': '✅ 30 días de garantía. Si no estás satisfecho, te devolvemos el dinero'
+                },
+
+                // Ofertas dinámicas
+                urgencyOffers: [
+                    '🔥 OFERTA ESPECIAL: 20% descuento si contratas HOY mismo',
+                    '⏰ ÚLTIMOS DÍAS: Setup gratuito valorado en $500 USD',
+                    '💎 BONUS EXCLUSIVO: 1 mes gratis si decides en las próximas 24h',
+                    '🚀 PROMO FLASH: Implementación en 12 horas por tiempo limitado'
+                ],
+
+                // Estadísticas para conversión
+                stats: {
+                    clientesActivos: '500+',
+                    mensajesProcesados: '1M+',
+                    satisfaccion: '98%',
+                    tiempoRespuesta: '< 2 seg'
+                }
+            };
+
+            // Función para crear el widget del asistente MEJORADO
+            function createChapiWidget() {
+                console.log('CHAPI: Creating enhanced widget...');
+
+                const widget = document.createElement('div');
+                widget.className = 'chapi-assistant-inline';
+                widget.innerHTML = `
+                    <button class="chapi-chat-button-inline" id="chapiChatButtonInline">
+                        💬
+                        <div class="notification-badge" id="notificationBadge" style="display: none;">1</div>
+                    </button>
+                    <div class="chapi-chat-window-inline" id="chapiChatWindowInline" style="display: none;">
+                        <div class="chapi-chat-header-inline">
+                            <div class="header-info">
+                                <h3>🤖 CHAPI Assistant</h3>
+                                <div class="status-indicator">
+                                    <div class="status-dot"></div>
+                                    <span>En línea</span>
+                                </div>
+                            </div>
+                            <button class="chapi-close-btn-inline" id="chapiCloseBtnInline">×</button>
+                        </div>
+                        <div class="chapi-chat-body-inline" id="chapiChatBodyInline">
+                            <div class="chapi-message bot-message">
+                                ${CHAPI_CONFIG_ENHANCED.welcomeMessage}
+                            </div>
+                            <div class="quick-options" id="quickOptions">
+                                <button class="quick-btn" onclick="sendQuickMessage('precios')">💰 Precios</button>
+                                <button class="quick-btn" onclick="sendQuickMessage('demo')">🚀 Demo</button>
+                                <button class="quick-btn" onclick="sendQuickMessage('contacto')">📞 Contacto</button>
+                            </div>
+                        </div>
+                        <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                            <div class="typing-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span>CHAPI está escribiendo...</span>
+                        </div>
+                        <div class="chapi-chat-input-container-inline">
+                            <input type="text" id="chapiInputInline" placeholder="Escribe tu mensaje...">
+                            <button id="chapiSendBtnInline">Enviar</button>
+                        </div>
+                        <div class="lead-capture" id="leadCapture" style="display: none;">
+                            <div class="lead-form">
+                                <h4>🎯 ¡Obtén una cotización personalizada!</h4>
+                                <input type="text" id="leadName" placeholder="Tu nombre">
+                                <input type="email" id="leadEmail" placeholder="Email">
+                                <input type="tel" id="leadPhone" placeholder="Teléfono (WhatsApp)">
+                                <button onclick="submitLead()">📨 Enviar</button>
+                                <button onclick="closeLead()" class="close-lead">❌ Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Estilos inline para asegurar que se muestren - VERSIÓN MEJORADA
+                const style = document.createElement('style');
+                style.textContent = `
+                    .chapi-assistant-inline {
+                        position: fixed !important;
+                        bottom: 20px !important;
+                        right: 20px !important;
+                        z-index: 999999 !important;
+                        font-family: system-ui, -apple-system, sans-serif;
+                    }
+
+                    .chapi-chat-button-inline {
+                        width: 64px !important;
+                        height: 64px !important;
+                        border-radius: 50% !important;
+                        background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
+                        border: none !important;
+                        cursor: pointer !important;
+                        color: white !important;
+                        font-size: 24px !important;
+                        box-shadow: 0 8px 20px rgba(47, 122, 254, 0.3) !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        transition: all 0.3s ease !important;
+                        position: relative !important;
+                        animation: pulse 2s infinite !important;
+                    }
+
+                    @keyframes pulse {
+                        0% { box-shadow: 0 8px 20px rgba(47, 122, 254, 0.3); }
+                        50% { box-shadow: 0 8px 30px rgba(47, 122, 254, 0.6); }
+                        100% { box-shadow: 0 8px 20px rgba(47, 122, 254, 0.3); }
+                    }
+
+                    .notification-badge {
+                        position: absolute !important;
+                        top: -5px !important;
+                        right: -5px !important;
+                        background: #ff4757 !important;
+                        color: white !important;
+                        border-radius: 50% !important;
+                        width: 20px !important;
+                        height: 20px !important;
+                        font-size: 12px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        font-weight: bold !important;
+                        animation: bounce 1s infinite !important;
+                    }
+
+                    @keyframes bounce {
+                        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                        40% { transform: translateY(-10px); }
+                        60% { transform: translateY(-5px); }
+                    }
+
+                    .chapi-chat-button-inline:hover {
+                        transform: translateY(-2px) !important;
+                        box-shadow: 0 12px 30px rgba(47, 122, 254, 0.4) !important;
+                        animation: none !important;
+                    }
+
+                    .chapi-chat-window-inline {
+                        position: absolute !important;
+                        bottom: 80px !important;
+                        right: 0 !important;
+                        width: 380px !important;
+                        height: 500px !important;
+                        background: #161c27 !important;
+                        border-radius: 16px !important;
+                        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+                        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                        display: flex !important;
+                        flex-direction: column !important;
+                        animation: slideUp 0.3s ease-out !important;
+                    }
+
+                    @keyframes slideUp {
+                        from { opacity: 0; transform: translateY(20px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+
+                    .chapi-chat-header-inline {
+                        padding: 16px !important;
+                        background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
+                        color: white !important;
+                        border-radius: 16px 16px 0 0 !important;
+                        display: flex !important;
+                        justify-content: space-between !important;
+                        align-items: center !important;
+                    }
+
+                    .header-info h3 {
+                        margin: 0 !important;
+                        font-size: 16px !important;
+                    }
+
+                    .status-indicator {
+                        display: flex !important;
+                        align-items: center !important;
+                        gap: 5px !important;
+                        font-size: 12px !important;
+                        opacity: 0.9 !important;
+                    }
+
+                    .status-dot {
+                        width: 8px !important;
+                        height: 8px !important;
+                        background: #00ff88 !important;
+                        border-radius: 50% !important;
+                        animation: blink 2s infinite !important;
+                    }
+
+                    @keyframes blink {
+                        0%, 50% { opacity: 1; }
+                        51%, 100% { opacity: 0.3; }
+                    }
+
+                    .chapi-close-btn-inline {
+                        background: none !important;
+                        border: none !important;
+                        color: white !important;
+                        font-size: 20px !important;
+                        cursor: pointer !important;
+                        width: 24px !important;
+                        height: 24px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        border-radius: 50% !important;
+                        transition: background 0.3s ease !important;
+                    }
+
+                    .chapi-close-btn-inline:hover {
+                        background: rgba(255, 255, 255, 0.2) !important;
+                    }
+
+                    .chapi-chat-body-inline {
+                        flex: 1 !important;
+                        padding: 16px !important;
+                        overflow-y: auto !important;
+                        color: #e8eef8 !important;
+                    }
+
+                    .chapi-message {
+                        margin-bottom: 12px !important;
+                        padding: 12px 16px !important;
+                        border-radius: 18px !important;
+                        background: rgba(47, 122, 254, 0.1) !important;
+                        border: 1px solid rgba(47, 122, 254, 0.2) !important;
+                        animation: messageSlideIn 0.3s ease-out !important;
+                        line-height: 1.4 !important;
+                    }
+
+                    @keyframes messageSlideIn {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+
+                    .user-message {
+                        background: rgba(0, 212, 166, 0.1) !important;
+                        border: 1px solid rgba(0, 212, 166, 0.2) !important;
+                        margin-left: 40px !important;
+                        text-align: right !important;
+                    }
+
+                    .quick-options {
+                        display: flex !important;
+                        gap: 8px !important;
+                        flex-wrap: wrap !important;
+                        margin: 16px 0 !important;
+                    }
+
+                    .quick-btn {
+                        background: rgba(47, 122, 254, 0.1) !important;
+                        border: 1px solid rgba(47, 122, 254, 0.3) !important;
+                        color: #2f7afe !important;
+                        padding: 8px 12px !important;
+                        border-radius: 20px !important;
+                        font-size: 12px !important;
+                        cursor: pointer !important;
+                        transition: all 0.3s ease !important;
+                    }
+
+                    .quick-btn:hover {
+                        background: rgba(47, 122, 254, 0.2) !important;
+                        transform: translateY(-1px) !important;
+                    }
+
+                    .typing-indicator {
+                        padding: 16px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        gap: 8px !important;
+                        color: #a9b3c4 !important;
+                        font-size: 13px !important;
+                        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+                    }
+
+                    .typing-dots {
+                        display: flex !important;
+                        gap: 4px !important;
+                    }
+
+                    .typing-dots span {
+                        width: 6px !important;
+                        height: 6px !important;
+                        background: #2f7afe !important;
+                        border-radius: 50% !important;
+                        animation: typingDots 1.5s infinite !important;
+                    }
+
+                    .typing-dots span:nth-child(1) { animation-delay: 0s; }
+                    .typing-dots span:nth-child(2) { animation-delay: 0.3s; }
+                    .typing-dots span:nth-child(3) { animation-delay: 0.6s; }
+
+                    @keyframes typingDots {
+                        0%, 60%, 100% { transform: scale(1); opacity: 0.4; }
+                        30% { transform: scale(1.2); opacity: 1; }
+                    }
+
+                    .chapi-chat-input-container-inline {
+                        padding: 16px !important;
+                        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+                        display: flex !important;
+                        gap: 8px !important;
+                    }
+
+                    .chapi-chat-input-container-inline input {
+                        flex: 1 !important;
+                        padding: 12px 16px !important;
+                        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                        border-radius: 25px !important;
+                        background: rgba(255, 255, 255, 0.05) !important;
+                        color: #e8eef8 !important;
+                        font-family: inherit !important;
+                        transition: border-color 0.3s ease !important;
+                    }
+
+                    .chapi-chat-input-container-inline input:focus {
+                        outline: none !important;
+                        border-color: #2f7afe !important;
+                        box-shadow: 0 0 10px rgba(47, 122, 254, 0.2) !important;
+                    }
+
+                    .chapi-chat-input-container-inline button {
+                        padding: 12px 20px !important;
+                        background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
+                        border: none !important;
+                        border-radius: 25px !important;
+                        color: white !important;
+                        cursor: pointer !important;
+                        font-weight: 500 !important;
+                        transition: all 0.3s ease !important;
+                        min-width: 80px !important;
+                    }
+
+                    .chapi-chat-input-container-inline button:hover {
+                        transform: translateY(-1px) !important;
+                        box-shadow: 0 4px 15px rgba(47, 122, 254, 0.3) !important;
+                    }
+
+                    .lead-capture {
+                        position: absolute !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        right: 0 !important;
+                        bottom: 0 !important;
+                        background: rgba(22, 28, 39, 0.98) !important;
+                        backdrop-filter: blur(10px) !important;
+                        border-radius: 16px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        animation: slideUp 0.3s ease-out !important;
+                    }
+
+                    .lead-form {
+                        background: #161c27 !important;
+                        padding: 24px !important;
+                        border-radius: 16px !important;
+                        border: 1px solid rgba(47, 122, 254, 0.3) !important;
+                        width: 90% !important;
+                        text-align: center !important;
+                    }
+
+                    .lead-form h4 {
+                        color: #e8eef8 !important;
+                        margin-bottom: 16px !important;
+                        font-size: 16px !important;
+                    }
+
+                    .lead-form input {
+                        width: 100% !important;
+                        padding: 12px !important;
+                        margin: 8px 0 !important;
+                        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                        border-radius: 8px !important;
+                        background: rgba(255, 255, 255, 0.05) !important;
+                        color: #e8eef8 !important;
+                        box-sizing: border-box !important;
+                    }
+
+                    .lead-form button {
+                        padding: 12px 20px !important;
+                        margin: 8px 4px !important;
+                        border: none !important;
+                        border-radius: 8px !important;
+                        cursor: pointer !important;
+                        font-weight: 500 !important;
+                        transition: all 0.3s ease !important;
+                    }
+
+                    .lead-form button:first-of-type {
+                        background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
+                        color: white !important;
+                    }
+
+                    .close-lead {
+                        background: rgba(255, 71, 87, 0.1) !important;
+                        color: #ff4757 !important;
+                        border: 1px solid rgba(255, 71, 87, 0.3) !important;
+                    }
+
+                    @media (max-width: 480px) {
+                        .chapi-chat-window-inline {
+                            width: 320px !important;
+                            height: 450px !important;
+                        }
+                    }
+                `;
+
+                document.head.appendChild(style);
+                document.body.appendChild(widget);
+
+                // Event listeners
+                const chatButton = document.getElementById('chapiChatButtonInline');
+                const chatWindow = document.getElementById('chapiChatWindowInline');
+                const closeBtn = document.getElementById('chapiCloseBtnInline');
+                const sendBtn = document.getElementById('chapiSendBtnInline');
+                const input = document.getElementById('chapiInputInline');
+                const chatBody = document.getElementById('chapiChatBodyInline');
+
+                let isOpen = false;
+
+                chatButton.addEventListener('click', function () {
+                    isOpen = !isOpen;
+                    chatWindow.style.display = isOpen ? 'flex' : 'none';
+                    if (isOpen) {
+                        input.focus();
+                    }
+                });
+
+                closeBtn.addEventListener('click', function () {
+                    isOpen = false;
+                    chatWindow.style.display = 'none';
+                });
+
+                function sendMessage() {
+                    const message = input.value.trim();
+                    if (!message) return;
+
+                    // Agregar mensaje del usuario
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'chapi-message user-message';
+                    userMessage.textContent = message;
+                    chatBody.appendChild(userMessage);
+
+                    input.value = '';
+                    chatBody.scrollTop = chatBody.scrollHeight;
+
+                    // Mostrar indicador de "escribiendo"
+                    showTypingIndicator();
+
+                    // Analizar intención del mensaje
+                    const intent = analyzeIntent(message);
+
+                    // Respuesta automática mejorada
+                    setTimeout(() => {
+                        hideTypingIndicator();
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'chapi-message bot-message';
+                        botMessage.innerHTML = generateSmartResponse(message, intent);
+                        chatBody.appendChild(botMessage);
+                        chatBody.scrollTop = chatBody.scrollHeight;
+
+                        // Después de ciertos mensajes, mostrar captura de leads
+                        if (shouldShowLeadCapture(intent, message)) {
+                            setTimeout(() => showLeadCapture(), 2000);
+                        }
+
+                        // Tracking básico
+                        trackInteraction('message_sent', { intent, message });
+                    }, getRandomResponseTime());
+                }
+
+                // Función para analizar la intención del usuario
+                function analyzeIntent(message) {
+                    const lowerMessage = message.toLowerCase();
+                    const intents = CHAPI_CONFIG_ENHANCED.intents;
+
+                    for (const [intent, keywords] of Object.entries(intents)) {
+                        if (keywords.some(keyword => lowerMessage.includes(keyword))) {
+                            return intent;
+                        }
+                    }
+                    return 'general';
+                }
+
+                // Función para generar respuestas inteligentes
+                function generateSmartResponse(message, intent) {
+                    const lowerMessage = message.toLowerCase();
+                    const config = CHAPI_CONFIG_ENHANCED;
+
+                    // Verificar FAQ específicas primero
+                    for (const [faqKey, faqAnswer] of Object.entries(config.smartFAQ)) {
+                        if (lowerMessage.includes(faqKey)) {
+                            return faqAnswer;
+                        }
+                    }
+
+                    // Respuestas basadas en intención
+                    switch (intent) {
+                        case 'saludo':
+                            return `¡Hola! 👋 Soy CHAPI, tu especialista en chatbots inteligentes.<br><br>
+                                   📊 <strong>Nuestros números hablan:</strong><br>
+                                   • ${config.stats.clientesActivos} clientes activos<br>
+                                   • ${config.stats.mensajesProcesados} mensajes procesados<br>
+                                   • ${config.stats.satisfaccion} satisfacción del cliente<br><br>
+                                   ¿Te interesa conocer nuestros planes o ver una demo?`;
+
+                        case 'precios':
+                            const urgencyOffer = config.urgencyOffers[Math.floor(Math.random() * config.urgencyOffers.length)];
+                            return `💰 <strong>Nuestros planes (Precios en MXN):</strong><br><br>
+                                   🥉 <strong>BÁSICO - $990/mes</strong><br>
+                                   • Chatbot para WhatsApp<br>
+                                   • Respuestas automáticas<br>
+                                   • Soporte por email<br><br>
+                                   🥈 <strong>PRO - $1,990/mes</strong> ⭐ MÁS POPULAR<br>
+                                   • Todo lo del Básico<br>
+                                   • Integración CRM<br>
+                                   • Múltiples plataformas<br>
+                                   • Soporte prioritario<br><br>
+                                   🥇 <strong>EMPRESARIAL - $3,990/mes</strong><br>
+                                   • Todo lo del Pro<br>
+                                   • IA personalizada<br>
+                                   • Soporte 24/7<br><br>
+                                   🎁 <strong>${urgencyOffer}</strong><br><br>
+                                   ¿Te interesa algún plan específico?`;
+
+                        case 'demo':
+                            return `🚀 <strong>¡Excelente elección!</strong><br><br>
+                                   En nuestra demo personalizada verás:<br>
+                                   • 📱 Tu chatbot funcionando en WhatsApp EN VIVO<br>
+                                   • ⚙️ Integración con tu CRM favorito<br>
+                                   • 🔄 Flujos de ventas automatizados<br>
+                                   • 📊 Panel de análisis en tiempo real<br><br>
+                                   ⏱️ <strong>Duración:</strong> 15-20 minutos<br>
+                                   💻 <strong>Modalidad:</strong> Online via Zoom<br><br>
+                                   📞 <strong>¡Agenda ahora!</strong><br>
+                                   WhatsApp: +52 222 858 8674`;
+
+                        case 'contacto':
+                            return `👥 <strong>¡Perfecto! Hablemos directamente:</strong><br><br>
+                                   📱 <strong>WhatsApp (Recomendado):</strong><br>
+                                   +52 222 858 8674<br>
+                                   <em>Respuesta inmediata de 9:00 AM - 8:00 PM</em><br><br>
+                                   ✉️ <strong>Email:</strong><br>
+                                   jovany2224@gmail.com<br>
+                                   <em>Respuesta en menos de 2 horas</em><br><br>
+                                   🕐 <strong>Horarios de atención:</strong><br>
+                                   Lunes a Viernes: 9:00 AM - 8:00 PM<br>
+                                   Sábados: 10:00 AM - 4:00 PM<br><br>
+                                   ¿Prefieres que te llamemos nosotros?`;
+
+                        case 'caracteristicas':
+                            return `✨ <strong>¿Qué hace especial a CHAPI?</strong><br><br>
+                                   🔧 <strong>Automatización Completa:</strong><br>
+                                   • Flujos de ventas automáticos<br>
+                                   • Calificación de leads<br>
+                                   • Seguimiento personalizado<br><br>
+                                   🌐 <strong>Multi-Plataforma:</strong><br>
+                                   • WhatsApp, Telegram, Web<br>
+                                   • Facebook Messenger<br>
+                                   • Más de 100+ integraciones<br><br>
+                                   🧠 <strong>Inteligencia Artificial:</strong><br>
+                                   • Comprende lenguaje natural<br>
+                                   • Aprende de cada conversación<br>
+                                   • Respuestas contextuales<br><br>
+                                   ¿Te interesa una demo para verlo en acción?`;
+
+                        case 'urgente':
+                            return `⚡ <strong>¡Entendemos la urgencia!</strong><br><br>
+                                   🚀 <strong>Implementación EXPRESS:</strong><br>
+                                   • Setup en 12 horas (disponible)<br>
+                                   • Configuración prioritaria<br>
+                                   • Soporte dedicado<br><br>
+                                   📞 <strong>¡Contacta AHORA!</strong><br>
+                                   WhatsApp: +52 222 858 8674<br>
+                                   <em>Menciona "URGENTE" para atención inmediata</em><br><br>
+                                   🎁 Bonus: Setup gratuito por prisa`;
+
+                        case 'tiempo':
+                            return `⏱️ <strong>Tiempos de implementación:</strong><br><br>
+                                   🥉 <strong>Plan Básico:</strong> 24 horas<br>
+                                   🥈 <strong>Plan Pro:</strong> 24-48 horas<br>
+                                   🥇 <strong>Plan Empresarial:</strong> 48-72 horas<br><br>
+                                   ⚡ <strong>Express (costo adicional):</strong> 12 horas<br><br>
+                                   📋 <strong>Proceso típico:</strong><br>
+                                   1. Configuración inicial (2-4 hrs)<br>
+                                   2. Personalización (4-8 hrs)<br>
+                                   3. Pruebas y ajustes (2-4 hrs)<br>
+                                   4. Entrega y capacitación (1-2 hrs)<br><br>
+                                   ¿Necesitas implementación urgente?`;
+
+                        case 'integración':
+                            return `🔗 <strong>Integraciones disponibles:</strong><br><br>
+                                   📊 <strong>CRMs Populares:</strong><br>
+                                   • Salesforce, HubSpot, Pipedrive<br>
+                                   • Zoho, Monday, ClickUp<br><br>
+                                   ⚙️ <strong>Automatización:</strong><br>
+                                   • n8n, Zapier, Make (Integromat)<br>
+                                   • Power Automate<br><br>
+                                   💳 <strong>Pagos:</strong><br>
+                                   • Stripe, PayPal, MercadoPago<br>
+                                   • OXXO, transferencias<br><br>
+                                   📧 <strong>Email Marketing:</strong><br>
+                                   • Mailchimp, ActiveCampaign<br>
+                                   • SendGrid, GetResponse<br><br>
+                                   ¿Qué sistema específico necesitas integrar?`;
+
+                        case 'soporte':
+                            return `🛠️ <strong>Nuestro soporte incluye:</strong><br><br>
+                                   🥉 <strong>Básico:</strong> Email (24-48h)<br>
+                                   🥈 <strong>Pro:</strong> Chat prioritario (2-4h)<br>
+                                   🥇 <strong>Empresarial:</strong> 24/7 + Teléfono<br><br>
+                                   📚 <strong>Recursos adicionales:</strong><br>
+                                   • Base de conocimientos<br>
+                                   • Videos tutoriales<br>
+                                   • Webinars mensuales<br>
+                                   • Comunidad de usuarios<br><br>
+                                   🎓 <strong>Capacitación incluida:</strong><br>
+                                   • Sesión de onboarding<br>
+                                   • Manual personalizado<br>
+                                   • Mejores prácticas<br><br>
+                                   ¿Tienes algún problema específico?`;
+
+                        case 'horarios':
+                            return `🕐 <strong>Horarios de atención:</strong><br><br>
+                                   📞 <strong>Soporte Humano:</strong><br>
+                                   • Lunes a Viernes: 9:00 AM - 8:00 PM<br>
+                                   • Sábados: 10:00 AM - 4:00 PM<br>
+                                   • Domingos: Solo emergencias<br><br>
+                                   🤖 <strong>Chatbot 24/7:</strong><br>
+                                   • Respuestas automáticas siempre<br>
+                                   • Escalación a humano cuando sea necesario<br><br>
+                                   🌟 <strong>Plan Empresarial:</strong><br>
+                                   • Soporte 24/7/365<br>
+                                   • Línea directa de emergencias<br><br>
+                                   ¿Necesitas atención fuera de horario?`;
+
+                        default:
+                            return `¡Interesante pregunta! 🤔<br><br>
+                                   Para darte la respuesta más precisa, te conectamos con nuestro especialista:<br><br>
+                                   📱 <strong>WhatsApp:</strong> +52 222 858 8674<br>
+                                   ✉️ <strong>Email:</strong> jovany2224@gmail.com<br><br>
+                                   💡 <strong>Mientras tanto, puedes preguntarme sobre:</strong><br>
+                                   • "precios" - Nuestros planes<br>
+                                   • "demo" - Ver funcionamiento<br>
+                                   • "características" - Qué podemos hacer<br>
+                                   • "integración" - Conectar con tu CRM<br><br>
+                                   ¿Te interesa alguno de estos temas?`;
+                    }
+                }
+
+                // Funciones auxiliares mejoradas
+                function showTypingIndicator() {
+                    document.getElementById('typingIndicator').style.display = 'flex';
+                }
+
+                function hideTypingIndicator() {
+                    document.getElementById('typingIndicator').style.display = 'none';
+                }
+
+                function getRandomResponseTime() {
+                    return Math.random() * 2000 + 1000; // 1-3 segundos
+                }
+
+                function shouldShowLeadCapture(intent, message) {
+                    const triggerIntents = ['precios', 'demo', 'contacto'];
+                    const messageCount = chatBody.children.length;
+                    return triggerIntents.includes(intent) && messageCount > 4 && !localStorage.getItem('leadCaptured');
+                }
+
+                function showLeadCapture() {
+                    document.getElementById('leadCapture').style.display = 'flex';
+                }
+
+                function trackInteraction(action, data) {
+                    // Tracking básico en localStorage
+                    const interactions = JSON.parse(localStorage.getItem('chapiInteractions') || '[]');
+                    interactions.push({
+                        timestamp: new Date().toISOString(),
+                        action,
+                        data
+                    });
+                    localStorage.setItem('chapiInteractions', JSON.stringify(interactions));
+
+                    // Aquí se podría enviar a Google Analytics o similar
+                    console.log('CHAPI Interaction:', { action, data });
+                }
+
+                sendBtn.addEventListener('click', sendMessage);
+                input.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+
+                console.log('CHAPI: Widget created successfully!');
+                return widget;
+            }
+
+            // También crear versión super simple como respaldo
+            function createSimpleWidget() {
+                const simpleWidget = document.createElement('div');
+                simpleWidget.innerHTML = `
+                    <button id="simpleChapiBtn" style="
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        z-index: 999999;
+                        width: 64px;
+                        height: 64px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                        border: none;
+                        cursor: pointer;
+                        color: white;
+                        font-size: 24px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 8px 20px rgba(47, 122, 254, 0.3);
+                    ">💬</button>
+                    <div id="simpleChapiWindow" style="
+                        position: fixed;
+                        bottom: 100px;
+                        right: 20px;
+                        width: 300px;
+                        height: 400px;
+                        background: #161c27;
+                        border-radius: 16px;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                        z-index: 999999;
+                        display: none;
+                        flex-direction: column;
+                        color: white;
+                        font-family: system-ui;
+                    ">
+                        <div style="padding: 16px; background: linear-gradient(135deg, #2f7afe, #00d4a6); border-radius: 16px 16px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin: 0; font-size: 16px;">🤖 CHAPI Assistant</h3>
+                            <button id="simpleCloseBtn" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer;">×</button>
+                        </div>
+                        <div style="flex: 1; padding: 16px; overflow-y: auto;">
+                            <div style="padding: 10px 12px; border-radius: 12px; background: rgba(47, 122, 254, 0.1); border: 1px solid rgba(47, 122, 254, 0.2); margin-bottom: 12px;">
+                                ¡Hola! 👋 Soy CHAPI, tu asistente virtual especializado en chatbots inteligentes. ¿En qué puedo ayudarte hoy?
+                            </div>
+                        </div>
+                        <div style="padding: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 8px;">
+                            <input id="simpleInput" type="text" placeholder="Escribe tu mensaje..." style="flex: 1; padding: 10px 12px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: #e8eef8;">
+                            <button id="simpleSendBtn" style="padding: 10px 16px; background: linear-gradient(135deg, #2f7afe, #00d4a6); border: none; border-radius: 8px; color: white; cursor: pointer;">Enviar</button>
+                        </div>
+                    </div>
+                `;
+
+                document.body.appendChild(simpleWidget);
+
+                // Event listeners para el widget simple
+                document.getElementById('simpleChapiBtn').onclick = function () {
+                    const window = document.getElementById('simpleChapiWindow');
+                    window.style.display = window.style.display === 'none' ? 'flex' : 'none';
+                };
+
+                document.getElementById('simpleCloseBtn').onclick = function () {
+                    document.getElementById('simpleChapiWindow').style.display = 'none';
+                };
+
+                console.log('Simple widget created successfully!');
+            }
+
+            // Función para inicializar ambos widgets
+            function initWidgets() {
+                console.log('CHAPI: DOM loaded, creating inline assistant...');
+                createChapiWidget();
+                createSimpleWidget();
+            }
+
+            // Inicializar inmediatamente
+            document.addEventListener('DOMContentLoaded', initWidgets);
+
+            // También intentar si el DOM ya está cargado
+            if (document.readyState !== 'loading') {
+                initWidgets();
+            }
+        </script>
+
+        <script>
+            // Mostrar información del dispositivo
+            document.getElementById('userAgent').textContent = navigator.userAgent;
+            document.getElementById('screenSize').textContent = `${screen.width}x${screen.height}`;
+            document.getElementById('viewport').textContent = `${window.innerWidth}x${window.innerHeight}`;
+
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            document.getElementById('isMobile').textContent = isMobile ? 'Sí' : 'No';
+
+            function addTestResult(message, type = 'info') {
+                const div = document.createElement('div');
+                div.className = `status ${type}`;
+                div.textContent = message;
+                document.getElementById('testResults').appendChild(div);
+            }
+
+            function runTests() {
+                document.getElementById('testResults').innerHTML = '<h3>🔍 Resultados del Test:</h3>';
+
+                // Test 0: Widget debug
+                const debugWidget = document.getElementById('debugWidget');
+                addTestResult(`Widget debug visible: ${debugWidget ? 'Sí' : 'No'}`, debugWidget ? 'success' : 'error');
+
+                // Test 1: Verificar que el widget inline existe
+                setTimeout(() => {
+                    const widget = document.querySelector('.chapi-assistant-inline');
+                    addTestResult(`Widget inline creado: ${widget ? 'Sí' : 'No'}`, widget ? 'success' : 'error');
+
+                    // Test 1b: Widget simple
+                    const simpleBtn = document.getElementById('simpleChapiBtn');
+                    addTestResult(`Widget simple creado: ${simpleBtn ? 'Sí' : 'No'}`, simpleBtn ? 'success' : 'error');
+
+                    if (widget) {
+                        const styles = window.getComputedStyle(widget);
+                        addTestResult(`Widget posición: ${styles.position}`, styles.position === 'fixed' ? 'success' : 'warning');
+                        addTestResult(`Widget z-index: ${styles.zIndex}`, parseInt(styles.zIndex) > 999999 ? 'success' : 'warning');
+                    }
+
+                    // Test 2: Verificar que el botón inline existe
+                    const button = document.querySelector('.chapi-chat-button-inline');
+                    addTestResult(`Botón inline creado: ${button ? 'Sí' : 'No'}`, button ? 'success' : 'error');
+
+                    if (button) {
+                        const buttonStyles = window.getComputedStyle(button);
+                        addTestResult(`Botón visible: ${buttonStyles.display !== 'none' ? 'Sí' : 'No'}`, buttonStyles.display !== 'none' ? 'success' : 'error');
+                        addTestResult(`Botón width: ${buttonStyles.width}`, buttonStyles.width === '64px' ? 'success' : 'warning');
+                        addTestResult(`Botón height: ${buttonStyles.height}`, buttonStyles.height === '64px' ? 'success' : 'warning');
+                    }
+
+                    // Test 3: Verificar función de click
+                    const chatWindow = document.querySelector('.chapi-chat-window-inline');
+                    addTestResult(`Ventana de chat creada: ${chatWindow ? 'Sí' : 'No'}`, chatWindow ? 'success' : 'error');
+
+                    if (chatWindow) {
+                        const windowStyles = window.getComputedStyle(chatWindow);
+                        addTestResult(`Ventana inicialmente oculta: ${windowStyles.display === 'none' ? 'Sí' : 'No'}`, windowStyles.display === 'none' ? 'success' : 'warning');
+                    }
+
+                    addTestResult('✅ Tests completados', 'success');
+
+                    // Contar widgets visibles
+                    let visibleWidgets = 0;
+                    if (debugWidget) visibleWidgets++;
+                    if (simpleBtn) visibleWidgets++;
+                    if (widget) visibleWidgets++;
+
+                    addTestResult(`Total widgets creados: ${visibleWidgets}`, visibleWidgets > 0 ? 'success' : 'error');
+                }, 500);
+            }
+
+            function forceShow() {
+                const widget = document.querySelector('.chapi-assistant-inline');
+                const button = document.querySelector('.chapi-chat-button-inline');
+
+                if (widget) {
+                    widget.style.cssText = `
+                        position: fixed !important;
+                        bottom: 20px !important;
+                        right: 20px !important;
+                        z-index: 999999 !important;
+                        display: block !important;
+                        visibility: visible !important;
+                        opacity: 1 !important;
+                    `;
+                    addTestResult('Widget forzado a mostrar', 'success');
+                }
+
+                if (button) {
+                    button.style.cssText = `
+                        width: 64px !important;
+                        height: 64px !important;
+                        background: linear-gradient(135deg, #2f7afe, #00d4a6) !important;
+                        border: none !important;
+                        border-radius: 50% !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        visibility: visible !important;
+                        opacity: 1 !important;
+                        color: white !important;
+                        font-size: 24px !important;
+                        cursor: pointer !important;
+                    `;
+                    addTestResult('Botón forzado a mostrar', 'success');
+                }
+
+                // Trigger click event to test functionality
+                if (button) {
+                    setTimeout(() => {
+                        button.click();
+                        addTestResult('Test de click ejecutado - ¿Se abrió la ventana?', 'warning');
+                    }, 500);
+                }
+            }
+
+            // Ejecutar tests automáticamente después de cargar
+            setTimeout(runTests, 2000);
+
+            // Navegación suave
+            document.addEventListener('DOMContentLoaded', function () {
+                const links = document.querySelectorAll('a[href^="#"]');
+                links.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            });
+
+            // Función para cargar el video demo
+            function loadDemoVideo() {
+                const placeholder = document.getElementById('videoPlaceholder');
+                const player = document.getElementById('videoPlayer');
+                const iframe = document.getElementById('demoIframe');
+
+                // Puedes reemplazar esta URL con tu video real
+                // Opciones de video demo:
+                const videoOptions = [
+                    // YouTube (reemplaza VIDEO_ID con tu ID real)
+                    'https://www.youtube.com/embed/VIDEO_ID?autoplay=1&rel=0',
+
+                    // Vimeo (reemplaza VIDEO_ID con tu ID real)
+                    'https://player.vimeo.com/video/VIDEO_ID?autoplay=1',
+
+                    // Demo simulado con chatbot en acción
+                    createSimulatedDemo()
+                ];
+
+                // Por ahora, mostraremos un demo simulado
+                placeholder.style.display = 'none';
+                player.style.display = 'block';
+
+                // Crear demo simulado si no hay video real
+                if (!iframe.src) {
+                    createInteractiveDemo();
+                }
+            }
+
+            // Crear demo interactivo simulado
+            function createInteractiveDemo() {
+                const player = document.getElementById('videoPlayer');
+                player.innerHTML = `
+                    <div style="
+                        height: 400px;
+                        background: linear-gradient(135deg, #0a0d14, #161c27);
+                        border-radius: 12px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <div style="
+                            background: rgba(22, 28, 39, 0.95);
+                            padding: 40px;
+                            border-radius: 16px;
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            max-width: 500px;
+                            width: 90%;
+                            text-align: center;
+                        ">
+                            <div id="demoChat" style="
+                                height: 250px;
+                                background: #0a0d14;
+                                border-radius: 12px;
+                                padding: 20px;
+                                margin-bottom: 20px;
+                                overflow-y: auto;
+                                border: 1px solid rgba(47, 122, 254, 0.3);
+                            ">
+                                <div style="color: #00d4a6; margin-bottom: 10px; font-size: 0.9rem;">
+                                    🤖 CHAPI Bot conectado
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="demoInput" placeholder="Escribe 'hola' para empezar..." style="
+                                    flex: 1;
+                                    padding: 12px;
+                                    border: 1px solid rgba(255, 255, 255, 0.2);
+                                    border-radius: 8px;
+                                    background: rgba(255, 255, 255, 0.05);
+                                    color: white;
+                                ">
+                                <button onclick="sendDemoMessage()" style="
+                                    padding: 12px 20px;
+                                    background: linear-gradient(135deg, #2f7afe, #00d4a6);
+                                    border: none;
+                                    border-radius: 8px;
+                                    color: white;
+                                    cursor: pointer;
+                                ">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Agregar event listener para Enter
+                document.getElementById('demoInput').addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        sendDemoMessage();
+                    }
+                });
+
+                // Mensaje de bienvenida automático
+                setTimeout(() => {
+                    addDemoMessage('¡Hola! 👋 Soy CHAPI, tu asistente de ventas. Escribe "hola" para comenzar una demostración.', 'bot');
+                }, 1000);
+            }
+
+            // Enviar mensaje en el demo
+            function sendDemoMessage() {
+                const input = document.getElementById('demoInput');
+                const message = input.value.trim();
+                if (!message) return;
+
+                addDemoMessage(message, 'user');
+                input.value = '';
+
+                // Respuestas del bot
+                setTimeout(() => {
+                    let response = '';
+                    const lowerMessage = message.toLowerCase();
+
+                    if (lowerMessage.includes('hola') || lowerMessage.includes('hello')) {
+                        response = '¡Perfecto! 🎉 Soy tu asistente virtual. Te puedo ayudar con:<br>• "precios" - Ver nuestros planes<br>• "demo" - Información sobre demos<br>• "contacto" - Hablar con un humano';
+                    } else if (lowerMessage.includes('precio')) {
+                        response = '💰 <strong>Nuestros planes:</strong><br>🥉 BÁSICO - $990 MXN/mes<br>🥈 PRO - $1,990 MXN/mes<br>🥇 EMPRESARIAL - $3,990 MXN/mes<br><br>¿Te interesa algún plan específico?';
+                    } else if (lowerMessage.includes('demo')) {
+                        response = '🚀 ¡Excelente! Podemos agendar una demo personalizada donde verás:<br>• Tu chatbot funcionando en WhatsApp<br>• Integración con tu CRM<br>• Flujos de ventas automatizados<br><br>📱 WhatsApp: +52 222 858 8674';
+                    } else if (lowerMessage.includes('contacto')) {
+                        response = '👥 ¡Perfecto! Te conectamos con nuestro equipo:<br><br>📱 <strong>WhatsApp:</strong> +52 222 858 8674<br>✉️ <strong>Email:</strong> jovany2224@gmail.com<br><br>¿Prefieres que te llamemos?';
+                    } else {
+                        response = 'Interesante... 🤔 Para darte la mejor respuesta, te conecto con un especialista:<br><br>📱 WhatsApp: +52 222 858 8674<br><br>O puedes preguntarme sobre "precios", "demo" o "contacto"';
+                    }
+
+                    addDemoMessage(response, 'bot');
+                }, 1500);
+            }
+
+            // Agregar mensaje al chat demo
+            function addDemoMessage(message, sender) {
+                const chat = document.getElementById('demoChat');
+                if (!chat) return;
+
+                const messageDiv = document.createElement('div');
+                messageDiv.style.cssText = `
+                    margin-bottom: 12px;
+                    padding: 10px 12px;
+                    border-radius: 12px;
+                    ${sender === 'user'
+                        ? 'background: rgba(0, 212, 166, 0.2); border: 1px solid rgba(0, 212, 166, 0.3); text-align: right; margin-left: 40px;'
+                        : 'background: rgba(47, 122, 254, 0.2); border: 1px solid rgba(47, 122, 254, 0.3);'
+                    }
+                    color: #e8eef8;
+                    font-size: 0.9rem;
+                    line-height: 1.4;
+                `;
+
+                messageDiv.innerHTML = message;
+                chat.appendChild(messageDiv);
+                chat.scrollTop = chat.scrollHeight;
+            }
+        </script>
+    </body>
+
+</html>

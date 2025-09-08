@@ -1,0 +1,286 @@
+{
+  // === CONFIGURACIÓN GENERAL ===
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortImports": "explicit"
+  },
+  "editor.autoSave": "afterDelay",
+  "editor.autoSaveDelay": 1000,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.wordBasedSuggestions": "allDocuments",
+  "editor.wordBasedSuggestionsMode": "allDocuments",
+  "editor.parameterHints.enabled": true,
+  "editor.hover.enabled": true,
+  "editor.minimap.enabled": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.inlineSuggest.enabled": true,
+  "editor.tabCompletion": "on",
+  "editor.snippetSuggestions": "top",
+
+  // === ARCHIVOS Y ASOCIACIONES ===
+  "files.associations": {
+    "*.md": "markdown",
+    "*.html": "html",
+    "*.css": "css",
+    "*.js": "javascript",
+    "*.py": "python",
+    "*.json": "json",
+    "*.env": "properties",
+    "*.bat": "batch",
+    "*.txt": "plaintext",
+    "CNAME": "plaintext",
+    "*.config": "json",
+    "requirements.txt": "pip-requirements"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // === HTML OPTIMIZADO ===
+  "html.format.enable": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.preserveNewLines": true,
+  "html.format.maxPreserveNewLines": 2,
+  "html.format.indentHandlebars": true,
+  "html.format.endWithNewline": true,
+  "html.format.wrapLineLength": 120,
+  "html.format.wrapAttributes": "auto",
+  "html.autoClosingTags": true,
+  "html.autoCreateQuotes": true,
+  "html.completion.attributeDefaultValue": "doublequotes",
+
+  // === CSS AVANZADO ===
+  "css.validate": true,
+  "css.lint.important": "warning",
+  "css.lint.float": "warning",
+  "css.lint.zeroUnits": "warning",
+  "css.lint.duplicateProperties": "warning",
+  "css.lint.emptyRules": "warning",
+  "css.completion.completePropertyWithSemicolon": true,
+  "css.completion.triggerPropertyValueCompletion": true,
+  "scss.validate": true,
+  "less.validate": true,
+
+  // === JAVASCRIPT/TYPESCRIPT ===
+  "javascript.validate.enable": true,
+  "javascript.format.enable": true,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.includeAutomaticOptionalChainCompletions": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.validate.enable": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // === PYTHON PARA CHAPI ===
+  "python.defaultInterpreterPath": "python",
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": ["--max-line-length=120"],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.completeFunctionParens": true,
+
+  // === EMMET SUPERCHARGED ===
+  "emmet.includeLanguages": {
+    "html": "html",
+    "css": "css",
+    "scss": "scss",
+    "less": "less",
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact",
+    "python": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.showExpandedAbbreviation": "always",
+  "emmet.showSuggestionsAsSnippets": true,
+
+  // === LIVE SERVER CONFIGURADO ===
+  "liveServer.settings.port": 3000,
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.host": "localhost",
+  "liveServer.settings.root": "/",
+  "liveServer.settings.mount": [["/", "./"]],
+  "liveServer.settings.file": "index.html",
+  "liveServer.settings.wait": 100,
+  "liveServer.settings.fullReload": true,
+
+  // === MARKDOWN MEJORADO ===
+  "markdown.preview.theme": "github",
+  "markdown.preview.fontSize": 14,
+  "markdown.preview.lineHeight": 1.6,
+  "markdown.preview.markEditorSelection": true,
+  "markdown.preview.scrollPreviewWithEditor": true,
+  "markdown.preview.scrollEditorWithPreview": true,
+
+  // === TEMA Y APARIENCIA CHIDA ===
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "vs-seti",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#2f7afe",
+    "activityBar.foreground": "#ffffff",
+    "activityBar.inactiveForeground": "#cccccc",
+    "statusBar.background": "#2f7afe",
+    "statusBar.foreground": "#ffffff",
+    "titleBar.activeBackground": "#1e5bb8",
+    "titleBar.activeForeground": "#ffffff",
+    "editor.background": "#1e1e1e",
+    "editor.foreground": "#d4d4d4",
+    "editorCursor.foreground": "#2f7afe",
+    "editor.selectionBackground": "#264f78",
+    "editor.lineHighlightBackground": "#2a2d2e"
+  },
+
+  // === BÚSQUEDA SIN RESTRICCIONES ===
+  "search.exclude": {
+    "**/node_modules": false,
+    "**/dist": false,
+    "**/.git": false,
+    "**/tmp": false,
+    "**/.vscode": false,
+    "**/logs": false
+  },
+  "search.followSymlinks": true,
+  "search.useIgnoreFiles": false,
+  "search.useParentIgnoreFiles": false,
+  "search.smartCase": true,
+
+  // === CONFIGURACIÓN SIN RESTRICCIONES ===
+  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.banner": "never",
+  "security.workspace.trust.emptyWindow": false,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "extensions.ignoreRecommendations": false,
+  "extensions.showRecommendationsOnlyOnDemand": false,
+
+  // === TERMINAL INTEGRADO ===
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "args": ["-NoLogo"]
+    },
+    "Command Prompt": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": [],
+      "icon": "terminal-cmd"
+    }
+  },
+  "terminal.integrated.cwd": "C:\\Users\\jovan\\Desktop\\CHAPI_AZURE",
+
+  // === INTELLISENSE POTENCIADO ===
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggest.showMethods": true,
+  "editor.suggest.showFunctions": true,
+  "editor.suggest.showConstructors": true,
+  "editor.suggest.showFields": true,
+  "editor.suggest.showVariables": true,
+  "editor.suggest.showClasses": true,
+  "editor.suggest.showStructs": true,
+  "editor.suggest.showInterfaces": true,
+  "editor.suggest.showModules": true,
+  "editor.suggest.showProperties": true,
+  "editor.suggest.showEvents": true,
+  "editor.suggest.showOperators": true,
+  "editor.suggest.showUnits": true,
+  "editor.suggest.showValues": true,
+  "editor.suggest.showConstants": true,
+  "editor.suggest.showEnums": true,
+  "editor.suggest.showEnumMembers": true,
+  "editor.suggest.showKeywords": true,
+  "editor.suggest.showText": true,
+  "editor.suggest.showColors": true,
+  "editor.suggest.showFiles": true,
+  "editor.suggest.showReferences": true,
+  "editor.suggest.showCustomcolors": true,
+  "editor.suggest.showFolders": true,
+  "editor.suggest.showTypeParameters": true,
+  "editor.suggest.showSnippets": true,
+  "editor.suggest.showUsers": true,
+  "editor.suggest.showIssues": true,
+
+  // === CONFIGURACIÓN PARA DESARROLLO WEB CHIDO ===
+  "editor.linkedEditing": true,
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "boundary",
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+  "editor.fontFamily": "'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.5,
+
+  // === DEPURACIÓN AUTOMÁTICA ===
+  "debug.allowBreakpointsEverywhere": true,
+  "debug.inlineValues": "auto",
+  "debug.showInStatusBar": "always",
+
+  // === CONFIGURACIÓN ESPECÍFICA CHAPI ===
+  "python.analysis.extraPaths": [
+    "C:\\Users\\jovan\\Desktop\\CHAPI_AZURE",
+    "C:\\Users\\jovan\\Desktop\\CHAPI_AZURE\\modules",
+    "C:\\Users\\jovan\\Desktop\\CHAPI_AZURE\\utils"
+  ],
+  "python.linting.pylintPath": "pylint",
+  "python.linting.flake8Path": "flake8",
+
+  // === WORKSPACE SETTINGS ===
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.settings.editor": "json",
+  "workbench.settings.openDefaultSettings": true,
+  "workbench.settings.useSplitJSON": true,
+
+  // === FORMATO PERSONALIZADO ===
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "vscode.markdown-language-features",
+    "editor.wordWrap": "on"
+  }
+}

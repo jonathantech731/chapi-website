@@ -1,0 +1,623 @@
+/* 🤖 CHAPI Assistant Widget - Estilos PRO Mejorados */
+
+/* Variables CSS para consistencia */
+:root {
+  --chapi-primary: #2f7afe;
+  --chapi-secondary: #00d4a6;
+  --chapi-bg: #0a0d14;
+  --chapi-glass: rgba(22, 28, 39, 0.95);
+  --chapi-text: #e8eef8;
+  --chapi-muted: #a9b3c4;
+  --chapi-radius: 16px;
+  --chapi-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  --chapi-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --chapi-green: #10b981;
+  --chapi-red: #ff4757;
+  --chapi-orange: #ffa502;
+}
+
+/* Reset y base para el widget */
+.chapi-widget,
+.chapi-widget * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container principal del widget */
+.chapi-widget {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 999999 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Botón flotante (trigger) */
+.chapi-trigger {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--chapi-shadow);
+  transition: var(--chapi-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  overflow: hidden;
+}
+
+.chapi-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 25px 50px rgba(47, 122, 254, 0.3);
+}
+
+.chapi-trigger:active {
+  transform: scale(0.95);
+}
+
+.chapi-trigger-icon {
+  font-size: 24px;
+  animation: chapi-pulse 2s infinite;
+}
+
+/* Badge de notificación */
+.chapi-notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--chapi-red);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  animation: chapi-bounce 1s infinite;
+}
+
+/* Ventana del chat */
+.chapi-chat {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 380px;
+  height: 600px;
+  background: var(--chapi-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--chapi-radius);
+  box-shadow: var(--chapi-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: scale(0) translateY(20px);
+  opacity: 0;
+  transition: var(--chapi-transition);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.chapi-chat-open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Header del chat */
+.chapi-header {
+  background: linear-gradient(135deg, var(--chapi-primary), var(--chapi-secondary));
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.chapi-header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chapi-avatar {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.chapi-header-text {
+  flex: 1;
+}
+
+.chapi-header-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.chapi-header-subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.chapi-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--chapi-transition);
+}
+
+.chapi-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Área de mensajes */
+.chapi-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(10, 13, 20, 0.5);
+  position: relative;
+}
+
+.chapi-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chapi-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chapi-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+/* Mensajes individuales */
+.chapi-message {
+  display: flex;
+  margin-bottom: 16px;
+  align-items: flex-start;
+  gap: 12px;
+  animation: chapi-slideIn 0.3s ease;
+}
+
+.chapi-message-user {
+  flex-direction: row-reverse;
+}
+
+.chapi-message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--chapi-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.chapi-message-user .chapi-message-avatar {
+  background: var(--chapi-green);
+}
+
+.chapi-message-content {
+  max-width: 75%;
+  flex: 1;
+}
+
+.chapi-message-text {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 16px;
+  border-radius: 16px;
+  color: var(--chapi-text);
+  line-height: 1.5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chapi-message-user .chapi-message-text {
+  background: var(--chapi-primary);
+  color: white;
+  border-color: var(--chapi-primary);
+}
+
+.chapi-message-time {
+  font-size: 11px;
+  color: var(--chapi-muted);
+  margin-top: 4px;
+  text-align: right;
+}
+
+.chapi-message-user .chapi-message-time {
+  text-align: left;
+}
+
+/* Acciones de mensaje */
+.chapi-message-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chapi-message-action {
+  background: var(--chapi-primary);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--chapi-transition);
+}
+
+.chapi-message-action:hover {
+  background: var(--chapi-secondary);
+  transform: translateY(-1px);
+}
+
+/* Indicador de escritura */
+.chapi-typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.chapi-typing-dots {
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chapi-typing-dots span {
+  width: 8px;
+  height: 8px;
+  background: var(--chapi-muted);
+  border-radius: 50%;
+  animation: chapi-typing 1.4s infinite ease-in-out;
+}
+
+.chapi-typing-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.chapi-typing-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+/* Acciones rápidas */
+.chapi-quick-actions {
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chapi-quick-btn {
+  background: rgba(47, 122, 254, 0.1);
+  color: var(--chapi-primary);
+  border: 1px solid rgba(47, 122, 254, 0.3);
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--chapi-transition);
+  white-space: nowrap;
+}
+
+.chapi-quick-btn:hover {
+  background: var(--chapi-primary);
+  color: white;
+}
+
+/* Container de input */
+.chapi-input-container {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.chapi-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 12px 16px;
+  color: var(--chapi-text);
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  max-height: 120px;
+  min-height: 44px;
+  transition: var(--chapi-transition);
+}
+
+.chapi-input:focus {
+  outline: none;
+  border-color: var(--chapi-primary);
+  box-shadow: 0 0 0 3px rgba(47, 122, 254, 0.1);
+}
+
+.chapi-input::placeholder {
+  color: var(--chapi-muted);
+}
+
+.chapi-send-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--chapi-primary);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--chapi-transition);
+  flex-shrink: 0;
+}
+
+.chapi-send-btn:hover {
+  background: var(--chapi-secondary);
+  transform: scale(1.05);
+}
+
+.chapi-send-btn:active {
+  transform: scale(0.95);
+}
+
+/* Footer promocional */
+.chapi-footer {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--chapi-orange), #ff6b6b);
+  text-align: center;
+  color: white;
+  font-size: 12px;
+}
+
+.chapi-promo {
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chapi-widget {
+    bottom: 10px !important;
+    right: 10px !important;
+    left: 10px !important;
+  }
+
+  .chapi-chat {
+    width: calc(100vw - 20px);
+    height: 70vh;
+    max-height: 600px;
+    bottom: 80px;
+    right: 0;
+    left: 0;
+  }
+
+  .chapi-trigger {
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .chapi-trigger-icon {
+    font-size: 20px;
+  }
+
+  .chapi-message-content {
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .chapi-chat {
+    height: 80vh;
+    border-radius: 12px;
+  }
+
+  .chapi-header {
+    padding: 16px;
+  }
+
+  .chapi-messages {
+    padding: 16px;
+  }
+
+  .chapi-input-container {
+    padding: 16px;
+  }
+
+  .chapi-quick-actions {
+    padding: 12px 16px;
+  }
+}
+
+/* Animaciones */
+@keyframes chapi-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes chapi-bounce {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes chapi-slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chapi-typing {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Estados especiales */
+.chapi-message-text strong {
+  color: var(--chapi-primary);
+  font-weight: 600;
+}
+
+.chapi-message-text a {
+  color: var(--chapi-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.chapi-message-text a:hover {
+  text-decoration: underline;
+}
+
+/* Efectos de hover mejorados */
+.chapi-chat {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chapi-message {
+  transition: all 0.2s ease;
+}
+
+.chapi-message:hover {
+  transform: translateX(2px);
+}
+
+/* Soporte para modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --chapi-bg: #000000;
+    --chapi-glass: rgba(0, 0, 0, 0.95);
+    --chapi-text: #ffffff;
+  }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+
+  .chapi-widget *,
+  .chapi-widget *::before,
+  .chapi-widget *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus para accesibilidad */
+.chapi-trigger:focus,
+.chapi-close:focus,
+.chapi-send-btn:focus,
+.chapi-input:focus,
+.chapi-quick-btn:focus,
+.chapi-message-action:focus {
+  outline: 2px solid var(--chapi-primary);
+  outline-offset: 2px;
+}
+
+/* Estados de carga */
+.chapi-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.chapi-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: chapi-shimmer 1.5s infinite;
+}
+
+@keyframes chapi-shimmer {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .chapi-trigger {
+    border: 2px solid white;
+  }
+
+  .chapi-message-text {
+    border-width: 2px;
+  }
+
+  .chapi-input {
+    border-width: 2px;
+  }
+}

@@ -1,0 +1,164 @@
+# 🤖 CHAPI Website - .gitignore
+
+# =====================================
+# 📁 Sistema Operativo
+# =====================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Linux
+*~
+.nfs*
+
+# =====================================
+# 🛠️ Herramientas de Desarrollo
+# =====================================
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# =====================================
+# 📦 Dependencias y Packages
+# =====================================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# =====================================
+# 🔧 Build y Distribución
+# =====================================
+
+# Build outputs
+dist/
+build/
+out/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# =====================================
+# 🔐 Configuración y Secretos
+# =====================================
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API Keys y configuración sensible
+config/secrets.json
+*.key
+*.pem
+
+# =====================================
+# 📊 Analytics y Logs
+# =====================================
+
+# Log files
+logs/
+*.log
+
+# Analytics temporales
+analytics/temp/
+*.analytics
+
+# =====================================
+# 💾 Backups y Cachés
+# =====================================
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Cache directories
+.cache/
+.tmp/
+
+# =====================================
+# 🎨 Assets temporales
+# =====================================
+
+# Imágenes temporales o de prueba
+assets/temp/
+*.temp.jpg
+*.temp.png
+*.temp.gif
+
+# =====================================
+# 📝 Documentación temporal
+# =====================================
+
+# Drafts y notas temporales
+*.draft.md
+notes.txt
+todo.txt
+
+# =====================================
+# 🚀 Deploy y CI/CD
+# =====================================
+
+# Deploy configs (si son sensibles)
+deploy-config.json
+
+# =====================================
+# 📱 Mobile y PWA
+# =====================================
+
+# PWA cache
+sw.js.map
+workbox-*.js
+
+# =====================================
+# 🔍 Testing
+# =====================================
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# =====================================
+# MANTENER ESTOS ARCHIVOS
+# =====================================
+
+# Documentación importante
+!README.md
+!docs/
+!LICENSE
+
+# Assets finales
+!assets/images/final/
+!assets/css/
+!assets/js/
+
+# Configuración de GitHub Pages
+!CNAME
+!_config.yml

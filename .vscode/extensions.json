@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "ms-vscode.live-server",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "pranaygp.vscode-css-peek",
+    "ritwickdey.liveserver",
+    "christian-kohler.path-intellisense",
+    "ms-vscode.vscode-json",
+    "davidanson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one",
+    "streetsidesoftware.code-spell-checker",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next"
+  ]
+}

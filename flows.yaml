@@ -1,0 +1,271 @@
+# 🤖 CHAPI Assistant - Flujos Conversacionales
+# Sistema de flujos programados para asistente inteligente
+
+flows:
+  # ===========================================
+  # FLUJO PRINCIPAL: DESCUBRIMIENTO DE LEADS
+  # ===========================================
+  main_flow:
+    steps:
+      - id: "welcome"
+        message: "¡Hola! 👋 Soy **CHAPI**, tu asistente de chatbots inteligentes.\n\n¿En qué **sector** trabaja tu negocio?"
+        options:
+          - text: "🍕 Restaurante/Comida"
+            next: "sector_restaurant"
+          - text: "🛒 E-commerce/Tienda"
+            next: "sector_ecommerce"
+          - text: "🏢 Servicios Profesionales"
+            next: "sector_services"
+          - text: "🏥 Salud/Medicina"
+            next: "sector_health"
+          - text: "🎓 Educación"
+            next: "sector_education"
+          - text: "📈 Marketing/Agencia"
+            next: "sector_marketing"
+          - text: "🏠 Inmobiliaria"
+            next: "sector_real_estate"
+          - text: "🔧 Otro sector"
+            next: "sector_other"
+
+      # ===========================================
+      # SECTORES ESPECÍFICOS
+      # ===========================================
+      - id: "sector_restaurant"
+        sector: "restaurante"
+        message: "🍕 **¡Perfecto! Especialista en restaurantes aquí.**\n\nNuestros bots automatizan:\n• Toma de pedidos 24/7\n• Menú interactivo con fotos\n• Cálculo de delivery automático\n• Confirmación de órdenes\n\n**📊 ¿Cuántas consultas/pedidos reciben al día aproximadamente?**"
+        input_type: "number"
+        next: "daily_queries"
+
+      - id: "sector_ecommerce"
+        sector: "ecommerce"
+        message: "🛒 **¡Excelente! Experto en e-commerce.**\n\nAutomatizamos:\n• Catálogo con búsqueda inteligente\n• Proceso de compra completo\n• Seguimiento de pedidos\n• Soporte post-venta 24/7\n\n**📊 ¿Cuántos clientes/consultas atienden diariamente?**"
+        input_type: "number"
+        next: "daily_queries"
+
+      - id: "sector_services"
+        sector: "servicios"
+        message: "🏢 **¡Perfecto! Especialista en servicios profesionales.**\n\nOptimizamos:\n• Agendado de citas automático\n• Información de servicios 24/7\n• Calificación de leads inteligente\n• Seguimiento automatizado\n\n**📊 ¿Cuántos clientes potenciales los contactan al día?**"
+        input_type: "number"
+        next: "daily_queries"
+
+      - id: "sector_health"
+        sector: "salud"
+        message: "🏥 **¡Excelente! Especialista en sector salud.**\n\nFacilitamos:\n• Agendado de citas médicas\n• Información de servicios médicos\n• Recordatorios automáticos\n• Triaje básico de síntomas\n\n**📊 ¿Cuántos pacientes los contactan diariamente?**"
+        input_type: "number"
+        next: "daily_queries"
+
+      - id: "sector_education"
+        sector: "educacion"
+        message: "🎓 **¡Perfecto! Especialista en educación.**\n\nAutomatizamos:\n• Información de cursos y programas\n• Proceso de inscripciones\n• Soporte a estudiantes 24/7\n• Seguimiento académico\n\n**📊 ¿Cuántas consultas de estudiantes reciben al día?**"
+        input_type: "number"
+        next: "daily_queries"
+
+      - id: "sector_marketing"
+        sector: "marketing"
+        message: "📈 **¡Excelente! Especialista en agencias.**\n\nPotenciamos:\n• Calificación de leads automática\n• Presentación de servicios 24/7\n• Agendado de reuniones\n• Seguimiento de prospects\n\n**📊 ¿Cuántos leads generan diariamente?**"
+        input_type: "number"
+        next: "daily_queries"
+
+      - id: "sector_real_estate"
+        sector: "inmobiliaria"
+        message: "🏠 **¡Perfecto! Especialista en inmobiliaria.**\n\nOptimizamos:\n• Búsqueda de propiedades\n• Agendado de visitas\n• Calificación de compradores\n• Seguimiento de interesados\n\n**📊 ¿Cuántos interesados los contactan al día?**"
+        input_type: "number"
+        next: "daily_queries"
+
+      - id: "sector_other"
+        sector: "otro"
+        message: "🔧 **¡Sin problema! Trabajamos con todos los sectores.**\n\n¿Podrías contarme específicamente a qué se dedica tu negocio?\n\n**📊 También, ¿cuántas consultas reciben al día aproximadamente?**"
+        input_type: "text"
+        next: "daily_queries"
+
+      # ===========================================
+      # ANÁLISIS DE VOLUMEN
+      # ===========================================
+      - id: "daily_queries"
+        message: "**📊 Perfecto, {daily_queries} consultas diarias.**\n\n¿Cuál es tu **objetivo principal** con un chatbot?\n\n**Selecciona tu prioridad:**"
+        options:
+          - text: "🕐 Atender fuera de horario"
+            goal: "24_7_service"
+            next: "goal_analysis"
+          - text: "⚡ Responder más rápido"
+            goal: "speed"
+            next: "goal_analysis"
+          - text: "💰 Generar más ventas"
+            goal: "sales"
+            next: "goal_analysis"
+          - text: "🤖 Automatizar respuestas repetitivas"
+            goal: "automation"
+            next: "goal_analysis"
+          - text: "📈 Capturar más leads"
+            goal: "lead_capture"
+            next: "goal_analysis"
+          - text: "🎯 Calificar mejor a los clientes"
+            goal: "lead_qualification"
+            next: "goal_analysis"
+
+      # ===========================================
+      # ANÁLISIS POR OBJETIVO
+      # ===========================================
+      - id: "goal_analysis"
+        message: "**🎯 Excelente elección: {goal_name}**\n\n**Para tu sector ({sector}) con {daily_queries} consultas diarias, mi recomendación es:**\n\n{recommendation}\n\n**💡 ¿Te gustaría ver un demo personalizado de cómo funcionaría en tu negocio?**"
+        options:
+          - text: "✅ Sí, quiero ver el demo"
+            next: "demo_request"
+          - text: "💰 Primero dime los precios"
+            next: "pricing"
+          - text: "❓ Tengo algunas preguntas"
+            next: "questions"
+
+      # ===========================================
+      # DEMOSTRACIÓN
+      # ===========================================
+      - id: "demo_request"
+        message: "**🎉 ¡Perfecto! Te voy a preparar un demo personalizado.**\n\n**Para hacer el demo más relevante, necesito:**"
+        form:
+          - field: "company_name"
+            label: "Nombre de tu empresa/negocio"
+            type: "text"
+            required: true
+          - field: "contact_name"
+            label: "Tu nombre"
+            type: "text"
+            required: true
+          - field: "phone"
+            label: "WhatsApp/Teléfono"
+            type: "phone"
+            required: true
+          - field: "email"
+            label: "Email (opcional)"
+            type: "email"
+            required: false
+        next: "demo_confirmation"
+
+      - id: "demo_confirmation"
+        message: "**🚀 ¡Listo {contact_name}!**\n\n**Tu demo personalizado para {company_name} incluirá:**\n\n✅ Simulación real para sector {sector}\n✅ Flujos específicos para tus {daily_queries} consultas diarias\n✅ Integración con WhatsApp Business\n✅ Panel de administración en vivo\n\n**⏰ ¿Cuándo te viene bien la demostración?**"
+        options:
+          - text: "📞 Llamada hoy mismo"
+            next: "schedule_today"
+          - text: "📅 Mañana por la mañana"
+            next: "schedule_tomorrow"
+          - text: "🗓️ Esta semana (tu eliges)"
+            next: "schedule_week"
+          - text: "📧 Envíame info por email"
+            next: "send_email"
+
+      # ===========================================
+      # PROGRAMACIÓN DE DEMO
+      # ===========================================
+      - id: "schedule_today"
+        message: "**📞 ¡Excelente! Demo para hoy.**\n\n**Te contactaré por WhatsApp al {phone} en las próximas 2 horas.**\n\n**Mientras tanto:**\n• Prepara 3 preguntas frecuentes de tus clientes\n• Ten a mano tu catálogo o servicios\n• Piensa en tu horario de atención actual\n\n**💬 ¿Alguna pregunta urgente antes del demo?**"
+        actions: ["send_lead_notification", "schedule_immediate_followup"]
+        next: "final_questions"
+
+      - id: "schedule_tomorrow"
+        message: "**📅 Demo programado para mañana.**\n\n**Te escribiré por WhatsApp al {phone} mañana entre 9-11 AM.**\n\n**Para aprovechar mejor el demo:**\n• Lista tus 5 preguntas más frecuentes\n• Ten tu catálogo/servicios a mano\n• Define tu horario de atención ideal\n\n**📋 Te envío un recordatorio esta noche. ¿Todo correcto?**"
+        actions: ["send_lead_notification", "schedule_reminder"]
+        next: "final_questions"
+
+      # ===========================================
+      # PRECIOS
+      # ===========================================
+      - id: "pricing"
+        message: "**💰 Te explico mis 3 paquetes para México:**\n\n**🥉 BÁSICO - $599/mes**\n• Bot informativo + FAQ\n• Horarios automáticos\n• 3 flujos de conversación\n• Ideal: {basic_ideal}\n\n**🥈 PREMIUM - $999/mes** ⭐\n• Todo lo básico +\n• Catálogo interactivo\n• Toma de pedidos/citas\n• WhatsApp Business\n• Ideal: {premium_ideal}\n\n**🥇 ULTRA - $1,599/mes**\n• Todo lo premium +\n• IA personalizada\n• Integraciones CRM\n• Analytics avanzados\n• Ideal: {ultra_ideal}\n\n**Para tu caso ({sector}, {daily_queries} consultas): Recomiendo {recommended_plan}**\n\n**¿Cuál te interesa más?**"
+        options:
+          - text: "🥉 Básico - $599"
+            plan: "basic"
+            next: "plan_details"
+          - text: "🥈 Premium - $999"
+            plan: "premium"
+            next: "plan_details"
+          - text: "🥇 Ultra - $1,599"
+            plan: "ultra"
+            next: "plan_details"
+          - text: "💬 Quiero negociar/preguntar"
+            next: "negotiate"
+
+# ===========================================
+# RESPUESTAS DINÁMICAS POR SECTOR/OBJETIVO
+# ===========================================
+recommendations:
+  restaurante:
+    "24_7_service": "Un bot que tome pedidos automáticamente fuera de horario. Podrías capturar 20-30% más ventas solo con atención nocturna."
+    "speed": "Menú interactivo instantáneo. Clientes ven fotos, precios y ordenan en 60 segundos."
+    "sales": "Bot upselling automático. 'Con tu pizza, ¿agregas bebida por $25?' Incrementa ticket promedio 35%."
+    "automation": "Bot que responda horarios, precios, tiempo de entrega. Libera tu tiempo para cocinar."
+    "lead_capture": "Bot que capte datos para promociones. 'Regístrate y obtén 20% descuento en tu próxima orden.'"
+
+  ecommerce:
+    "24_7_service": "Tienda abierta 24/7. Bot procesa órdenes mientras duermes. Clientes nocturnos son 40% más impulsivos."
+    "speed": "Catálogo con búsqueda instantánea. Cliente encuentra producto en 10 segundos vs 5 minutos."
+    "sales": "Bot con abandono de carrito. 'Olvidaste tu producto, aquí tienes 15% descuento.' Recupera 25% de ventas perdidas."
+    "automation": "Confirmación automática, tracking, FAQs. Reduces 80% de mensajes repetitivos."
+    "lead_capture": "Lead magnet automatizado. 'Descarga nuestra guía gratis' captura emails 24/7."
+
+  servicios:
+    "24_7_service": "Agendado automático fuera de horario. Clientes reservan citas cuando les conviene."
+    "speed": "Información instantánea de servicios y precios. Cliente calificado en 2 minutos."
+    "sales": "Bot que califique presupuesto antes de contactarte. Solo recibes leads listos para contratar."
+    "automation": "FAQ automático sobre servicios, horarios, precios. Tu tiempo solo para clientes reales."
+    "lead_capture": "Formulario inteligente que capture necesidades específicas antes de la cita."
+
+# ===========================================
+# PLANTILLAS DE MENSAJE POR SECTOR
+# ===========================================
+sector_templates:
+  restaurante:
+    basic_ideal: "Restaurantes familiares, cocinas caseras"
+    premium_ideal: "Restaurantes establecidos, franquicias pequeñas"
+    ultra_ideal: "Cadenas, restaurantes con delivery múltiple"
+    recommended_plan: "Premium (perfecto para automatizar pedidos)"
+
+  ecommerce:
+    basic_ideal: "Tiendas pequeñas, emprendimientos"
+    premium_ideal: "E-commerce establecido, tiendas digitales"
+    ultra_ideal: "E-commerce grande, marketplaces"
+    recommended_plan: "Premium (ideal para catálogo + ventas)"
+
+  servicios:
+    basic_ideal: "Consultorios, servicios locales"
+    premium_ideal: "Empresas establecidas, agencias"
+    ultra_ideal: "Corporativos, servicios especializados"
+    recommended_plan: "Básico o Premium (según volumen)"
+
+# ===========================================
+# CONFIGURACIÓN DE ACCIONES
+# ===========================================
+actions:
+  send_lead_notification:
+    type: "email"
+    to: "leads@chapibot.pro"
+    subject: "🔥 NUEVO LEAD CALIFICADO - {company_name}"
+    template: "lead_notification"
+
+  schedule_reminder:
+    type: "schedule"
+    delay: "1 day"
+    action: "send_whatsapp_reminder"
+
+  schedule_immediate_followup:
+    type: "schedule"
+    delay: "2 hours"
+    action: "call_lead"
+
+# ===========================================
+# FALLBACKS Y MANEJO DE ERRORES
+# ===========================================
+fallbacks:
+  no_match:
+    message: "🤔 No entendí bien. ¿Podrías reformular? O elige una de estas opciones:"
+    options:
+      - text: "🔄 Empezar de nuevo"
+        next: "welcome"
+      - text: "💬 Hablar con humano"
+        next: "human_handoff"
+      - text: "📧 Enviar info por email"
+        next: "send_email"
+
+  human_handoff:
+    message: "👨‍💻 **Te conecto con un especialista humano.**\n\nEscríbenos directamente a:\n📱 WhatsApp: +52 123 456 7890\n📧 Email: soporte@chapibot.pro\n\n**Horario:** Lunes a Viernes 9 AM - 6 PM\n\n**Menciona:** 'Vengo del chat web' para atención prioritaria."
+
+  technical_error:
+    message: "⚠️ **Error técnico temporal.**\n\nPor favor:\n1. Recarga la página\n2. Si persiste, escríbenos a soporte@chapibot.pro\n\n**Mientras tanto, agenda una llamada:**\n📅 https://calendly.com/chapibot\n📱 WhatsApp: +52 123 456 7890"

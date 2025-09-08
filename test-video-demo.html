@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Video CHAPI</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 2rem;
+        background: #0a0d14;
+        color: white;
+        font-family: 'Inter', system-ui, sans-serif;
+      }
+
+      .video-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        text-align: center;
+      }
+
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+        /* 16:9 aspect ratio */
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        margin-bottom: 1rem;
+      }
+
+      .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 12px;
+      }
+
+      h1 {
+        color: #2f7afe;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      p {
+        color: #a9b3c4;
+        text-align: center;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>🎬 Prueba del Video Demo de CHAPI</h1>
+
+    <div class="video-container">
+      <h2 style="color: #00d4a6; margin-bottom: 1rem;">Video Demostración</h2>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/kxe0WOkGOvE?si=W9t77Xo9e6tjJBJB"
+          title="CHAPI Assistant - Demo en Vivo" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+      </div>
+      <p>Si puedes ver este video, la integración está funcionando correctamente.</p>
+    </div>
+
+    <div
+      style="margin-top: 3rem; padding: 2rem; background: rgba(22, 28, 39, 0.8); border-radius: 12px; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <h3 style="color: #ffb020;">Instrucciones de Verificación:</h3>
+      <ol style="color: #e8eef8; line-height: 1.8;">
+        <li>Abre este archivo en tu navegador</li>
+        <li>Verifica que el video de YouTube se carga correctamente</li>
+        <li>Prueba reproducir el video</li>
+        <li>Si funciona aquí, debería funcionar en el sitio principal</li>
+      </ol>
+
+      <h3 style="color: #10b981; margin-top: 2rem;">Estado del Video:</h3>
+      <ul style="color: #e8eef8; line-height: 1.8;">
+        <li>✅ URL del video: https://youtu.be/kxe0WOkGOvE?si=W9t77Xo9e6tjJBJB</li>
+        <li>✅ Formato iframe responsivo implementado</li>
+        <li>✅ Estilos CSS aplicados correctamente</li>
+        <li>✅ Integrado en index.html principal</li>
+        <li>✅ Integrado en deploy/frontend/index.html</li>
+      </ul>
+    </div>
+
+    <script>
+      // Log para debug
+      console.log('Página de prueba del video CHAPI cargada');
+
+      // Verificar si el iframe se carga
+      window.addEventListener('load', function () {
+        const iframe = document.querySelector('iframe');
+        if (iframe) {
+          console.log('✅ Iframe del video encontrado');
+          console.log('URL del video:', iframe.src);
+        } else {
+          console.log('❌ No se encontró el iframe del video');
+        }
+      });
+    </script>
+  </body>
+
+</html>

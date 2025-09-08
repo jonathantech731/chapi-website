@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAPI - Instrucciones de Inicio</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        min-height: 100vh;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        text-align: center;
+        color: #fff;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+      }
+
+      .step {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 5px solid #4CAF50;
+      }
+
+      .command {
+        background: #2c3e50;
+        color: #2ecc71;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: 'Courier New', monospace;
+        margin: 10px 0;
+        overflow-x: auto;
+      }
+
+      .highlight {
+        background: #ff6b6b;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin: 20px 0;
+      }
+
+      .success {
+        background: #2ecc71;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+
+      .warning {
+        background: #f39c12;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🤖 CHAPI Assistant</h1>
+      <h2>📋 Instrucciones de Inicio Manual</h2>
+
+      <div class="warning">
+        ⚠️ <strong>IMPORTANTE:</strong> Necesitas abrir DOS ventanas de terminal separadas
+      </div>
+
+      <div class="step">
+        <h3>📁 Paso 1: Navegar al directorio</h3>
+        <p>En ambas ventanas de terminal, ejecuta:</p>
+        <div class="command">cd d:\chapi-website</div>
+      </div>
+
+      <div class="step">
+        <h3>🔧 Paso 2: Iniciar Backend (Terminal 1)</h3>
+        <p>En la <strong>PRIMERA</strong> ventana de terminal:</p>
+        <div class="command">.venv\Scripts\python.exe simple_openai_server.py</div>
+        <p>Deberías ver: "Server running on http://localhost:8000"</p>
+      </div>
+
+      <div class="step">
+        <h3>🌐 Paso 3: Iniciar Frontend (Terminal 2)</h3>
+        <p>En la <strong>SEGUNDA</strong> ventana de terminal:</p>
+        <div class="command">.venv\Scripts\python.exe frontend_server.py</div>
+        <p>Deberías ver: "Servidor iniciado en http://localhost:3000"</p>
+      </div>
+
+      <div class="highlight">
+        🎯 Paso 4: Abrir en tu navegador
+        <br><br>
+        <a href="http://localhost:3000" target="_blank" style="color: white; text-decoration: none; font-size: 1.3em;">
+          👉 http://localhost:3000 👈
+        </a>
+      </div>
+
+      <div class="success">
+        ✅ ¡Busca el widget de chat en la esquina inferior derecha!
+      </div>
+
+      <div class="step">
+        <h3>🔍 Solución de Problemas</h3>
+        <ul>
+          <li><strong>Puerto en uso:</strong> Cierra otros programas que usen los puertos 3000 y 8000</li>
+          <li><strong>Error de Python:</strong> Verifica que el entorno virtual esté activado</li>
+          <li><strong>No aparece el chat:</strong> Refresca la página (F5)</li>
+          <li><strong>Error de API:</strong> Verifica la clave de OpenAI en el archivo .env</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>📊 Verificar Estado</h3>
+        <ul>
+          <li><a href="http://localhost:8000/docs" target="_blank" style="color: #2ecc71;">Backend API Docs</a></li>
+          <li><a href="http://localhost:8000" target="_blank" style="color: #2ecc71;">Backend Status</a></li>
+          <li><a href="http://localhost:3000" target="_blank" style="color: #2ecc71;">Frontend Web</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Auto-refresh cada 30 segundos para verificar si los servidores están listos
+      setTimeout(() => {
+        const backendTest = fetch('http://localhost:8000').then(() => {
+          console.log('✅ Backend disponible');
+          document.querySelector('.highlight').innerHTML += '<br><small style="color: #2ecc71;">✅ Backend detectado</small>';
+        }).catch(() => {
+          console.log('❌ Backend no disponible');
+        });
+
+        const frontendTest = fetch('http://localhost:3000').then(() => {
+          console.log('✅ Frontend disponible');
+          document.querySelector('.highlight').innerHTML += '<br><small style="color: #2ecc71;">✅ Frontend detectado</small>';
+        }).catch(() => {
+          console.log('❌ Frontend no disponible');
+        });
+      }, 5000);
+    </script>
+  </body>
+
+</html>
