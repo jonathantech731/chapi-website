@@ -750,6 +750,340 @@
             z-index: 100;
             transition: width 0.3s ease;
         }
+
+        /* =================================
+           ESTILOS DEL WIDGET CHAPI
+        ================================= */
+
+        #chapiProfessionalWidget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999999;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Botón flotante principal */
+        #chapiFloatingBtn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--brand), var(--accent));
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 8px 25px rgba(47, 122, 254, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            animation: gentleBounce 3s infinite ease-in-out;
+        }
+
+        #chapiFloatingBtn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(47, 122, 254, 0.5);
+        }
+
+        /* Indicador de pulso */
+        .pulse-indicator {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Ventana de chat */
+        #chapiChatWindow {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 520px;
+            background: var(--glass);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Header del chat */
+        .chat-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--brand), var(--accent));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        #chapiCloseBtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        #chapiCloseBtn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Barra de progreso */
+        .progress-container {
+            padding: 15px 20px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand), var(--accent));
+            border-radius: 3px;
+            transition: width 0.6s ease;
+            width: 14.3%; /* Paso 1 de 7 */
+        }
+
+        .step-indicator {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        /* Área de mensajes */
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: var(--bg-soft);
+            color: var(--text);
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        /* Estilos de mensajes */
+        .message {
+            margin-bottom: 16px;
+            animation: fadeInMessage 0.4s ease-out;
+        }
+
+        @keyframes fadeInMessage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot-message {
+            background: var(--glass);
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 50px;
+            line-height: 1.5;
+            backdrop-filter: blur(10px);
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--brand), var(--accent));
+            color: white;
+            padding: 12px 18px;
+            border-radius: 18px;
+            margin-left: 50px;
+            text-align: right;
+            line-height: 1.4;
+        }
+
+        .typing-indicator {
+            background: var(--glass);
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-right: 50px;
+            color: var(--muted);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--brand);
+            border-radius: 50%;
+            animation: typingDots 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingDots {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-12px); }
+        }
+
+        /* Botones de acción rápida */
+        .quick-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .quick-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: var(--brand);
+            color: white;
+            border-color: var(--brand);
+            transform: translateY(-2px);
+        }
+
+        /* Input del chat */
+        .chat-input-container {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 12px 18px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        #chatInput:focus {
+            border-color: var(--brand);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(47, 122, 254, 0.1);
+        }
+
+        #sendBtn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--brand), var(--accent));
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        #sendBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(47, 122, 254, 0.3);
+        }
+
+        #sendBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Responsivo para el widget */
+        @media (max-width: 480px) {
+            #chapiChatWindow {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 100px);
+                bottom: 10px;
+                right: 10px;
+                border-radius: 16px;
+            }
+            
+            #chapiFloatingBtn {
+                bottom: 15px;
+                right: 15px;
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1071,7 +1405,491 @@
         </div>
     </footer>
 
+    <!-- WIDGET CHAPI PROFESIONAL - CALIFICACIÓN DE LEADS -->
+    <div id="chapiProfessionalWidget">
+        <button id="chapiFloatingBtn">
+            🤖
+            <span class="pulse-indicator"></span>
+        </button>
+        
+        <div id="chapiChatWindow">
+            <div class="chat-header">
+                <h3>🚀 CHAPI Assistant</h3>
+                <button id="chapiCloseBtn">×</button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="step-indicator" id="stepIndicator">Paso 1 de 7</span>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Los mensajes se agregan aquí dinámicamente -->
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Escribe tu respuesta...">
+                <button id="sendBtn">Enviar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        /* =================================
+           CONFIGURACIÓN DEL WIDGET CHAPI
+        ================================= */
+
+        // 📝 PERSONALIZA AQUÍ TUS TEXTOS Y CONFIGURACIÓN
+        const CHAPI_WIDGET_CONFIG = {
+            // Información de contacto (EDITA ESTOS DATOS)
+            whatsappNumber: '522228588674',
+            email: 'jovany2224@gmail.com',
+            companyName: 'CHAPI - Chatbots Inteligentes',
+            
+            // Configuración de planes (EDITA PRECIOS Y CARACTERÍSTICAS)
+            plans: {
+                basico: {
+                    name: 'Plan Básico',
+                    price: '6,000 MXN/mes',
+                    leadRange: [0, 200],
+                    features: ['1 canal', 'WhatsApp o Web', 'Plantillas básicas', 'Soporte email']
+                },
+                pro: {
+                    name: 'Plan Pro',
+                    price: '12,000 MXN/mes',
+                    leadRange: [201, 1000],
+                    features: ['3 canales', 'WhatsApp + Web + Telegram', 'IA avanzada', 'Integraciones', 'Soporte prioritario']
+                },
+                empresarial: {
+                    name: 'Plan Empresarial',
+                    price: '20,000 MXN/mes',
+                    leadRange: [1001, 999999],
+                    features: ['Canales ilimitados', 'IA personalizada', 'CRM incluido', 'Soporte 24/7', 'Consultoría']
+                }
+            },
+            
+            // 📝 TEXTOS DE CADA PASO (EDITA AQUÍ LOS MENSAJES)
+            steps: {
+                welcome: {
+                    message: `¡Hola! 👋 Soy tu asistente de CHAPI.<br><br>Te haré unas preguntas rápidas para recomendarte la solución perfecta para automatizar tu negocio.<br><br><strong>Solo tomará 2 minutos.</strong>`,
+                    quickButtons: ['🚀 Empezar', '📱 WhatsApp directo']
+                },
+                
+                name: {
+                    message: `Perfecto! Para personalizar mi recomendación:<br><br><strong>¿Cuál es tu nombre y empresa?</strong><br><br><em>Ejemplo: "Juan Pérez, Restaurante El Buen Sabor"</em>`,
+                    quickButtons: []
+                },
+                
+                channel: {
+                    message: `¡Excelente, {name}! 😊<br><br><strong>¿Qué canal te interesa automatizar principalmente?</strong>`,
+                    quickButtons: ['📱 WhatsApp Business', '🌐 Widget en web', '✈️ Telegram', '🔄 Todos los canales']
+                },
+                
+                leads: {
+                    message: `¡{channel} es una gran elección! 💪<br><br><strong>¿Aproximadamente cuántos leads recibes por mes?</strong><br><br><em>Esto me ayuda a recomendarte el plan ideal.</em>`,
+                    quickButtons: ['🔢 Menos de 50', '📊 50-200', '📈 200-500', '🚀 500-1000', '💼 Más de 1000']
+                },
+                
+                recommendation: {
+                    // El mensaje se genera dinámicamente basado en las respuestas
+                    quickButtons: ['✅ Agendar demo gratuita', '📱 Contacto por WhatsApp', '💰 Ver otros planes']
+                },
+                
+                contact: {
+                    message: `¡Excelente decisión! 🎉<br><br><strong>¿Cuál es tu WhatsApp o email para contactarte?</strong><br><br><em>Te contactaremos en las próximas 2 horas.</em>`,
+                    quickButtons: []
+                },
+                
+                confirmation: {
+                    // El mensaje se genera dinámicamente con el resumen
+                    quickButtons: ['📱 WhatsApp urgente', '🔄 Empezar de nuevo']
+                }
+            }
+        };
+
+        /* =================================
+           LÓGICA DEL WIDGET
+        ================================= */
+
+        class ChapiLeadWidget {
+            constructor() {
+                this.currentStep = 0;
+                this.isOpen = false;
+                this.leadData = {};
+                
+                this.stepNames = ['welcome', 'name', 'channel', 'leads', 'recommendation', 'contact', 'confirmation'];
+                
+                this.initializeElements();
+                this.bindEvents();
+            }
+            
+            initializeElements() {
+                this.floatingBtn = document.getElementById('chapiFloatingBtn');
+                this.chatWindow = document.getElementById('chapiChatWindow');
+                this.closeBtn = document.getElementById('chapiCloseBtn');
+                this.messagesContainer = document.getElementById('chatMessages');
+                this.input = document.getElementById('chatInput');
+                this.sendBtn = document.getElementById('sendBtn');
+                this.progressFill = document.getElementById('progressFill');
+                this.stepIndicator = document.getElementById('stepIndicator');
+            }
+            
+            bindEvents() {
+                this.floatingBtn.addEventListener('click', () => this.toggleChat());
+                this.closeBtn.addEventListener('click', () => this.closeChat());
+                this.sendBtn.addEventListener('click', () => this.sendMessage());
+                this.input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+            }
+            
+            toggleChat() {
+                if (this.isOpen) {
+                    this.closeChat();
+                } else {
+                    this.openChat();
+                }
+            }
+            
+            openChat() {
+                this.isOpen = true;
+                this.chatWindow.style.display = 'flex';
+                this.floatingBtn.innerHTML = '×';
+                
+                if (this.messagesContainer.children.length === 0) {
+                    this.startConversation();
+                }
+                
+                this.input.focus();
+            }
+            
+            closeChat() {
+                this.isOpen = false;
+                this.chatWindow.style.display = 'none';
+                this.floatingBtn.innerHTML = '🤖';
+            }
+            
+            startConversation() {
+                this.currentStep = 0;
+                this.leadData = {};
+                this.messagesContainer.innerHTML = '';
+                this.executeCurrentStep();
+            }
+            
+            updateProgress() {
+                const progress = ((this.currentStep + 1) / this.stepNames.length) * 100;
+                this.progressFill.style.width = `${progress}%`;
+                this.stepIndicator.textContent = `Paso ${this.currentStep + 1} de ${this.stepNames.length}`;
+            }
+            
+            executeCurrentStep() {
+                this.updateProgress();
+                const stepName = this.stepNames[this.currentStep];
+                
+                switch (stepName) {
+                    case 'welcome':
+                        this.showWelcomeStep();
+                        break;
+                    case 'name':
+                        this.showNameStep();
+                        break;
+                    case 'channel':
+                        this.showChannelStep();
+                        break;
+                    case 'leads':
+                        this.showLeadsStep();
+                        break;
+                    case 'recommendation':
+                        this.showRecommendationStep();
+                        break;
+                    case 'contact':
+                        this.showContactStep();
+                        break;
+                    case 'confirmation':
+                        this.showConfirmationStep();
+                        break;
+                }
+            }
+            
+            async addBotMessage(message, showButtons = []) {
+                this.showTypingIndicator();
+                
+                await this.delay(1200 + Math.random() * 800);
+                
+                this.removeTypingIndicator();
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message bot-message';
+                messageDiv.innerHTML = message;
+                this.messagesContainer.appendChild(messageDiv);
+                
+                if (showButtons.length > 0) {
+                    this.addQuickButtons(showButtons);
+                }
+                
+                this.scrollToBottom();
+            }
+            
+            addUserMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message user-message';
+                messageDiv.textContent = message;
+                this.messagesContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+            
+            showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typingIndicator';
+                typingDiv.className = 'typing-indicator';
+                typingDiv.innerHTML = `
+                    CHAPI está escribiendo
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                `;
+                this.messagesContainer.appendChild(typingDiv);
+                this.scrollToBottom();
+            }
+            
+            removeTypingIndicator() {
+                const typing = document.getElementById('typingIndicator');
+                if (typing) typing.remove();
+            }
+            
+            addQuickButtons(buttons) {
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.className = 'quick-buttons';
+                
+                buttons.forEach(buttonText => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quick-btn';
+                    btn.textContent = buttonText;
+                    btn.addEventListener('click', () => {
+                        this.input.value = buttonText;
+                        this.sendMessage();
+                    });
+                    buttonsContainer.appendChild(btn);
+                });
+                
+                this.messagesContainer.appendChild(buttonsContainer);
+                this.scrollToBottom();
+            }
+            
+            sendMessage() {
+                const message = this.input.value.trim();
+                if (!message) return;
+                
+                this.addUserMessage(message);
+                this.input.value = '';
+                
+                this.processUserResponse(message);
+            }
+            
+            processUserResponse(response) {
+                // Guardar la respuesta según el paso actual
+                const stepName = this.stepNames[this.currentStep];
+                
+                switch (stepName) {
+                    case 'welcome':
+                        if (response.toLowerCase().includes('whatsapp directo')) {
+                            window.open(`https://wa.me/${CHAPI_WIDGET_CONFIG.whatsappNumber}?text=Hola, vengo del widget de CHAPI`, '_blank');
+                            return;
+                        }
+                        break;
+                    case 'name':
+                        this.leadData.name = response;
+                        break;
+                    case 'channel':
+                        this.leadData.channel = response;
+                        break;
+                    case 'leads':
+                        this.leadData.leadsInput = response;
+                        this.leadData.leadsNumber = this.parseLeadsNumber(response);
+                        break;
+                    case 'recommendation':
+                        if (response.toLowerCase().includes('whatsapp')) {
+                            window.open(`https://wa.me/${CHAPI_WIDGET_CONFIG.whatsappNumber}?text=Hola, quiero información sobre CHAPI`, '_blank');
+                            return;
+                        }
+                        break;
+                    case 'contact':
+                        this.leadData.contact = response;
+                        break;
+                    case 'confirmation':
+                        if (response.toLowerCase().includes('whatsapp urgente')) {
+                            window.open(`https://wa.me/${CHAPI_WIDGET_CONFIG.whatsappNumber}?text=URGENTE: ${this.leadData.name} - ${this.leadData.contact}`, '_blank');
+                            return;
+                        } else if (response.toLowerCase().includes('empezar de nuevo')) {
+                            this.startConversation();
+                            return;
+                        }
+                        break;
+                }
+                
+                // Avanzar al siguiente paso
+                this.currentStep++;
+                
+                if (this.currentStep < this.stepNames.length) {
+                    setTimeout(() => this.executeCurrentStep(), 500);
+                }
+            }
+            
+            parseLeadsNumber(input) {
+                const text = input.toLowerCase();
+                if (text.includes('menos de 50') || text.includes('50')) return 25;
+                if (text.includes('50-200') || text.includes('100')) return 125;
+                if (text.includes('200-500') || text.includes('350')) return 350;
+                if (text.includes('500-1000') || text.includes('750')) return 750;
+                if (text.includes('más de 1000') || text.includes('1000')) return 1500;
+                
+                // Extraer número del texto
+                const numbers = input.match(/\d+/g);
+                return numbers ? parseInt(numbers[0]) : 100;
+            }
+            
+            getRecommendedPlan() {
+                const leads = this.leadData.leadsNumber || 100;
+                
+                for (const [key, plan] of Object.entries(CHAPI_WIDGET_CONFIG.plans)) {
+                    if (leads >= plan.leadRange[0] && leads <= plan.leadRange[1]) {
+                        return plan;
+                    }
+                }
+                
+                return CHAPI_WIDGET_CONFIG.plans.pro; // Plan por defecto
+            }
+            
+            // 📝 MÉTODOS DE CADA PASO (PERSONALIZA AQUÍ LOS MENSAJES)
+            
+            async showWelcomeStep() {
+                const config = CHAPI_WIDGET_CONFIG.steps.welcome;
+                await this.addBotMessage(config.message, config.quickButtons);
+            }
+            
+            async showNameStep() {
+                const config = CHAPI_WIDGET_CONFIG.steps.name;
+                await this.addBotMessage(config.message, config.quickButtons);
+            }
+            
+            async showChannelStep() {
+                const config = CHAPI_WIDGET_CONFIG.steps.channel;
+                const firstName = this.leadData.name.split(',')[0].split(' ')[0];
+                const message = config.message.replace('{name}', firstName);
+                await this.addBotMessage(message, config.quickButtons);
+            }
+            
+            async showLeadsStep() {
+                const config = CHAPI_WIDGET_CONFIG.steps.leads;
+                const message = config.message.replace('{channel}', this.leadData.channel);
+                await this.addBotMessage(message, config.quickButtons);
+            }
+            
+            async showRecommendationStep() {
+                const plan = this.getRecommendedPlan();
+                const firstName = this.leadData.name.split(',')[0].split(' ')[0];
+                const roi = this.leadData.leadsNumber * 120; // ROI estimado
+                
+                const message = `
+                    <strong>¡Perfecto, ${firstName}! 🎯</strong><br><br>
+                    
+                    📊 <strong>Tu perfil:</strong><br>
+                    • Empresa: ${this.leadData.name}<br>
+                    • Canal: ${this.leadData.channel}<br>
+                    • Leads mensuales: ~${this.leadData.leadsNumber}<br><br>
+                    
+                    🎯 <strong>Plan recomendado: ${plan.name}</strong><br>
+                    💰 Inversión: ${plan.price}<br><br>
+                    
+                    ✅ <strong>Incluye:</strong><br>
+                    ${plan.features.map(f => `• ${f}`).join('<br>')}<br><br>
+                    
+                    💡 <strong>ROI estimado:</strong> +$${roi.toLocaleString()} MXN mensuales<br>
+                    ⚡ <strong>Recuperas inversión en:</strong> 15-30 días
+                `;
+                
+                const config = CHAPI_WIDGET_CONFIG.steps.recommendation;
+                await this.addBotMessage(message, config.quickButtons);
+            }
+            
+            async showContactStep() {
+                const config = CHAPI_WIDGET_CONFIG.steps.contact;
+                await this.addBotMessage(config.message, config.quickButtons);
+            }
+            
+            async showConfirmationStep() {
+                const firstName = this.leadData.name.split(',')[0].split(' ')[0];
+                const plan = this.getRecommendedPlan();
+                
+                const message = `
+                    <strong>¡Listo, ${firstName}! ✅</strong><br><br>
+                    
+                    📝 <strong>Resumen:</strong><br>
+                    • Empresa: ${this.leadData.name}<br>
+                    • Plan: ${plan.name}<br>
+                    • Canal: ${this.leadData.channel}<br>
+                    • Contacto: ${this.leadData.contact}<br><br>
+                    
+                    🚀 <strong>Próximos pasos:</strong><br>
+                    1. Te contactaremos en 2 horas máximo<br>
+                    2. Demo personalizada (15 min)<br>
+                    3. Propuesta sin compromiso<br><br>
+                    
+                    ¡Gracias por confiar en CHAPI! 🤖💙
+                `;
+                
+                const config = CHAPI_WIDGET_CONFIG.steps.confirmation;
+                await this.addBotMessage(message, config.quickButtons);
+                
+                // 🔗 AQUÍ SE ENVÍA EL LEAD (PERSONALIZA LA INTEGRACIÓN)
+                this.sendLeadData();
+            }
+            
+            // 🔗 MÉTODO PARA ENVIAR DATOS DEL LEAD
+            sendLeadData() {
+                const leadData = {
+                    timestamp: new Date().toISOString(),
+                    name: this.leadData.name,
+                    channel: this.leadData.channel,
+                    monthlyLeads: this.leadData.leadsNumber,
+                    recommendedPlan: this.getRecommendedPlan().name,
+                    contact: this.leadData.contact,
+                    source: 'chapi_widget'
+                };
+                
+                console.log('📊 Lead capturado:', leadData);
+                
+                // 📝 PERSONALIZA AQUÍ TU INTEGRACIÓN:
+                
+                // OPCIÓN 1: Enviar a tu API
+                // this.sendToAPI(leadData);
+                
+                // OPCIÓN 2: Enviar por email usando EmailJS
+                // this.sendByEmail(leadData);
+                
+                // OPCIÓN 3: Enviar a Google Sheets
+                // this.sendToGoogleSheets(leadData);
+                
+                // OPCIÓN 4: Webhook personalizado
+                // this.sendToWebhook(leadData);
+            }
+            
+            // Métodos auxiliares
+            scrollToBottom() {
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+            
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        /* =================================
+           FUNCIONES ORIGINALES DE LA PÁGINA
+        ================================= */
+
         // Scroll indicator
         function updateScrollIndicator() {
             const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
@@ -1152,23 +1970,6 @@
             animateOnScroll();
         });
 
-        // Initial load
-        document.addEventListener('DOMContentLoaded', function() {
-            animateOnScroll();
-            updateScrollIndicator();
-        });
-
-        // Add some interactive features
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
         // Enhanced button interactions
         document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
@@ -1207,6 +2008,31 @@
             }
         `;
         document.head.appendChild(style);
+
+        /* =================================
+           INICIALIZACIÓN
+        ================================= */
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+            updateScrollIndicator();
+            
+            // Inicializar el widget CHAPI
+            const chapiWidget = new ChapiLeadWidget();
+            console.log('🚀 CHAPI Lead Widget inicializado');
+            
+            // Add interactive features to cards
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
     </script>
 </body>
 </html>
